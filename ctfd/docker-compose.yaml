@@ -1,0 +1,48 @@
+services:
+  ctfd:
+    image: ctfd/ctfd
+    restart: always
+    env_file: .env
+    environment:
+      - SECRET_KEY=$CTFD_SECRET_KEY
+      - DATABASE_URL=$CTFD_DATABASE_URL
+      - REDIS_URL=$CTFD_REDIS_URL
+      - REVERSE_PROXY=$CTFD_REVERSE_PROXY
+      - UPLOAD_FOLDER=$CTFD_UPLOAD_FOLDER
+      - LOG_FOLDER=$CTFD_LOG_FOLDER
+      - WORKERS=$CTFD_WORKERS
+    volumes:
+      - ./donnees/ctfd/uploads:/var/uploads
+      - ./donnees/ctfd/logs:/var/log/CTFd
+    ports:
+      - 8000:8000
+    networks:
+      - interne
+      - externe
+    depends_on:
+      - db
+      - redis
+  
+  redis:
+    image: redis:alpine
+    restart: always
+    # command: sh -c "chown -R root:root /data"
+    env_file: .env
+    volumes:
+      - ./donnees/redis:/data
+    networks:
+      - interne
+
+  db:
+    image: mysql
+    restart: always
+    env_file: .env
+    volumes:
+      - ./donnees/db:/var/lib/mysql
+    networks:
+      - interne
+
+networks:
+  interne:
+  externe:
+    driver: bridge
