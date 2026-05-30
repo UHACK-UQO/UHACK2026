@@ -11,6 +11,7 @@ Le projet est divisé en plusieurs dossiers :
 - [`mastodon`](./mastodon/) contient le serveur mastodon
 - [`courriels`](./courriels/) contient un serveur smtp
 - [`infra-réseau`](./infra-réseau/) contient les fichiers de configurations de l'infrastructure réseau
+- [`llm`](./llm/) contient une plateforme de llm
 - [`coordination`](./coordination/) contient les fichiers de coordination du déploiement de l'infrastucture (comme la définition de tous les comptes)
 - [`site-web`](./site-web/) contient le site web d'accueil des participants
 - [`docs`](./docs/) contient la documentation du projet
