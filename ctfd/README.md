@@ -9,3 +9,10 @@ Exécutez `docker compose up` dans le dossier et connectez-vous sur `http://loca
 ## Structure
 
 Le service docker-compose est composé de trois images : ctfd, mysql et redis. Leurs données sont stockées dans leur dossier respectif dans `donnees/x`.
+
+```mermaid
+flowchart TD
+ctfd-setup -- Configure --> ctfd
+ctfd -- cache --> redis
+ctfd -- sql --> postgresql
+```

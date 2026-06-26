@@ -1,6 +1,9 @@
 services:
   ctfd:
-    image: ctfd/ctfd
+    image: ctfd/ctfd:latest
+    # build:
+    #   context: .
+    #   dockerfile: ctfd.Dockerfile
     restart: always
     env_file: .env
     environment:
@@ -19,6 +22,11 @@ services:
     networks:
       - interne
       - externe
+    healthcheck: 
+      test: ["CMD", "bash", "-c", "curl -f https://localhost:8000 &> /dev/null; if [ $? -eq 0 ]; then printf '{\"status\":\"healthy\"}'; else printf 'null'; fi"]
+      interval: 1s
+      timeout: 1s
+      start_period: 5s
     depends_on:
       - db
       - redis
