@@ -88,7 +88,7 @@ apparence:
   
   # Couleur du thème de l'événement. Doit être un 
   # code hexadécimal RVB dans le format : #FFFFFF
-  couleur: "./logo.png"
+  couleur: "#FF6615"
 
 # Paramètres de visibilité
 visibilite:

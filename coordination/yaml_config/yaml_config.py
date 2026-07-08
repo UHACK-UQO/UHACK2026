@@ -1,3 +1,5 @@
+import re
+
 def valider_config(config : dict, structure : dict, nom : str = "") -> list[str]:
     """Valide les paramètres de la configuration.
 
@@ -23,6 +25,9 @@ def valider_config(config : dict, structure : dict, nom : str = "") -> list[str]
             erreurs.append(f"Le paramètre {nom}.{k} est invalide")
         if not isinstance(v, type(structure[k]["defaut"])):
             erreurs.append(f"Le paramètre {nom}.{k} doit être du type {type(structure[k]["defaut"])}, pas {type(k)}")
+        if "regex" in structure[k].keys() and not re.search(structure[k]["regex"], v):
+            erreurs.append(f"Le paramètre {nom}.{k} ne remplis pas le format '{structure[k]["regex"]}'")
+
         if "enum" in structure.keys():
             valeurs = []
             for e in structure[k]["enum"]:
@@ -64,12 +69,17 @@ def valider_structure(structure : dict, nom : str="") -> list[str]:
             erreurs.append(f"{nom}.{k}.defaut doit être 'str', 'int', 'float', 'bool', 'list' ou 'dict', pas {type(v["defaut"])}")
 
         for vk in v.keys():
-            if vk not in ["defaut","description","est_obligatoire","enum"]:
+            if vk not in ["defaut","description","est_obligatoire","enum","regex"]:
                 erreurs.append(f"[{nom}.{k}] Le paramètre {vk} n'est pas supporté. Doit être 'defaut', 'description', 'est_obligatoire' ou 'enum'.")
 
         if "est_obligatoire" in v.keys() and not isinstance(v["est_obligatoire"], bool):
             erreurs.append(f"{nom}.{k}.est_obligatoire doit être de type 'bool', pas {type(v["est_obligatoire"])}")
         
+        if "regex" in v.keys() and not isinstance(v["regex"], str):
+            erreurs.append(f"{nom}.{k}.regex doit être de type 'str', pas {type(v["regex"])}")
+        if "regex" in v.keys() and not isinstance(v["defaut"], str):
+            erreurs.append(f"[{nom}.{k}] Le paramètre 'regex' ne peut être définit que si le paramètre 'defaut' est un 'str'.")
+
         if "enum" in v.keys() and isinstance(v["defaut"], (dict, list)):
             erreurs.append(f"[{nom}.{k}] Les enums ne sont pas supportés avec les valeurs de type '{type(v["defaut"])}'.")
         elif "enum" in v.keys():

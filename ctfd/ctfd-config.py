@@ -6,7 +6,7 @@ import sys
 import os
 import mimetypes
 
-sys.path.insert(0,"../../coordination/yaml_config")
+sys.path.insert(0,"../coordination/yaml_config")
 import yaml_config
 
 def main():
@@ -65,6 +65,16 @@ def lire_configuration(rep_config : str) -> dict:
     return yaml_config.normaliser_config(config, structure_config)
 
 def configurer_ctfd(config : dict):
+    # Cette étape n'est pas documentée dans l'API CTFd.
+    # La page de configuration envoie un formulaire multi-part au serveur,
+    #   contenant toutes les informations nécessaires. De plus, CTFd vérifie
+    #   qu'un témoin de session est renvoyé et qu'un jeton csrf est présent
+    #   dans le formulaire.
+    # Voir : 
+    #   Manuel de configuration CTFd : https://docs.ctfd.io/docs/settings/overview
+    #   Options de configuration de ctfd-setup : https://github.com/ctfer-io/ctfd-setup/blob/main/config.go
+    #   Documentation des jetons CSRF/témoins de session : https://github.com/CTFd/CTFd/issues/2816
+
     rep = requests.get("http://localhost:8000/setup")
     print(rep)
     if "Set-Cookie" not in rep.headers.keys():
@@ -282,7 +292,8 @@ structure_config = {
             },
             "couleur":{
                 "description": "Couleur du thème de l'événement. Doit être un code hexadécimal RVB dans le format : #FFFFFF",
-                "defaut": "./logo.png"
+                "defaut": "#FF6615",
+                "regex": r"^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$"
             }
         }
     },
