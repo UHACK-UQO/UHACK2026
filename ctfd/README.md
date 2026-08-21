@@ -5,8 +5,9 @@ Ce dossier contient un serveur [CTFd](https://ctfd.io), une plateforme de CTFs, 
 ## Déploiement
 
 1. Exécutez `docker compose up` dans le dossier pour démarrer le service
-2. Installez les dépendances avec `python3 -m pip install -r requirements.txt`
-3. Configurez CTFd avec `python3 ctfd-config.py config.yaml`
+2. Exécutez `chown -R 1001:1001 donnees/ctfd`
+3. Installez les dépendances avec `python3 -m pip install -r requirements.txt`
+4. Configurez CTFd avec `python3 ctfd-config.py config.yaml`
 
 ## Structure
 
@@ -220,3 +221,39 @@ Tous ces paramètres sont documentés [dans le manuel de configuration de CTFd](
 La syntaxe des paramètres peut être référencée à partir du travail de [ctfd-setup](https://github.com/ctfer-io/ctfd-setup/blob/main/config.go).
 
 De plus, CTFd utilises un témoin de session et un jeton CSRF pour valider le formulaire renvoyé. Ces derniers sont [documentés ici](https://github.com/CTFd/CTFd/issues/2816).
+
+#### Les défis
+
+Les défis semblent téléchargés en quatre requêtes :
+
+1. Création du défi
+  
+   POST /challenges
+
+   ```json
+   {
+     "name":"Name",
+     "category":"Category",
+     "description":"Message ligne 1\r\nMessage ligne 2\r\nMessage ligne 3","initial":"1000",
+     "function":"logarithmic",
+     "decay":"500",
+     "minimum":"200",
+     "state":"hidden",
+     "type":"dynamic"
+   }
+   ```
+
+2. Création du drapeau et liaison avec le défi
+
+   POST /flags
+ 
+   ```json
+   {
+     "challenge_id":"1",
+     "content":"flag",
+     "type":"static",
+     "data":""
+   }
+   ```
+
+3. Téléchargement des fichiers [doc](https://docs.ctfd.io/docs/api/redoc#tag/files/operation/post_files_list)

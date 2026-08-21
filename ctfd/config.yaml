@@ -1,3 +1,7 @@
+# URL de connection à la plateforme ctfd.
+# [OBLIGATOIRE]
+url: "http://localhost:8000"
+
 # Paramètres du compte admin
 # [OBLIGATOIRE]
 admin:
@@ -67,20 +71,28 @@ general:
   # Les participants peuvent-ils partager les 
   # défis sur les réseaux sociaux?
   partage_sociaux: True
+  
+  # Répertoire contenant les défis. Le répertoire 
+  # doit contenir un dossier par catégorie et 
+  # dans chacun, un dossier par défi, qui chacun 
+  # contiennent un fichier `description.yaml`. 
+  # Voir /defis/README.md
+  # [OBLIGATOIRE]
+  repertoire_defis: "../defis/"
 
 # Apparence de CTFd
 apparence:
   # Logo de l'événement. Doit être le répertoire 
   # de l'image
-  logo: "./logo.png"
+  logo: "./ctfd-fichiers/tmp.png"
   
   # Bannière de l'événement. Doit être le 
   # répertoire de l'image
-  banniere: "./banniere.png"
+  banniere: "./ctfd-fichiers/tmp.png"
   
   # Icone de l'onglet du navigateur. Doit être le 
   # répertoire de l'image
-  icone: "./icone.png"
+  icone: "./ctfd-fichiers/tmp.png"
   
   # Thème utilisé lors de l'événement. Doit être 
   # le nom du thème

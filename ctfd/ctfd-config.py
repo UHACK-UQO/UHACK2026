@@ -1,38 +1,64 @@
 #!/bin/python3
-import requests
-import re
-import yaml
-import sys
-import os
 import mimetypes
+import os
+import re
+import sys
+
+import requests
+import yaml
 
 sys.path.insert(0,"../coordination/yaml_config")
 import yaml_config
 
+
 def main():
-    
+    # gestion des paramètres
+
     if "--help" in sys.argv or "-h" in sys.argv or "-?" in sys.argv:
         print(message_aide)
-        exit()
+        sys.exit()
 
     if "--defaut" in sys.argv or "-d" in sys.argv:
-        rep = sys.argv[sys.argv.index("-d" if "-d" in sys.argv else "--default") + 1]
-        if rep.startswith("-"):
-            rep = "./config.json"
+        argi = sys.argv.index("-d" if "-d" in sys.argv else "--defaut")
+        rep = ""
+        if len(sys.argv) == argi + 1 or sys.argv[argi + 1].startswith('-'):
+            rep = "./config.yaml" 
+        else:
+            rep = sys.argv[argi + 1]
 
         with open(rep,"w") as f:
             f.write(yaml_config.creer_yaml_defaut(structure_config))
-        exit()
+        sys.exit()
+
+    if "--defis-infos" in sys.argv or "-i" in sys.argv:
+        argi = sys.argv.index("-i" if "-i" in sys.argv else "--defis-infos")
+        rep = ""
+        if len(sys.argv) == argi + 1 or sys.argv[argi + 1].startswith('-'):
+            rep = "./description.yaml" 
+        else:
+            rep = sys.argv[argi + 1]
+        
+        with open(rep,"w") as f:
+            f.write(yaml_config.creer_yaml_defaut(structure_description_defis))
+        sys.exit()
 
     if len(sys.argv) < 2:
         print("[ERREUR] Veuillez indiquer le répertoire du fichier de configuration")
         print(message_aide)
-        exit()
+        sys.exit()
     
     rep_config = sys.argv[1]
 
+    # Configuration de CTFd
+
+    print("Configuration de CTFd.")
+
     config = lire_configuration(rep_config)
     configurer_ctfd(config)
+    capi = obtenir_clee_api(config)
+
+    defis = lire_defis(config["general"]["repertoire_defis"])
+    configurer_defis(defis)
 
 def lire_configuration(rep_config : str) -> dict:
     """Lit de fichier de configuration et renvoie un dictionnaire contenant tous les paramètres.
@@ -43,6 +69,8 @@ def lire_configuration(rep_config : str) -> dict:
     Returns:
         dict: Représentation de la configuration
     """
+    print("Lecture du fichier de configuration.")
+
     with open(rep_config,"r") as f :
         config = yaml.safe_load(f.read())
     
@@ -75,24 +103,23 @@ def configurer_ctfd(config : dict):
     #   Options de configuration de ctfd-setup : https://github.com/ctfer-io/ctfd-setup/blob/main/config.go
     #   Documentation des jetons CSRF/témoins de session : https://github.com/CTFd/CTFd/issues/2816
 
-    rep = requests.get("http://localhost:8000/setup")
-    print(rep)
+    print("Configuration de la plateforme à l'adresse " + config["url"])
+
+    rep = requests.get(config["url"] + "/setup")
     if "Set-Cookie" not in rep.headers.keys():
         print("[ERREUR] Il semblerait que CTFd soit déjà configuré, car le site n'a pas fournis de témoin de session.")
+        return
         
-    témoins = rep.headers["Set-Cookie"].split("; ")
+    temoins = rep.headers["Set-Cookie"].split("; ")
 
-    témoin_session = ""
-    for t in témoins:
+    temoin_session = ""
+    for t in temoins:
         if t.startswith("session="):
-            témoin_session = t
+            temoin_session = t
             break
 
-    print(témoin_session)
-
     jeton_csrf = re.search(r"'csrfNonce': \"([0-9a-f]*)\"",rep.content.decode("utf8")).group(1)
-    print(jeton_csrf)
-
+    
     # Traduction des valeurs des enums
     traductions = {
         "general.mode":{
@@ -144,25 +171,28 @@ def configurer_ctfd(config : dict):
     }
 
     ctf_logo = (None, None, None)
-    if config["apparence"]["logo"]:
-        if os.path.exists(config["apparence"]["logo"]):
-            ctf_logo = (os.path.basename(config["apparence"]["logo"]), open(config["apparence"]["logo"]), mimetypes.guess_type(config["apparence"]["logo"]))
+    image_rep = config["apparence"]["logo"]
+    if image_rep:
+        if os.path.exists(image_rep):
+            ctf_logo = (os.path.basename(image_rep), open(image_rep,"rb"), mimetypes.guess_type(image_rep)[0])  # noqa: SIM115
         else:
-            print(f"[ERREUR] Le fichier {config["apparence"]["logo"]} n'est pas accessible ou n'existe pas.")
+            print(f"[ERREUR] Le fichier {image_rep} n'est pas accessible ou n'existe pas.")
 
     ctf_banniere = (None, None, None)
-    if config["apparence"]["banniere"]:
-        if os.path.exists(config["apparence"]["banniere"]):
-            ctf_banniere = (os.path.basename(config["apparence"]["banniere"]), open(config["apparence"]["banniere"]), mimetypes.guess_type(config["apparence"]["banniere"]))
+    image_rep = config["apparence"]["banniere"]
+    if image_rep:
+        if os.path.exists(image_rep):
+            ctf_banniere = (os.path.basename(image_rep), open(image_rep,"rb"), mimetypes.guess_type(image_rep)[0])  # noqa: SIM115
         else:
-            print(f"[ERREUR] Le fichier {config["apparence"]["banniere"]} n'est pas accessible ou n'existe pas.")
+            print(f"[ERREUR] Le fichier {image_rep} n'est pas accessible ou n'existe pas.")
 
     ctf_icone = (None, None, None)
-    if config["apparence"]["icone"]:
-        if os.path.exists(config["apparence"]["icone"]):
-            ctf_icone = (os.path.basename(config["apparence"]["icone"]), open(config["apparence"]["icone"]), mimetypes.guess_type(config["apparence"]["icone"]))
+    image_rep = config["apparence"]["icone"]
+    if image_rep:
+        if os.path.exists(image_rep):
+            ctf_icone = (os.path.basename(image_rep), open(image_rep,"rb"), mimetypes.guess_type(image_rep)[0])  # noqa: SIM115
         else:
-            print(f"[ERREUR] Le fichier {config["apparence"]["icone"]} n'est pas accessible ou n'existe pas.")
+            print(f"[ERREUR] Le fichier {image_rep} n'est pas accessible ou n'existe pas.")
 
     config_form_fichiers = {
         "ctf_logo": ctf_logo,
@@ -171,14 +201,275 @@ def configurer_ctfd(config : dict):
     }
 
     rep = requests.post(
-        url="http://localhost:8000/setup", 
+        url=config["url"] + "/setup", 
         data=config_form, 
         files=config_form_fichiers,
-        headers={"Cookie":témoin_session}
+        headers={"Cookie":temoin_session}
         )
     
     if rep.status_code != 200:
         print(f"[ERREUR] CTFd a répondu avec un code d'erreur {rep.status_code}")
+        print("Indice : Assurez-vous que ctfd (uid 1001) aie les droits d'écriture à son dossier de données.")
+
+def obtenir_clee_api(config : dict) -> str:
+    """Obtient une clée API de CTFd
+
+    Args:
+        config (dict): configuration CTFd
+
+    Returns:
+        str: Clée API
+    """
+
+    # S'identifier pour obtenir de témoin de session
+    print("Authentification à CTFd")
+
+    rep = requests.get(config["url"] + "/login")
+    temoins = rep.headers["Set-Cookie"].split("; ")
+
+    temoin_session = ""
+    for t in temoins:
+        if t.startswith("session="):
+            temoin_session = t
+            break
+
+    jeton_csrf = re.search(r"'csrfNonce': \"([0-9a-f]*)\"",rep.content.decode("utf8")).group(1)
+    
+    login_json = {
+        "name": config["admin"]["nom"],
+        "password": config["admin"]["password"],
+        "_submit": "Soumettre",
+        "nonce": jeton_csrf
+    }
+
+    rep = requests.post(
+        url=config["url"]+"/login",
+        json=login_json,
+        headers={"Cookie":temoin_session}
+    )
+
+    if rep.status_code != 200:
+        print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+        return None
+    print("Authentifié avec succès")
+
+    # Obtention de la clée API
+    print("Obtention de la clée API")
+
+    rep = requests.get(url=config["url"]+"/settings")
+    jeton_csrf = re.search(r"'csrfNonce': \"([0-9a-f]*)\"",rep.content.decode("utf8")).group(1)
+
+    rep = requests.post(
+        url=config["url"]+"/tokens",
+        json={"description":"Clée API de ctfd-config.py"},
+        headers={"Cookie":temoin_session, "CSRF-Token":jeton_csrf}
+    )
+
+    if rep.status_code != 200:
+        print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+        
+        if not rep.json():
+            return None
+        
+        for e in rep.json()["errors"]:
+            print(f"\t{e}")
+        return None
+    
+    return rep.json()["data"]["value"]
+
+def lire_defis(rep : str) -> list[dict]:
+    """ Lit la liste de défis du répertoire fournit et retourne une liste d'objets défis.
+
+    Le répertoire doit avoir la structure suivante : 
+    
+    .
+    |
+    +-- Catégorie_1
+    |   +-- Défis_1
+    |   |   +-- description.yaml
+    |   |   +-- ...
+    |   |
+    |   +-- Défis_2
+    |   |   +-- description.yaml
+    |   |   +-- ...
+    |
+    +-- Catégorie_2
+    |   +-- Défis_3
+    |   |   +-- description.yaml
+    |   |   +-- ...
+    ... ... 
+
+    `descritption.yaml` doit avoir la structure suivante : 
+
+    ```yaml
+    est_ctfd: true # Si false, ne sera pas importé dans ctfd
+    titre: "titre du défi"
+    description: "Description du défi (supporte le markdown)"
+    drapeau: "flag du défi"
+    indices:
+        - "indice1 (facultatif) (supporte le markdown)"
+        - "indice2"
+        - ...
+    solution: "solution"
+    necessite_un_traitement_special: false # Mettre à true si l'importation dans ctfd nécessite un traitement spécial
+    ```
+
+    Args:
+        rep (str) : Répertoire du dossier contenant les défis
+    
+    Returns:
+        list[dict] : Liste des objets défis
+    """
+
+    print("Lecture des défis.")
+
+    erreurs = yaml_config.valider_structure(structure_description_defis)
+    if len(erreurs) > 0:
+        print("Erreurs dans la définition des descriptions des défis : ")
+        for e in erreurs:
+            print("\t"+e)
+        return None
+
+    if not os.path.exists(rep):
+        print("[ERREUR] le répertoire des défis n'existe pas.")
+        return
+    if not os.path.isdir(rep):
+        print("[ERREUR] le répertoire des défis n'est pas un dossier.")
+        return
+
+    defis = []
+
+    for c in os.listdir(rep):
+        if not os.path.isdir(rep + '/' + c):
+            continue
+
+        for d in os.listdir(rep + '/' + c):
+            if "description.yaml" not in os.path.listdir(rep + '/' + c + '/' + d):
+                continue
+            
+            print("Défi : " + c + '/' + d)
+
+            with open(rep + '/' + c + '/' + d) as f:
+                desc_yaml = yaml.safe_load(f.read())
+            
+            erreurs = yaml_config.valider_config(desc_yaml, structure_description_defis)
+            if len(erreurs) > 0:
+                print("Erreurs dans la description du défi :")
+                for e in erreurs:
+                    print("\t"+e)
+                continue
+            
+            desc = yaml_config.normaliser_config(desc_yaml, structure_description_defis)
+            desc["categorie"] = c
+            defis.append(desc)
+    
+    return defis
+
+def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
+    """Téléverse les défis
+
+    Args : 
+        config (dict) : Configuration de CTFd
+        defis (list[dict]) : Liste défis à téléverser
+        capi (str) : Clée API de CTFd
+    """
+
+    print("Téléversement des défis")
+
+    for d in defis:
+        print(d["categorie"] + '/' + d["titre"])
+
+        if not d["est_ctfd"]:
+            print("\tSauté car non-ctfd.")
+            continue
+
+        defis_json = {
+            "name": d["titre"],
+            "category": d["categorie"],
+            "description": d["description"]
+        }
+
+        if d["pointage"]["fonction"] == "constant":
+            # TODO
+            print("[ERREUR] Non implémenté")
+        else:
+            defis_json["type"] = "dynamic"
+            defis_json["function"] = "linear" if d["pointage"]["fonction"] == "lineaire" else "logarithmic"
+            defis_json["initial"] = d["pointage"]["initial"]
+            defis_json["minimum"] = d["pointage"]["minimum"]
+            defis_json["decay"] = d["pointage"]["decroissance"]
+        
+        rep = requests.post(
+            url=config["url"]+"/api/v1/challenges",
+            json=defis_json,
+            headers={"Authorization":f"Token {capi}"}
+        )
+
+        if rep.status_code != 200:
+            print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+            
+            if not rep.json():
+                return
+            
+            for e in rep.json()["errors"]:
+                print(f"\t{e}")
+            return
+        
+        d["id"] = rep.json()["data"]["id"]
+
+        print(f"\tTéléversé avec succés. ID : {d["id"]}")
+
+        defis_json = {
+            "challenge_id": d["id"],
+            "content": d["drapeau"],
+            "data": "",
+            "type": "static"
+        }
+
+        rep = requests.post(
+            url=config["url"] + "/api/v1/flags",
+            json=defis_json,
+            headers={"Authorization": f"Token {capi}"}
+        )
+
+        if rep.status_code != 200:
+            print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+            
+            if not rep.json():
+                return
+            
+            for e in rep.json()["errors"]:
+                print(f"\t{e}")
+            return
+        
+        print("\tDrapeau modifié")
+
+        defis_form = {
+            "challenge_id": d["id"],
+            "type": "challenge"
+        }
+
+        for f in d["fichiers"]:
+            if not os.path.exists(f) or not os.path.isfile(f):
+                print(f"[ERREUR] : {f} est un dossier ou n'existe pas.")
+                continue
+                
+            rep = requests.post(
+                url=config["url"] + "/api/v1/files",
+                data=defis_form,
+                files={"file":(os.path.basename(f),open(f,"rb"),mimetypes.guess_type(f))},
+                headers={"Authorization": f"Token {capi}"}
+            )
+
+            if rep.status_code != 200:
+                print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+                
+                if rep.json():
+                    for e in rep.json()["errors"]:
+                        print(f"\t{e}")
+            
+        print("\tFichiers téléversés avec succès.")
+
 
 message_aide = """
 USAGE ctfd-config <fichier-config>
@@ -188,9 +479,17 @@ USAGE ctfd-config <fichier-config>
 
     --defaut -d [répertoire]
         Générer un fichier de configuration par défaut
+    
+    --defis-infos -i [répertoire]
+        Générer un fichier de description de défis par défaut
 """
 
 structure_config = {
+    "url":{
+        "est_obligatoire": True,
+        "description": "URL de connection à la plateforme ctfd.",
+        "defaut": "http://localhost:8000"
+    },
     "admin":{
         "est_obligatoire": True,
         "description": "Paramètres du compte admin",
@@ -268,6 +567,11 @@ structure_config = {
             "partage_sociaux":{
                 "description": "Les participants peuvent-ils partager les défis sur les réseaux sociaux?",
                 "defaut": True
+            },
+            "repertoire_defis":{
+                "est_obligatoire": True,
+                "description": "Répertoire contenant les défis. Le répertoire doit contenir un dossier par catégorie et dans chacun, un dossier par défi, qui chacun contiennent un fichier `description.yaml`. Voir /defis/README.md",
+                "defaut": "../defis/"
             }
         }
     },
@@ -371,4 +675,100 @@ structure_config = {
     }
 }
 
-main()
+structure_description_defis = {
+    "est_ctfd": {
+        "est_obligatoire": True,
+        "description": "Si false, ne sera pas importé dans ctfd.",
+        "defaut": True
+    },
+    "titre": {
+        "est_obligatoire": True,
+        "description": "Titre du défi",
+        "defaut": "Défi"
+    },
+    "description": {
+        "est_obligatoire": True,
+        "description": "Description du défi. Supporte le markdown",
+        "defaut": "description",
+    },
+    "fichiers": {
+        "description": "Liste de fichiers à téléverser",
+        "defaut":[
+            "..."
+        ]
+    },
+    "drapeau": {
+        "est_obligatoire": True,
+        "description": "flag du défi",
+        "defaut": "UHACK{adfjkvnalkerfjgbvqap}",
+    },
+    "indices": {
+        "description": "Liste d'indices, en ordre d'apparence. Supporte le markdown.",
+        "defaut": [
+            "indice1",
+            "indice2",
+            "..."
+        ]
+    },
+    "solution": {
+        "est_obligatoire": True,
+        "description": "Solution du défi. Supporte le markdown. Cet attribut est obligatoire.",
+        "defaut": "Solution."
+    },
+    "pointage":{
+        "description": "Paramètres du pointage pour ce défi. Le nombre de points diminue à mesure que de plus en plus de solutions sont soumises au défi.",
+        "defaut": {
+            "initial": {
+                "description": "Nombre de points initial",
+                "defaut": 100
+            },
+            "fonction": {
+                "description": "Fonction de décroissance des points.",
+                "defaut": "logarithmique",
+                "enum":[
+                    {
+                        "nom": "constant",
+                        "description": "Le nombre de points reste constant tout au long de l'événement. Avec cette option, les paramètres `pointage.minimum` et `pointage.decroissance` n'ont aucun effet."
+                    },
+                    {
+                        "nom": "lineaire",
+                        "description": "Le nombre de points diminue au même rythme en fonction du nombre de solutions soumises."
+                    },
+                    {
+                        "nom": "logarithmique",
+                        "description": "Le nombre de points chute drastiquement avec les premières soumissions et de plus en plus doucement avec les suivantes."
+                    }
+                ]
+            },
+            "minimum": {
+                "description": "Nombre de points minimum. La décroissance ne passera pas en-dessous de ce niveau",
+                "defaut": 10
+            },
+            "decroissance": {
+                "description": "Taux de décroissance des points. Est interprété différemment dépendamment de `pointage.fonction`.",
+                "defaut": 10
+            }
+        }
+    },
+    "etat":{
+        "description": "Le défi est-il visible aux participants?",
+        "defaut": "visible",
+        "enum":[
+            {
+                "nom": "visible",
+                "description": "Les participants peuvent voir le défis"
+            },
+            {
+                "nom": "cache",
+                "description": "Le défi est caché aux participants."
+            }
+        ]
+    },
+    "necessite_un_traitement_special": {
+        "description": "Mettre à true si l'importation dans ctfd nécessite un traitement spécial",
+        "defaut": False
+    }
+}
+
+if __name__ == "__main__":
+    main()

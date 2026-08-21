@@ -1,0 +1,62 @@
+# Si false, ne sera pas importé dans ctfd.
+# [OBLIGATOIRE]
+est_ctfd: True
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Défi"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: "description"
+
+# Liste de fichiers à téléverser
+fichiers:
+  - ...
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{adfjkvnalkerfjgbvqap}"
+
+# Liste d'indices, en ordre d'apparence. Supporte 
+# le markdown.
+indices: 
+  - 'indice1'
+  - 'indice2'
+
+# Solution du défi. Supporte le markdown. Cet 
+# attribut est obligatoire.
+# [OBLIGATOIRE]
+solution: "Solution."
+
+# Mettre à true si l'importation dans ctfd 
+# nécessite un traitement spécial
+necessite_un_traitement_special: False
+
+# Paramètres du pointage pour ce défi. Le nombre 
+# de points diminue à mesure que de plus en plus 
+# de solutions sont soumises au défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  
+  # Fonction de décroissance des points.
+  # Valeurs acceptées :
+  #   lineaire :
+  #     Le nombre de points diminue au même 
+  #     rythme en fonction du nombre de solutions 
+  #     soumises.
+  #   logarithmique :
+  #     Le nombre de points chute drastiquement 
+  #     avec les premières soumissions et de plus 
+  #     en plus doucement avec les suivantes.
+  fonction: "logarithmique"
+
+  # Nombre de points minimum. La décroissance ne 
+  # passera pas en-dessous de ce niveau
+  minimum: 10
+  
+  # Taux de décroissance des points. Est 
+  # interprété différemment dépendamment de 
+  # `pointage.fonction`.
+  decroissance: 10
