@@ -12,7 +12,7 @@ description: "description"
 
 # Liste de fichiers à téléverser
 fichiers:
-  - ...
+  - ./tmp.png
 
 # flag du défi
 # [OBLIGATOIRE]

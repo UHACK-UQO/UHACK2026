@@ -1,9 +1,6 @@
 services:
   ctfd:
     image: ctfd/ctfd:latest
-    # build:
-    #   context: .
-    #   dockerfile: ctfd.Dockerfile
     restart: always
     env_file: .env
     environment:

@@ -78,7 +78,7 @@ general:
   # contiennent un fichier `description.yaml`. 
   # Voir /defis/README.md
   # [OBLIGATOIRE]
-  repertoire_defis: "../defis/"
+  repertoire_defis: "../defis"
 
 # Apparence de CTFd
 apparence:

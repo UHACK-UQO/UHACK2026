@@ -3,6 +3,7 @@ import mimetypes
 import os
 import re
 import sys
+import time
 
 import requests
 import yaml
@@ -54,11 +55,11 @@ def main():
     print("Configuration de CTFd.")
 
     config = lire_configuration(rep_config)
-    configurer_ctfd(config)
-    capi = obtenir_clee_api(config)
+    temoin_session = configurer_ctfd(config)
+    capi = obtenir_clee_api(config, temoin_session)
 
     defis = lire_defis(config["general"]["repertoire_defis"])
-    configurer_defis(defis)
+    configurer_defis(config, defis, capi)
 
 def lire_configuration(rep_config : str) -> dict:
     """Lit de fichier de configuration et renvoie un dictionnaire contenant tous les paramètres.
@@ -210,8 +211,12 @@ def configurer_ctfd(config : dict):
     if rep.status_code != 200:
         print(f"[ERREUR] CTFd a répondu avec un code d'erreur {rep.status_code}")
         print("Indice : Assurez-vous que ctfd (uid 1001) aie les droits d'écriture à son dossier de données.")
+    
+    print("CTFd configuré avec succès.")
 
-def obtenir_clee_api(config : dict) -> str:
+    return temoin_session
+
+def obtenir_clee_api(config : dict, temoin_session : str) -> str:
     """Obtient une clée API de CTFd
 
     Args:
@@ -221,59 +226,25 @@ def obtenir_clee_api(config : dict) -> str:
         str: Clée API
     """
 
-    # S'identifier pour obtenir de témoin de session
-    print("Authentification à CTFd")
-
-    rep = requests.get(config["url"] + "/login")
-    temoins = rep.headers["Set-Cookie"].split("; ")
-
-    temoin_session = ""
-    for t in temoins:
-        if t.startswith("session="):
-            temoin_session = t
-            break
-
-    jeton_csrf = re.search(r"'csrfNonce': \"([0-9a-f]*)\"",rep.content.decode("utf8")).group(1)
-    
-    login_json = {
-        "name": config["admin"]["nom"],
-        "password": config["admin"]["password"],
-        "_submit": "Soumettre",
-        "nonce": jeton_csrf
-    }
-
-    rep = requests.post(
-        url=config["url"]+"/login",
-        json=login_json,
-        headers={"Cookie":temoin_session}
-    )
-
-    if rep.status_code != 200:
-        print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
-        return None
-    print("Authentifié avec succès")
-
-    # Obtention de la clée API
     print("Obtention de la clée API")
 
-    rep = requests.get(url=config["url"]+"/settings")
+    rep = requests.get(
+        url=config["url"]+"/settings",
+        headers={"Cookie": temoin_session}
+        )
     jeton_csrf = re.search(r"'csrfNonce': \"([0-9a-f]*)\"",rep.content.decode("utf8")).group(1)
 
     rep = requests.post(
-        url=config["url"]+"/tokens",
+        url=config["url"]+"/api/v1/tokens",
         json={"description":"Clée API de ctfd-config.py"},
         headers={"Cookie":temoin_session, "CSRF-Token":jeton_csrf}
     )
 
     if rep.status_code != 200:
         print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
-        
-        if not rep.json():
-            return None
-        
-        for e in rep.json()["errors"]:
-            print(f"\t{e}")
         return None
+
+    print("Clée API obtenue avec succès.")
     
     return rep.json()["data"]["value"]
 
@@ -344,12 +315,12 @@ def lire_defis(rep : str) -> list[dict]:
             continue
 
         for d in os.listdir(rep + '/' + c):
-            if "description.yaml" not in os.path.listdir(rep + '/' + c + '/' + d):
+            if not os.path.isdir(rep + '/' + c + '/' + d) or "description.yaml" not in os.listdir(rep + '/' + c + '/' + d):
                 continue
             
             print("Défi : " + c + '/' + d)
 
-            with open(rep + '/' + c + '/' + d) as f:
+            with open(rep + '/' + c + '/' + d + "/description.yaml", 'r') as f:
                 desc_yaml = yaml.safe_load(f.read())
             
             erreurs = yaml_config.valider_config(desc_yaml, structure_description_defis)
@@ -361,6 +332,10 @@ def lire_defis(rep : str) -> list[dict]:
             
             desc = yaml_config.normaliser_config(desc_yaml, structure_description_defis)
             desc["categorie"] = c
+
+            for i in range(len(desc["fichiers"])):
+                desc["fichiers"][i] = os.path.abspath(rep + '/' + c + '/' + d + '/' + desc["fichiers"][i])
+
             defis.append(desc)
     
     return defis
@@ -457,7 +432,7 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
             rep = requests.post(
                 url=config["url"] + "/api/v1/files",
                 data=defis_form,
-                files={"file":(os.path.basename(f),open(f,"rb"),mimetypes.guess_type(f))},
+                files={"file":(os.path.basename(f),open(f,"rb"),mimetypes.guess_type(f))},  # noqa: SIM115
                 headers={"Authorization": f"Token {capi}"}
             )
 
@@ -469,6 +444,8 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
                         print(f"\t{e}")
             
         print("\tFichiers téléversés avec succès.")
+
+    # TODO PATCH le reste des informations
 
 
 message_aide = """
