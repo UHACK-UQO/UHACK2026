@@ -1,0 +1,4 @@
+I, [2026-08-25T18:58:38.477353 #26]  INFO -- : [dotenv] Loaded [33m.env.production[0m
+[1;34mINFO [0m 2026-08-25T18:58:41.361Z pid=26 tid=2rm: Sidekiq 8.1.6 connecting to Redis with options {size: 10, pool_name: "internal", url: "redis://redis:6379/0", driver: :hiredis}
+OK
+New password: 47eb67c39882439bfb932b43a442be57

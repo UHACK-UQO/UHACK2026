@@ -2,9 +2,14 @@
 
 - [x] Mettre en place le docker ctfd
 - [x] Mettre en place le script de setup ctfd
-- [ ] Obtention d'une clé API
-- [ ] Mettre en place le script de téléchargement des défis
-  - [ ] Lire les dossiers et extraire les défis
-  - [ ] Reverse-engineer l'API de ctfd pour le téléchargement de défis
-  - [ ] Télécharger les défis
+- [x] Obtention d'une clé API
+- [x] Mettre en place le script de téléversement des défis
+  - [x] Lire les dossiers et extraire les défis
+  - [x] Reverse-engineer l'API de ctfd pour le téléchargement de défis
+  - [x] Téléverser les défis
+  - [ ] Terminer les détails de téléversements
 - [ ] Créer les comptes
+- [x] Installer Mastodon
+- [ ] Créer les comptes mastodons
+- [ ] Installer le serveur SMTP
+- [ ] Créer les comptes SMTP

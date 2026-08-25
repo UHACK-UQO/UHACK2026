@@ -1,0 +1,4 @@
+postgres*
+public
+redis
+installation/*.bool
