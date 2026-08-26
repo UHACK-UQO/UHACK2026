@@ -3,7 +3,7 @@ import mimetypes
 import os
 import re
 import sys
-import time
+import json
 
 import requests
 import yaml
@@ -60,6 +60,8 @@ def main():
 
     defis = lire_defis(config["general"]["repertoire_defis"])
     configurer_defis(config, defis, capi)
+
+    configurer_utilisateurs(config, capi)
 
 def lire_configuration(rep_config : str) -> dict:
     """Lit de fichier de configuration et renvoie un dictionnaire contenant tous les paramètres.
@@ -447,6 +449,164 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
 
     # TODO PATCH le reste des informations
 
+def configurer_utilisateurs(config : dict, capi : str) -> None:
+    print("Configuration des utilisateurs")
+
+    fichier_utilisateurs = config["general"]["fichier_utilisateurs"]
+    if not os.path.exists(fichier_utilisateurs) or not os.path.isfile(fichier_utilisateurs):
+        print("[ERREUR] : Le répertoire vers le fichier des utilisateurs n'existe pas ou n'est pas un fichier.")
+        return
+
+    utilisateurs : dict = None
+    with open(fichier_utilisateurs, "r") as f:
+        utilisateurs = json.loads(f.read())
+    
+    if "utilisateurs" not in utilisateurs:
+        print("[ERREUR] : Le fichier des utilisateurs doit contenir la clé 'utilisateurs'")
+        return
+    if "equipes_ctfd" not in utilisateurs:
+        print("[ERREUR] : Le fichier des utilisateurs doit contenir la clé 'equipes_ctfd'")
+        return
+    if not isinstance(utilisateurs["utilisateurs"], list):
+        print("[ERREUR] : La clé 'utilisateurs' doit être une liste d'objets")
+        return
+    if not isinstance(utilisateurs["equipes_ctfd"], list):
+        print("[ERREUR] : La clé 'equipes_ctfd' doit être une liste d'objets")
+        return
+    
+    for u in utilisateurs["utilisateurs"]:
+        if "nom" not in u:
+            print("[ERREUR] : Les utilisateurs doivent avoir une clé 'nom'")
+            continue
+        if "courriel" not in u:
+            print(f"[ERREUR] : {u["nom"]} ne possède pas de 'courriel'")
+            continue
+        if "mdp_ctfd" not in u:
+            print(f"[ERREUR] : {u["nom"]} ne possède pas de 'mdp_ctfd'")
+            continue
+    
+        print(f"\t{u["nom"]}, {u["courriel"]} : ", end="")
+
+        utilisateurs_json = {
+            "name": u["nom"],
+            "email": u["courriel"],
+            "password": u["mdp_ctfd"],
+            "type": "user",
+            "verified": True,
+            "hidden": False,
+            "change_password": False,
+            "banned": False,
+            "fields": []
+        }
+
+        rep = requests.post(
+            url=config["url"] + "/api/v1/users",
+            json=utilisateurs_json,
+            headers={"Authorization":f"Token {capi}"}
+            )
+        
+        if rep.status_code != 200:
+            print(f"[ERREUR] : Le serveur a répondu avec un code {rep.status_code}")
+            for e in rep.json()["errors"]:
+                print(f"\t\t{e}")
+            continue
+        
+        u["ctfd_id"] = rep.json()["data"]["id"]
+        print(f" id = {u["ctfd_id"]}")
+
+    print("Configuration des équipes")
+    for e in utilisateurs["equipes_ctfd"]:
+        if not "nom" in e:
+            print("[ERREUR] : Les équipes doivent avoir une clé 'nom'")
+            continue
+        if not "mdp" in e:
+            print(f"[ERREUR] : L'équipe {e["nom"]} n'a pas de 'mdp'")
+            continue
+        if not "chef" in e:
+            print(f"[ERREUR] : L'équipe {e["nom"]} n'a pas de 'chef'")
+            continue
+        if not "membres" in e or not isinstance(e["membres"], list):
+            print(f"[ERREUR] : L'équipe {e["nom"]} n'a pas de 'membres' ou la clé n'est pas une liste")
+            continue
+        if len(e["membres"]) == 0 or len(e["membres"]) > 5:
+            print(f"[ERREUR] : L'équipe {e["nom"]} n'a pas de membres ou a plus de 5 membres")
+            continue
+
+        print(f"\t{e["nom"]} : ", end="")
+
+        # Trouver le chef d'équipe pour prendre son courriel
+        u_chef : dict = None
+        for u in utilisateurs["utilisateurs"]:
+            if u["nom"] == e["chef"]:
+                u_chef = u
+                break
+        if u_chef == None:
+            print(f"[ERREUR] : Le chef {e["chef"]} n'existe pas")
+            continue
+
+        equipe_json = {
+            "name": e["nom"],
+            "password": e["mdp"],
+            "email": u_chef["courriel"],
+            "hidden": False,
+            "banned": False,
+            "fields": []
+        }
+
+        rep = requests.post(
+            url=config["url"] + "/api/v1/teams",
+            json=equipe_json,
+            headers={"Authorization":f"Token {capi}"}
+        )
+
+        if rep.status_code != 200:
+            print(f"[ERREUR] : Le serveur a répondu avec le code d'erreur {rep.status_code}")
+            for e in rep.json()["errors"]:
+                print(f"\t\t{e}")
+            continue
+
+        id_equipe = rep.json()["data"]["id"]
+
+        if e["chef"] not in e["membres"]:
+            e["membres"].append(e["chef"])
+
+        for m in e["membres"]:
+
+            u_membre : dict = None
+            if m != "chef":
+                for u in utilisateurs["utilisateurs"]:
+                    if u["nom"] == m:
+                        u_membre = u
+                        break
+            else:
+                u_membre = u_chef
+            
+            if u_membre == None:
+                print(f"[ERREUR] : Le membre {m} n'existe pas")
+
+            rep = requests.post(
+                url=config["url"]+f"/api/v1/teams/{id_equipe}/members",
+                json={"user_id":u_membre["ctfd_id"]},
+                headers={"Authorization":f"Token {capi}"}
+            )
+
+            if rep.status_code != 200:
+                print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+                for er in rep.json()["errors"]:
+                    print(f"\t\t{er}")
+
+            rep = requests.patch(
+                url=config["url"]+f"/api/v1/teams/{id_equipe}",
+                json={"captain_id":u_chef["ctfd_id"]},
+                headers={"Authorization":f"Token {capi}"}
+            )
+
+            if rep.status_code != 200:
+                print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+                for er in rep.json()["errors"]:
+                    print(f"\t\t{er}")
+
+        print("OK")
 
 message_aide = """
 USAGE ctfd-config <fichier-config>
@@ -532,6 +692,11 @@ structure_config = {
                         "description": "Seuls les participants possédant un compte pourront participer à l'événement"
                     }
                 ]
+            },
+            "fichier_utilisateurs": {
+                "est_obligatoire": True,
+                "Description": "Répertoire du fichier JSON listant les utilisateurs et leurs équipes.",
+                "defaut": "../coordination/comptes_utilisateurs.json",
             },
             "debut":{
                 "description": "Date d'ouverture de l'événement. Les participants n'auront pas accès à la plateforme avant cette date.\nFormat : Unix Epoch\n\tex. : 1781751060 = mer 17 jun 2026 22:51:00 EDT",

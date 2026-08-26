@@ -51,6 +51,11 @@ general:
   #     Seuls les participants possédant un 
   #     compte pourront participer à l'événement
   creation_compte: False
+
+  # Répertoire du fichier JSON listant les
+  # utilisateurs et leurs équipes
+  # [OBLIGATOIRE]
+  fichier_utilisateurs: ../coordination/comptes_utilisateurs.json
   
   # Date d'ouverture de l'événement. Les 
   # participants n'auront pas accès à la 
