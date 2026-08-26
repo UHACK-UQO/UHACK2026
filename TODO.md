@@ -10,6 +10,6 @@
   - [ ] Terminer les détails de téléversements
 - [ ] Créer les comptes
 - [x] Installer Mastodon
-- [ ] Créer les comptes mastodons
+- [x] Créer les comptes mastodons
 - [ ] Installer le serveur SMTP
 - [ ] Créer les comptes SMTP

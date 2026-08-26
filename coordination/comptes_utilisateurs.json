@@ -1,0 +1,12 @@
+[
+    {
+        "nom":"test",
+        "id":"test",
+        "courriel":"test@uhack.ca"
+    },
+    {
+        "nom":"test1",
+        "id":"test1",
+        "courriel":"test1@uhack.ca"
+    }
+]

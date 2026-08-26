@@ -2,3 +2,4 @@ postgres*
 public
 redis
 installation/*.bool
+installation/*.mdp
