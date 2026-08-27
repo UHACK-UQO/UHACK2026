@@ -1,0 +1,194 @@
+# NOTE: This config file is in 'sconf' format. Indent with tabs. Comments must be
+# on their own line, they don't end a line. Do not escape or quote strings.
+# Details: https://pkg.go.dev/github.com/mjl-/sconf.
+
+
+# Directory where all data is stored, e.g. queue, accounts and messages, ACME TLS
+# certs/keys. If this is a relative path, it is relative to the directory of
+# mox.conf.
+DataDir: ../data
+
+# Default log level, one of: error, info, debug, trace, traceauth, tracedata.
+# Trace logs SMTP and IMAP protocol transcripts, with traceauth also messages with
+# passwords, and tracedata on top of that also the full data exchanges (full
+# messages), which can be a large amount of data.
+LogLevel: debug
+
+# User to switch to after binding to all sockets as root. Default: mox. If the
+# value is not a known user, it is parsed as integer and used as uid and gid.
+# (optional)
+User: 1000
+
+# Full hostname of system, e.g. mail.<domain>
+Hostname: smtp.uhack.ca
+
+# If enabled, a single DNS TXT lookup of _updates.xmox.nl is done every 24h to
+# check for a new release. Each time a new release is found, a changelog is
+# fetched from https://updates.xmox.nl/changelog and delivered to the postmaster
+# mailbox. (optional)
+#
+# RECOMMENDED: please enable to stay up to date
+#
+#CheckUpdates: true
+
+# Automatic TLS configuration with ACME, e.g. through Let's Encrypt. The key is a
+# name referenced in TLS configs, e.g. letsencrypt. (optional)
+ACME:
+	letsencrypt:
+
+		# For letsencrypt, use https://acme-v02.api.letsencrypt.org/directory.
+		DirectoryURL: https://acme-v02.api.letsencrypt.org/directory
+
+		# Email address to register at ACME provider. The provider can email you when
+		# certificates are about to expire. If you configure an address for which email is
+		# delivered by this server, keep in mind that TLS misconfigurations could result
+		# in such notification emails not arriving.
+		ContactEmail: mox@uhack.ca
+
+		# If set, used for suggested CAA DNS records, for restricting TLS certificate
+		# issuance to a Certificate Authority. If empty and DirectyURL is for Let's
+		# Encrypt, this value is set automatically to letsencrypt.org. (optional)
+		IssuerDomainName: letsencrypt.org
+
+# File containing hash of admin password, for authentication in the web admin
+# pages (if enabled). (optional)
+AdminPasswordFile: adminpasswd
+
+# Listeners are groups of IP addresses and services enabled on those IP addresses,
+# such as SMTP/IMAP or internal endpoints for administration or Prometheus
+# metrics. All listeners with SMTP/IMAP services enabled will serve all configured
+# domains. If the listener is named 'public', it will get a few helpful additional
+# configuration checks, for acme automatic tls certificates and monitoring of ips
+# in dnsbls if those are configured.
+Listeners:
+	public:
+
+		# Use 0.0.0.0 to listen on all IPv4 and/or :: to listen on all IPv6 addresses, but
+		# it is better to explicitly specify the IPs you want to use for email, as mox
+		# will make sure outgoing connections will only be made from one of those IPs. If
+		# both outgoing IPv4 and IPv6 connectivity is possible, and only one family has
+		# explicitly configured addresses, both address families are still used for
+		# outgoing connections. Use the "direct" transport to limit address families for
+		# outgoing connections.
+		IPs:
+			- 0.0.0.0
+
+		# For SMTP/IMAP STARTTLS, direct TLS and HTTPS connections. (optional)
+		TLS:
+
+			# Name of provider from top-level configuration to use for ACME, e.g. letsencrypt.
+			# (optional)
+			ACME: letsencrypt
+
+			# Private keys used for ACME certificates. Specified explicitly so DANE TLSA DNS
+			# records can be generated, even before the certificates are requested. DANE is a
+			# mechanism to authenticate remote TLS certificates based on a public key or
+			# certificate specified in DNS, protected with DNSSEC. DANE is opportunistic and
+			# attempted when delivering SMTP with STARTTLS. The private key files must be in
+			# PEM format. PKCS8 is recommended, but PKCS1 and EC private keys are recognized
+			# as well. Only RSA 2048 bit and ECDSA P-256 keys are currently used. The first of
+			# each is used when requesting new certificates through ACME. (optional)
+			HostPrivateKeyFiles:
+				- hostkeys/smtp.uhack.ca.20260826T235256.rsa2048.privatekey.pkcs8.pem
+				- hostkeys/smtp.uhack.ca.20260826T235256.ecdsap256.privatekey.pkcs8.pem
+
+		# (optional)
+		SMTP:
+			Enabled: true
+
+			# Addresses of DNS block lists for incoming messages. Block lists are only
+			# consulted for connections/messages without enough reputation to make an
+			# accept/reject decision. This prevents sending IPs of all communications to the
+			# block list provider. If any of the listed DNSBLs contains a requested IP
+			# address, the message is rejected as spam. The DNSBLs are checked for healthiness
+			# before use, at most once per 4 hours. IPs we can send from are periodically
+			# checked for being in the configured DNSBLs. See MonitorDNSBLs in domains.conf to
+			# only monitor IPs we send from, without using those DNSBLs for incoming messages.
+			# Example DNSBLs: sbl.spamhaus.org, bl.spamcop.net. See
+			# https://www.spamhaus.org/sbl/ and https://www.spamcop.net/ for more information
+			# and terms of use. (optional)
+			#DNSBLs:
+				#- sbl.spamhaus.org
+				#- bl.spamcop.net
+
+		# Account web interface, for email users wanting to change their accounts, e.g.
+		# set new password, set new delivery rulesets. Default path is /. (optional)
+		AccountHTTP:
+			Enabled: true
+
+		# Admin web interface, for managing domains, accounts, etc. Default path is
+		# /admin/. Preferably only enable on non-public IPs. Hint: use 'ssh -L
+		# 8080:localhost:80 you@yourmachine' and open http://localhost:8080/admin/, or set
+		# up a tunnel (e.g. WireGuard) and add its IP to the mox 'internal' listener.
+		# (optional)
+		AdminHTTP:
+			Enabled: true
+
+		# Webmail client, for reading email. Default path is /webmail/. (optional)
+		WebmailHTTP:
+			Enabled: true
+
+		# Like WebAPIHTTPS, but with plain HTTP, without TLS. (optional)
+		WebAPIHTTP:
+			Enabled: true
+
+		# Serve prometheus metrics, for monitoring. You should not enable this on a public
+		# IP. (optional)
+		MetricsHTTP:
+			Enabled: true
+
+		# SMTP over TLS for submitting email, by email applications. Requires a TLS
+		# config. (optional)
+		Submissions:
+			Enabled: true
+
+		# IMAP over TLS for reading email, by email applications. Requires a TLS config.
+		# (optional)
+		IMAPS:
+			Enabled: true
+
+		# Serve autoconfiguration/autodiscovery to simplify configuring email
+		# applications, will use port 443. Requires a TLS config. (optional)
+		AutoconfigHTTPS:
+			Enabled: true
+
+		# Serve MTA-STS policies describing SMTP TLS requirements. Requires a TLS config.
+		# (optional)
+		MTASTSHTTPS:
+			Enabled: true
+
+		# All configured WebHandlers will serve on an enabled listener. (optional)
+		WebserverHTTP:
+			Enabled: true
+
+		# All configured WebHandlers will serve on an enabled listener. Either ACME must
+		# be configured, or for each WebHandler domain a TLS certificate must be
+		# configured. (optional)
+		WebserverHTTPS:
+			Enabled: true
+
+# Destination for emails delivered to postmaster addresses: a plain 'postmaster'
+# without domain, 'postmaster@<hostname>' (also for each listener with SMTP
+# enabled), and as fallback for each domain without explicitly configured
+# postmaster destination.
+Postmaster:
+	Account: mox
+
+	# E.g. Postmaster or Inbox.
+	Mailbox: Postmaster
+
+# Destination for per-host TLS reports (TLSRPT). TLS reports can be per recipient
+# domain (for MTA-STS), or per MX host (for DANE). The per-domain TLS reporting
+# configuration is in domains.conf. This is the TLS reporting configuration for
+# this host. If absent, no host-based TLSRPT address is configured, and no host
+# TLSRPT DNS record is suggested. (optional)
+HostTLSRPT:
+
+	# Account to deliver TLS reports to. Typically same account as for postmaster.
+	Account: mox
+
+	# Mailbox to deliver TLS reports to. Recommended value: TLSRPT.
+	Mailbox: TLSRPT
+
+	# Localpart at hostname to accept TLS reports at. Recommended value: tlsreports.
+	Localpart: tlsreports

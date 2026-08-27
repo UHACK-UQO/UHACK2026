@@ -11,7 +11,7 @@ else
     echo "Mot de passe généré. Vous pouvez le consulter dans installation/admin.mdp"
 
     echo "Création des comptes utilisateurs..."
-    jq -c ".[]" /opt/mastodon/comptes.json | while read compte; do
+    jq -c ".utilisateurs[]" /opt/mastodon/comptes.json | while read compte; do
         nom=$(echo $compte | jq -r ".id")
         courriel=$(echo $compte | jq -r ".courriel")
         echo "${nom}, ${courriel}"
