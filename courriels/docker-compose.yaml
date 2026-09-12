@@ -28,32 +28,68 @@
 # prevents listening on ::1 (IPv6 is not enabled in docker by default).
 
 services:
-  mox:
-    # Replace "latest" with the version you want to run, see https://r.xmox.nl/r/mox/.
-    # Include the @sha256:... digest to ensure you get the listed image.
+  # postfix:
+  #   build:
+  #     context: .
+  #     dockerfile: postfix.Dockerfile
+  #   hostname: smtp.uhack.ctf
+  #   # command: /bin/sh -c /mox/installation/installation.sh
+  #   env_file: .env
+  #   volumes:
+  #     - ./config/main.cf:/etc/postfix/main.cf
+  #     - ./spool:/var/spool/postfix
+  #     - ./log:/var/log/postfix
+  #     - ./installation:/mox/installation
+  #     - ../coordination/comptes_utilisateurs.json:/mox/comptes.json
+  #   # ports:
+  #   #   - 25:25
+  #   #   - 465:465
+  #   #   - 587:587
+  #   #   - 993:993
+  #   #   - 143:143
+  #   #   - 443:443
+  #   #   - 80:80
+  #   networks:
+  #     uhack_partage:
+  #       ipv4_address: 172.16.10.20
+  #   dns: 172.16.10.1
+  #   restart: always
+  #   healthcheck:
+  #     test: netstat -nlt | grep ':25 '
+  #     interval: 1s
+  #     timeout: 1s
+  #     retries: 10
+  
+  mail:
     build:
       context: .
-      dockerfile: mox.Dockerfile
-    command: /bin/sh -c /mox/installation/installation.sh
+      dockerfile: dms.Dockerfile
+    restart: always
+    post_start: 
+      - command: /bin/sh -c /tmp/installation/installation.sh
     env_file: .env
     volumes:
-      - ./config:/mox/config:z
-      - ./data:/mox/data:z
-      - ./installation:/mox/installation
-      - ../coordination/comptes_utilisateurs.json:/mox/comptes.json
-      - ./mox.conf.template:/mox/mox.conf.template
-    ports:
-      - 127.0.0.1:25:25
-      - 127.0.0.1:465:465
-      - 127.0.0.1:587:587
-      - 127.0.0.1:993:993
-      - 127.0.0.1:143:143
-      - 127.0.0.1:443:443
-      - 127.0.0.1:80:80
-    working_dir: /mox
-    restart: on-failure
-    healthcheck:
-      test: netstat -nlt | grep ':25 '
-      interval: 1s
-      timeout: 1s
-      retries: 10
+      - ./dms/mail-data:/var/mail
+      - ./dms/mail-state:/var/mail-state
+      - ./dms/mail-logs:/var/log/mail
+      - ./dms/config:/tmp/docker-mailserver
+      - /etc/localtime:/etc/locatime:ro
+      - ./installation:/tmp/installation
+      - ../coordination/comptes_utilisateurs.json:/tmp/comptes.json
+    networks:
+      uhack_partage:
+        ipv4_address: 172.16.10.20
+    dns: 172.16.10.2
+
+  roundcube:
+    image: roundcube/roundcubemail
+    restart: always
+    env_file: .env
+    networks:
+      uhack_partage:
+        ipv4_address: 172.16.10.40
+    dns: 172.16.10.2
+
+networks:
+  uhack_partage:
+    external: true

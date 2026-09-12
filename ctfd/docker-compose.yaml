@@ -14,11 +14,11 @@ services:
     volumes:
       - ./donnees/ctfd/uploads:/var/uploads
       - ./donnees/ctfd/logs:/var/log/CTFd
-    ports:
-      - 8000:8000
+      - ./resolv.conf:/etc/resolv.conf
     networks:
-      - interne
-      - externe
+      interne:
+      uhack_partage:
+        ipv4_address: 172.16.10.30
     healthcheck: 
       test: ["CMD", "bash", "-c", "curl -f https://localhost:8000 &> /dev/null; if [ $? -eq 0 ]; then printf '{\"status\":\"healthy\"}'; else printf 'null'; fi"]
       interval: 1s
@@ -49,5 +49,5 @@ services:
 
 networks:
   interne:
-  externe:
-    driver: bridge
+  uhack_partage:
+    external: true

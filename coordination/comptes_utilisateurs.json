@@ -3,14 +3,14 @@
         {
             "nom":"test",
             "id":"test",
-            "courriel":"test@uhack.ca",
+            "courriel":"test@uhack.ctf",
             "mdp_ctfd":"mdp1",
             "mdp_courriel": "moxmoxmox"
         },
         {
             "nom":"test1",
             "id":"test1",
-            "courriel":"test1@uhack.ca",
+            "courriel":"test1@uhack.ctf",
             "mdp_ctfd":"mdp2",
             "mdp_courriel": "moxmoxmox"
         }

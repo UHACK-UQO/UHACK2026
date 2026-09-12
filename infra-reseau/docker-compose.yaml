@@ -1,0 +1,14 @@
+services:
+  dnsmasq:
+    image: dockurr/dnsmasq
+    restart: always
+    volumes:
+      - ./dnsmasq.conf:/etc/dnsmasq.conf
+      - ./dnsmasq.sh:/usr/bin/dnsmasq.sh
+    networks:
+      uhack_partage:
+        ipv4_address: 172.16.10.2
+
+networks:
+  uhack_partage:
+    external: true
