@@ -1,6 +1,20 @@
-# Si false, ne sera pas importé dans ctfd.
+# Type de défiCTFd.
+#     utilisateurs.
+#     exposé.
+#     
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource de 
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit 
+#     exposé, mais ce service est le même pour 
+#     tous les Ex.: Exposer une API REST.
+#   service_personnel :
+#     Le défi nécessite qu'un service pour chaque 
+#     utilisateur soit Ex.: Exposer un boot2root.
 # [OBLIGATOIRE]
-est_ctfd: True
+type: "ctfd"
 
 # Titre du défi
 # [OBLIGATOIRE]
@@ -11,8 +25,7 @@ titre: "Défi"
 description: "description"
 
 # Liste de fichiers à téléverser
-fichiers:
-  - ./tmp.png
+fichiers: ['...']
 
 # flag du défi
 # [OBLIGATOIRE]
@@ -20,18 +33,12 @@ drapeau: "UHACK{adfjkvnalkerfjgbvqap}"
 
 # Liste d'indices, en ordre d'apparence. Supporte 
 # le markdown.
-indices: 
-  - 'indice1'
-  - 'indice2'
+indices: ['indice1', 'indice2', '...']
 
 # Solution du défi. Supporte le markdown. Cet 
 # attribut est obligatoire.
 # [OBLIGATOIRE]
 solution: "Solution."
-
-# Mettre à true si l'importation dans ctfd 
-# nécessite un traitement spécial
-necessite_un_traitement_special: False
 
 # Paramètres du pointage pour ce défi. Le nombre 
 # de points diminue à mesure que de plus en plus 
@@ -42,6 +49,12 @@ pointage:
   
   # Fonction de décroissance des points.
   # Valeurs acceptées :
+  #   constant :
+  #     Le nombre de points reste constant tout 
+  #     au long de l'événement. Avec cette 
+  #     option, les paramètres `pointage.minimum` 
+  #     et `pointage.decroissance` n'ont aucun 
+  #     effet.
   #   lineaire :
   #     Le nombre de points diminue au même 
   #     rythme en fonction du nombre de solutions 
@@ -51,7 +64,7 @@ pointage:
   #     avec les premières soumissions et de plus 
   #     en plus doucement avec les suivantes.
   fonction: "logarithmique"
-
+  
   # Nombre de points minimum. La décroissance ne 
   # passera pas en-dessous de ce niveau
   minimum: 10
@@ -60,3 +73,15 @@ pointage:
   # interprété différemment dépendamment de 
   # `pointage.fonction`.
   decroissance: 10
+
+# Le défi est-il visible aux participants?
+# Valeurs acceptées :
+#   visible :
+#     Les participants peuvent voir le défis
+#   cache :
+#     Le défi est caché aux participants.
+etat: "visible"
+
+# Mettre à true si l'importation dans ctfd 
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

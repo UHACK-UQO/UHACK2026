@@ -356,8 +356,8 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
     for d in defis:
         print(d["categorie"] + '/' + d["titre"])
 
-        if not d["est_ctfd"]:
-            print("\tSauté car non-ctfd.")
+        if d["type"] != "ctfd":
+            print("[ERREUR] Type de défi non implémenté")
             continue
 
         defis_json = {
@@ -368,7 +368,7 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
 
         if d["pointage"]["fonction"] == "constant":
             # TODO
-            print("[ERREUR] Non implémenté")
+            print("[ERREUR] Fonction de pointage non implémenté")
         else:
             defis_json["type"] = "dynamic"
             defis_json["function"] = "linear" if d["pointage"]["fonction"] == "lineaire" else "logarithmic"
@@ -446,6 +446,8 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
                         print(f"\t{e}")
             
         print("\tFichiers téléversés avec succès.")
+
+
 
     # TODO PATCH le reste des informations
 
@@ -815,10 +817,24 @@ structure_config = {
 }
 
 structure_description_defis = {
-    "est_ctfd": {
+    "type": {
         "est_obligatoire": True,
-        "description": "Si false, ne sera pas importé dans ctfd.",
-        "defaut": True
+        "description": "Type de défi",
+        "defaut": "ctfd",
+        "enum":[
+            {
+                "nom": "ctfd",
+                "description": "Le défi n'utilise aucune autre ressource de CTFd.\nEx.: Un fichier à télécharger."
+            },
+            {
+                "nom": "service_unique",
+                "description": "Le défi nécessite qu'un service soit exposé, mais ce service est le même pour tous les utilisateurs.\nEx.: Exposer une API REST."
+            },
+            {
+                "nom": "service_personnel",
+                "description": "Le défi nécessite qu'un service pour chaque utilisateur soit exposé.\nEx.: Exposer un boot2root."
+            }
+        ]
     },
     "titre": {
         "est_obligatoire": True,
