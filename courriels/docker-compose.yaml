@@ -67,7 +67,8 @@ services:
     restart: always
     post_start: 
       - command: /bin/sh -c /tmp/installation/installation.sh
-    env_file: .env
+    env_file: 
+      - .env
     volumes:
       - ./dms/mail-data:/var/mail
       - ./dms/mail-state:/var/mail-state

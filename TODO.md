@@ -13,4 +13,5 @@
 - [x] Créer les comptes mastodons
 - [x] Installer le serveur SMTP
 - [x] Créer les comptes SMTP
-- [ ] Créer réseau virtuel avec résolution DNS (LE SERVEUR SMTP ET MASTODON NE FONCTIONNENT PAS EN CE MOMENT)
+- [x] Créer réseau virtuel avec résolution DNS
+- [ ] Automatiser la modification du nom de domaine

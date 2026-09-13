@@ -2,7 +2,9 @@ services:
   ctfd:
     image: ctfd/ctfd:latest
     restart: always
-    env_file: .env
+    env_file:
+      - ../coordination/nom_domaine.env
+      - .env
     environment:
       - SECRET_KEY=$CTFD_SECRET_KEY
       - DATABASE_URL=$CTFD_DATABASE_URL

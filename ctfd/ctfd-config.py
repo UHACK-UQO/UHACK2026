@@ -478,19 +478,16 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
         if "nom" not in u:
             print("[ERREUR] : Les utilisateurs doivent avoir une clé 'nom'")
             continue
-        if "courriel" not in u:
-            print(f"[ERREUR] : {u["nom"]} ne possède pas de 'courriel'")
-            continue
-        if "mdp_ctfd" not in u:
-            print(f"[ERREUR] : {u["nom"]} ne possède pas de 'mdp_ctfd'")
+        if "mdp" not in u:
+            print(f"[ERREUR] : {u["nom"]} ne possède pas de 'mdp'")
             continue
     
-        print(f"\t{u["nom"]}, {u["courriel"]} : ", end="")
+        print(f"\t{u["nom"]}, {u["id"]}@{os.getenv("DOMAINE_GLOBAL","aucun_domaine.lan")} : ", end="")
 
         utilisateurs_json = {
             "name": u["nom"],
-            "email": u["courriel"],
-            "password": u["mdp_ctfd"],
+            "email": f"{u["id"]}@{os.getenv("DOMAINE_GLOBAL","aucun_domaine.lan")}",
+            "password": u["mdp"],
             "type": "user",
             "verified": True,
             "hidden": False,
@@ -547,7 +544,7 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
         equipe_json = {
             "name": e["nom"],
             "password": e["mdp"],
-            "email": u_chef["courriel"],
+            "email": f"{u_chef["id"]}@{os.getenv("DOMAINE_GLOBAL","aucun_domaine.lan")}",
             "hidden": False,
             "banned": False,
             "fields": []

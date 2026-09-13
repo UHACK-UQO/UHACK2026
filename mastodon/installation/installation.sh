@@ -13,7 +13,7 @@ else
     echo "Création des comptes utilisateurs..."
     jq -c ".utilisateurs[]" /opt/mastodon/comptes.json | while read compte; do
         nom=$(echo $compte | jq -r ".id")
-        courriel=$(echo $compte | jq -r ".courriel")
+        courriel="${nom}@${DOMAINE_GLOBAL}"
         echo "${nom}, ${courriel}"
         RAILS_ENV=production bin/tootctl accounts create $nom --email $courriel --confirmed | grep "New password: " | sed "s/New password: /${nom}: /gm" >> /opt/mastodon/installation/utilisateurs.mdp
         RAILS_ENV=production bin/tootctl accounts modify $nom --approve

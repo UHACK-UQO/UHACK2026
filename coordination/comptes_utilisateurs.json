@@ -1,18 +1,19 @@
 {
     "utilisateurs": [
         {
+            "nom":"admin",
+            "id":"admin",
+            "mdp":"9504b4d5470b049f8fecf7eb82a2ee20"
+        },
+        {
             "nom":"test",
             "id":"test",
-            "courriel":"test@uhack.ctf",
-            "mdp_ctfd":"mdp1",
-            "mdp_courriel": "moxmoxmox"
+            "mdp":"mdp1"
         },
         {
             "nom":"test1",
             "id":"test1",
-            "courriel":"test1@uhack.ctf",
-            "mdp_ctfd":"mdp2",
-            "mdp_courriel": "moxmoxmox"
+            "mdp":"mdp2"
         }
     ],
     "equipes_ctfd":[

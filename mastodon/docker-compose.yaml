@@ -76,7 +76,9 @@ services:
       dockerfile: mastodon.Dockerfile
     # image: ghcr.io/mastodon/mastodon:v4.7.0
     restart: always
-    env_file: .env.production
+    env_file: 
+      - ../coordination/nom_domaine.env
+      - .env.production
     command: /bin/sh -c /opt/mastodon/installation/installation.sh
     networks:
       - uhack_partage

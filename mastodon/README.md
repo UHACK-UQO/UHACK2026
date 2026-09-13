@@ -4,9 +4,10 @@ Cette instance de mastodon servira à simuler une réponse de crise par les rés
 
 ## Déploiement
 
-1. Exécutez `chown -R 991:991 installation`
-2. Exécutez `docker compose up -d`
-3. Le mot de passe du compte admin se trouvera dans `installation/admin.mdp`
+1. Modifiez le nom de domaine dans le fichier `.env.production`
+2. Exécutez `chown -R 991:991 installation`
+3. Exécutez `docker compose up -d`
+4. Le mot de passe du compte admin se trouvera dans `installation/admin.mdp`
 
 ## Structure
 
