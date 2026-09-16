@@ -33,6 +33,17 @@ description: |-
   vous n'en connaissez pas les paramètres. Vous devrez rebâtir le système 
   pour décoder la communication des attaquants.
 
+  ---
+
+  The hackers are trying to transmit a ransom letter, but it seems the
+  message isn't going through! There is too much noise on the line and
+  clearly, **the error correction system is down**.
+
+  You know the system uses a 
+  [Hamming Code](https://en.wikipedia.org/wiki/Hamming_code), but you
+  forget the parameters. You need to rebuild the system to decode the
+  hacker's communication.
+
 # Liste de fichiers à téléverser
 fichiers:
   - "rançon.pdf.bin"
@@ -44,7 +55,10 @@ drapeau: "UHACK{e7f1d6a99f63d22db73f3faccba68d42}"
 # Liste d'indices, en ordre d'apparence. Supporte 
 # le markdown.
 indices: 
-  - "Vous vous souvenez soudainement que le système utilisait un code de Hamming (15,11)"
+  - |- 
+    Vous vous souvenez soudainement que le système utilisait un code de Hamming (15,11)
+    
+    You suddenly remember that the system used a (15,11) Hamming Code.
 
 # Solution du défi. Supporte le markdown. Cet 
 # attribut est obligatoire.
@@ -58,7 +72,7 @@ solution: |-
 
     # Lire le document
     document : bytearray
-    with open("rancon.pdf","rb") as f:
+    with open("rançon.pdf","rb") as f:
         document = f.read() + b'\x00\x00'
 
     # Extraire les mots de 11 bits
@@ -156,15 +170,15 @@ solution: |-
         doc_8.append(m_16 & 0xFF)
 
     doc_b = bytearray(doc_8)
-    with open("rancon.pdf.bin","wb") as f:
+    with open("rançon.pdf.bin","wb") as f:
         f.write(doc_b)
   ```
-  
+
   Décodeur : 
   ```python
     # Hamming Code 15,11
 
-    with open("rancon.pdf.bin","rb") as f:
+    with open("rançon.pdf.bin","rb") as f:
         document = f.read()
 
     # Corriger la corruption
@@ -223,7 +237,7 @@ solution: |-
             m_8 = (m_11 << (8-dec)) & 0xFF
             dec = dec-5
 
-    with open("test.pdf","wb") as f:
+    with open("rançon.pdf","wb") as f:
         f.write(bytearray(doc_8))
   ```
 
