@@ -1,23 +1,6 @@
 # URL de connection à la plateforme ctfd.
 # [OBLIGATOIRE]
-url: "http://localhost:8000"
-
-# Paramètres du compte admin
-# [OBLIGATOIRE]
-admin:
-  # Nom d'utilisateur
-  # [OBLIGATOIRE]
-  nom: "admin"
-  
-  # Courriel de l'administrateur. Doit être un 
-  # courriel valide, mais n'a pas besoin d'être 
-  # une vrai adresse.
-  # [OBLIGATOIRE]
-  courriel: "courriel@admin.tld"
-  
-  # Mot de passe admin
-  # [OBLIGATOIRE]
-  mdp: "0a3a865dc4d272a6a21617ef94e07c33903c382c6e18765b31709ef29b2c313d"
+url: "http://ctfd.uhack.ctf:8000"
 
 # Paramètres généraux du CTF
 # [OBLIGATOIRE]

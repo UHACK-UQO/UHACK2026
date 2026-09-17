@@ -15,3 +15,4 @@
 - [x] Créer les comptes SMTP
 - [x] Créer réseau virtuel avec résolution DNS
 - [ ] Automatiser la modification du nom de domaine
+- [ ] Passer les requêtes par un proxy inverse

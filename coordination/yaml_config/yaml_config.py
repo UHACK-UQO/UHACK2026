@@ -69,11 +69,14 @@ def valider_structure(structure : dict, nom : str="") -> list[str]:
             erreurs.append(f"{nom}.{k}.defaut doit être 'str', 'int', 'float', 'bool', 'list' ou 'dict', pas {type(v["defaut"])}")
 
         for vk in v.keys():
-            if vk not in ["defaut","description","est_obligatoire","enum","regex"]:
-                erreurs.append(f"[{nom}.{k}] Le paramètre {vk} n'est pas supporté. Doit être 'defaut', 'description', 'est_obligatoire' ou 'enum'.")
+            if vk not in ["defaut","description","est_obligatoire","enum","regex","defaut_est_exemple"]:
+                erreurs.append(f"{nom}.{k} Le paramètre {vk} n'est pas supporté. Doit être 'defaut', 'description', 'est_obligatoire', 'defaut_est_exemple' ou 'enum'.")
 
         if "est_obligatoire" in v.keys() and not isinstance(v["est_obligatoire"], bool):
             erreurs.append(f"{nom}.{k}.est_obligatoire doit être de type 'bool', pas {type(v["est_obligatoire"])}")
+        
+        if "defaut_est_exemple" in v.keys() and not isinstance(v["defaut_est_exemple"], bool):
+            erreurs.append(f"{nom}.{k}.defaut_est_exemple doit être de type 'bool', pas {type(v["defaut_est_exemple"])}")
         
         if "regex" in v.keys() and not isinstance(v["regex"], str):
             erreurs.append(f"{nom}.{k}.regex doit être de type 'str', pas {type(v["regex"])}")
@@ -111,6 +114,9 @@ def valider_structure(structure : dict, nom : str="") -> list[str]:
         
         if "defaut" in v.keys() and isinstance(v["defaut"], dict):
             valider_structure(v["defaut"], f"{k}.defaut")
+        
+        if "defaut" in v.keys() and isinstance(v["defaut"], list) and len(v["defaut"]) == 1 and isinstance(v["defaut"][0], dict):
+            valider_structure(v["defaut"][0], f"{k}.defaut[]")
     
     return erreurs
 
@@ -132,16 +138,34 @@ def normaliser_config(config : dict, structure : dict) -> dict:
     config_norm = {}
 
     for k,v in structure.items():
-        if not isinstance(v["defaut"], dict):
-            if k in config.keys():
-                config_norm[k] = config[k]
-            else:
-                config_norm[k] = v["defaut"]
-        else:
+        if isinstance(v["defaut"], dict):
             if k in config:
                 config_norm[k] = normaliser_config(config[k],v["defaut"])
+            elif "defaut_est_exemple" not in v.keys() or not v["defaut_est_exemple"]:  # noqa: SIM118
+                config_norm[k] = normaliser_config({},v["defaut"])
             else:
-                config_norm = normaliser_config({},v["defaut"])
+                config_norm[k] = None
+
+        elif isinstance(v["defaut"], list) and len(v["defaut"]) == 1 and isinstance(v["defaut"][0], dict):
+            if k in config:
+                config_norm[k] = []
+                for i in range(len(config[k])):
+                    config_norm[k].append( normaliser_config(config[k][i], v["defaut"][0]) )
+            elif "defaut_est_exemple" not in v.keys() or not v["defaut_est_exemple"]:  # noqa: SIM118
+                config_norm[k] = [normaliser_config({},v["defaut"][0])]
+            else:
+                config_norm[k] = []
+
+        else:
+            if k in config.keys():  # noqa: SIM118
+                config_norm[k] = config[k]
+            elif "defaut_est_exemple" not in v.keys() or not v["defaut_est_exemple"]:  # noqa: SIM118
+                config_norm[k] = v["defaut"]
+            else:
+                if isinstance(v["defaut"], list):
+                    config_norm[k] = []
+                else:
+                    config_norm[k] = None
     return config_norm
 
 def creer_yaml_defaut(structure : dict, tabulation : int=0) -> str:
@@ -233,7 +257,7 @@ def creer_yaml_defaut(structure : dict, tabulation : int=0) -> str:
             commentaire += '\n' + enum
 
         # Est obligatoire
-        if "est_obligatoire" in v and v["est_obligatoire"]:
+        if "est_obligatoire" in v.keys() and v["est_obligatoire"]:
             commentaire += "\n# [OBLIGATOIRE]"
         
         valeur = ""
@@ -244,6 +268,18 @@ def creer_yaml_defaut(structure : dict, tabulation : int=0) -> str:
                 valeur += c
                 if c == '\n':
                     valeur += "  "
+        elif isinstance(v["defaut"], list):
+            valeur = str(k)+":\n"
+            for e in v["defaut"]:
+                if not isinstance(e, dict):
+                    valeur += "  - " + ('"' if isinstance(e, str) else '') +str(e) + ('"' if isinstance(e, str) else '') + "\n"
+                else:
+                    valeur_brute = creer_yaml_defaut(e,tabulation=tabulation+2)
+                    valeur += "  - "
+                    for c in valeur_brute:
+                        valeur += c
+                        if c == '\n':
+                            valeur += "    "
         else:
             valeur = str(k)+': ' + ('"' if isinstance(v["defaut"], str) else '') +str(v["defaut"]) + ('"' if isinstance(v["defaut"], str) else '')
 

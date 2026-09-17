@@ -1,0 +1,144 @@
+# Type de défiCTFd.
+#     utilisateurs.
+#     exposé.
+#     
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource de 
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit 
+#     exposé, mais ce service est le même pour 
+#     tous les Ex.: Exposer une API REST.
+#   service_personnel :
+#     Le défi nécessite qu'un service pour chaque 
+#     utilisateur soit Ex.: Exposer un boot2root.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Défi2"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: "description"
+
+# Liste de fichiers à téléverser
+#fichiers:
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{adfjkvnalkerfjgbvqap}"
+
+# Liste d'indices, en ordre d'apparence. Supporte 
+# le markdown.
+indices:
+  - # Titre de l'indice
+    titre: "Indice1"
+    
+    # Contenu de l'indice
+    description: "Ceci est un indice"
+    
+    # Coût en nombres de points pour ouvrir 
+    # l'indice
+    points: 50
+    
+    # Liste des indices devant être ouverts avant 
+    # que celui-ci soit accessible. Cette liste 
+    # représente l'indexe des indinces dans la 
+    # présente liste.
+    #prerequis:
+
+  - # Titre de l'indice
+    titre: "Indice2"
+    
+    # Contenu de l'indice
+    description: "Ceci est un indice"
+    
+    # Coût en nombres de points pour ouvrir 
+    # l'indice
+    points: 50
+    
+    # Liste des indices devant être ouverts avant 
+    # que celui-ci soit accessible. Cette liste 
+    # représente l'indexe des indinces dans la 
+    # présente liste.
+    prerequis:
+      - 0
+  
+  - # Titre de l'indice
+    titre: "Indice3"
+    
+    # Contenu de l'indice
+    description: "Ceci est un indice"
+    
+    # Coût en nombres de points pour ouvrir 
+    # l'indice
+    points: 50
+    
+    # Liste des indices devant être ouverts avant 
+    # que celui-ci soit accessible. Cette liste 
+    # représente l'indexe des indinces dans la 
+    # présente liste.
+    prerequis:
+      - 0
+      - 1
+    
+# Solution du défi. Supporte le markdown. Cet 
+# attribut est obligatoire.
+# [OBLIGATOIRE]
+solution: "Solution."
+
+# Paramètres du pointage pour ce défi. Le nombre 
+# de points diminue à mesure que de plus en plus 
+# de solutions sont soumises au défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  
+  # Fonction de décroissance des points.
+  # Valeurs acceptées :
+  #   constant :
+  #     Le nombre de points reste constant tout 
+  #     au long de l'événement. Avec cette 
+  #     option, les paramètres `pointage.minimum` 
+  #     et `pointage.decroissance` n'ont aucun 
+  #     effet.
+  #   lineaire :
+  #     Le nombre de points diminue au même 
+  #     rythme en fonction du nombre de solutions 
+  #     soumises.
+  #   logarithmique :
+  #     Le nombre de points chute drastiquement 
+  #     avec les premières soumissions et de plus 
+  #     en plus doucement avec les suivantes.
+  fonction: "logarithmique"
+  
+  # Nombre de points minimum. La décroissance ne 
+  # passera pas en-dessous de ce niveau
+  minimum: 10
+  
+  # Taux de décroissance des points. Est 
+  # interprété différemment dépendamment de 
+  # `pointage.fonction`.
+  decroissance: 10
+
+# Le défi est-il visible aux participants?
+# Valeurs acceptées :
+#   visible :
+#     Les participants peuvent voir le défis
+#   cache :
+#     Le défi est caché aux participants.
+etat: "visible"
+
+# Liste des défis devant avoir été complété avant 
+# de pouvoir accéder à celui-ci. Faites référence 
+# aux défis par leur titre.
+prerequis:
+  - "Défi"
+  - "L'avis"
+
+# Mettre à true si l'importation dans ctfd 
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

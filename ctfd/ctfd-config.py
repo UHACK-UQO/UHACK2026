@@ -13,8 +13,7 @@ import yaml_config
 
 
 def main():
-    # gestion des paramètres
-
+    # gestion des paramètre
     if "--help" in sys.argv or "-h" in sys.argv or "-?" in sys.argv:
         print(message_aide)
         sys.exit()
@@ -93,7 +92,23 @@ def lire_configuration(rep_config : str) -> dict:
             print("\t"+e)
         return None
 
-    return yaml_config.normaliser_config(config, structure_config)
+    config = yaml_config.normaliser_config(config, structure_config)
+
+    # Ajouter les comptes utilisateurs
+
+    fichier_comptes = config["general"]["fichier_utilisateurs"]
+    if not os.path.exists(fichier_comptes) or not os.path.isfile(fichier_comptes):
+        print("[ERREUR] : Le répertoire vers le fichier des utilisateurs n'existe pas ou n'est pas un fichier.")
+        return
+
+    comptes : dict = None
+    with open(fichier_comptes, "r") as f:
+        comptes = json.loads(f.read())
+
+    config["utilisateurs"] = comptes["utilisateurs"]
+    config["equipes"] = comptes["equipes_ctfd"]
+
+    return config
 
 def configurer_ctfd(config : dict):
     # Cette étape n'est pas documentée dans l'API CTFd.
@@ -120,6 +135,7 @@ def configurer_ctfd(config : dict):
         if t.startswith("session="):
             temoin_session = t
             break
+    print(temoin_session)
 
     jeton_csrf = re.search(r"'csrfNonce': \"([0-9a-f]*)\"",rep.content.decode("utf8")).group(1)
     
@@ -151,6 +167,13 @@ def configurer_ctfd(config : dict):
         }
     }
 
+    # Aller chercher le compte admin
+    admin : dict = {}
+    for c in config["utilisateurs"]:
+        if c["id"] == "admin":
+            admin = c
+            break
+
     config_form = {
         "ctf_name":                 config["general"]   ["nom"],
         "ctf_description":          config["general"]   ["description"],
@@ -161,9 +184,9 @@ def configurer_ctfd(config : dict):
         "registration_visibility":  traductions["general.creation_compte"][ config["general"]   ["creation_compte"]],
         "verify_emails": False,
         "team_size":                config["general"]   ["taille_equipes"],
-        "name":                     config["admin"]     ["nom"],
-        "email":                    config["admin"]     ["courriel"],
-        "password":                 config["admin"]     ["mdp"],
+        "name":                     admin["nom"],
+        "email":                    f"{admin["id"]}@{os.getenv("DOMAINE_GLOBAL","aucun_domaine.td")}",
+        "password":                 admin["mdp"],
         "ctf_theme":                config["apparence"] ["theme"],
         "theme_color":              config["apparence"] ["couleur"],
         "start":                    config["general"]   ["debut"],
@@ -223,6 +246,7 @@ def obtenir_clee_api(config : dict, temoin_session : str) -> str:
 
     Args:
         config (dict): configuration CTFd
+        temoin_session (str): Témon de session admin
 
     Returns:
         str: Clée API
@@ -360,6 +384,8 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
             print("[ERREUR] Type de défi non implémenté")
             continue
 
+        # Création du défi
+
         defis_json = {
             "name": d["titre"],
             "category": d["categorie"],
@@ -367,8 +393,7 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
         }
 
         if d["pointage"]["fonction"] == "constant":
-            # TODO
-            print("[ERREUR] Fonction de pointage non implémenté")
+            defis_json["type"] = "standard"
         else:
             defis_json["type"] = "dynamic"
             defis_json["function"] = "linear" if d["pointage"]["fonction"] == "lineaire" else "logarithmic"
@@ -396,6 +421,8 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
 
         print(f"\tTéléversé avec succés. ID : {d["id"]}")
 
+        # Ajout d'un drapeau
+
         defis_json = {
             "challenge_id": d["id"],
             "content": d["drapeau"],
@@ -421,16 +448,21 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
         
         print("\tDrapeau modifié")
 
+        # Ajout des fichiers
+
         defis_form = {
             "challenge_id": d["id"],
             "type": "challenge"
         }
 
         for f in d["fichiers"]:
+            if f.split('/')[-1] == structure_description_defis["fichiers"]["defaut"][0]:
+                continue
+
             if not os.path.exists(f) or not os.path.isfile(f):
                 print(f"[ERREUR] : {f} est un dossier ou n'existe pas.")
                 continue
-                
+
             rep = requests.post(
                 url=config["url"] + "/api/v1/files",
                 data=defis_form,
@@ -440,16 +472,92 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
 
             if rep.status_code != 200:
                 print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
-                
+
+                if rep.json():
+                    for e in rep.json()["errors"]:
+                        print(f"\t{e}")
+
+        print("\tFichiers téléversés avec succès.")
+
+        # Ajout des indices
+
+        indice_json = {"challenge_id" : d["id"]}
+        for i in d["indices"]:
+            indice_json["title"] = i["titre"]
+            indice_json["content"] = i["description"]
+            indice_json["cost"] = i["points"]
+            
+            rep = requests.post(
+                url=f"{config["url"]}/api/v1/hints",
+                json=indice_json,
+                headers={"Authorization": f"Token {capi}"}
+            )
+
+            if rep.status_code != 200:
+                print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+
                 if rep.json():
                     for e in rep.json()["errors"]:
                         print(f"\t{e}")
             
-        print("\tFichiers téléversés avec succès.")
+            i["ctfd_id"] = rep.json()["data"]["id"]
 
+        # BUG PATCHer un défi ou un indice pour y ajouter des prérequis ne modifie pas les prérequis du coté de CTFd
+        indice_json = {}
+        for i in d["indices"]:
+            print(f"\t[ATTENTION] Les prérequis de {d["categotie"]}/{d["titre"]}/{i["titre"]} {i["prerequis"]} risquent de ne pas être posé.")
 
+            prerequis_id = []
+            for p in i["prerequis"]:
+                if p < 0 or p >= len(d["indices"]):
+                    continue
+                prerequis_id.append(d["indices"][p]["ctfd_id"])
 
-    # TODO PATCH le reste des informations
+            rep = requests.patch(
+                url=f"{config["url"]}/api/v1/hints/{i["ctfd_id"]}",
+                json={"prerequesites":{"requirements":prerequis_id}},
+                headers={"Authorization": f"Token {capi}"}
+            )
+
+            if rep.status_code != 200:
+                print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+
+                if rep.json():
+                    for e in rep.json()["errors"]:
+                        print(f"\t{e}")
+        print("\tAjouté les indices")
+
+    # Ajouter les contraintes de prérequis des défis
+    # BUG PATCHer un défi ou un indice pour y ajouter des prérequis ne modifie pas les prérequis du coté de CTFd
+    print("Ajout des contraintes de prérequis des défis")
+    for d in defis:
+        print(f"\t{d["categorie"]}/{d["titre"]} : ",end="")
+        print("[ATTENTION] Les prérequis risquent de ne pas être posés ",end="")
+
+        prerequis_id = []
+        for p in d["prerequis"]:
+            for d2 in defis:
+                if d2["titre"] == p:
+                    prerequis_id.append(d2["id"])
+        rep = requests.patch(
+            url=f"{config["url"]}/api/v1/challenges/{d["id"]}",
+            json={
+                "requirements":{
+                    "anonymize":False,
+                    "prerequesites":prerequis_id
+                }
+            },
+            headers={"Authorization": f"Token {capi}"}
+        )
+
+        if rep.status_code != 200:
+            print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+
+            if rep.json():
+                for e in rep.json()["errors"]:
+                    print(f"\t{e}")
+        else:
+            print("OK")
 
 def configurer_utilisateurs(config : dict, capi : str) -> None:
     print("Configuration des utilisateurs")
@@ -483,7 +591,11 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
         if "mdp" not in u:
             print(f"[ERREUR] : {u["nom"]} ne possède pas de 'mdp'")
             continue
-    
+        
+        # Le compte admin est déjà créé
+        if u["id"] == "admin":
+            continue
+
         print(f"\t{u["nom"]}, {u["id"]}@{os.getenv("DOMAINE_GLOBAL","aucun_domaine.lan")} : ", end="")
 
         utilisateurs_json = {
@@ -625,27 +737,6 @@ structure_config = {
         "est_obligatoire": True,
         "description": "URL de connection à la plateforme ctfd.",
         "defaut": "http://localhost:8000"
-    },
-    "admin":{
-        "est_obligatoire": True,
-        "description": "Paramètres du compte admin",
-        "defaut":{
-            "nom":{
-                "est_obligatoire": True,
-                "description": "Nom d'utilisateur",
-                "defaut": "admin"
-            },
-            "courriel":{
-                "est_obligatoire": True,
-                "description": "Courriel de l'administrateur. Doit être un courriel valide, mais n'a pas besoin d'être une vrai adresse.",
-                "defaut": "courriel@admin.tld"
-            },
-            "mdp": {
-                "est_obligatoire": True,
-                "description": "Mot de passe admin",
-                "defaut": "0a3a865dc4d272a6a21617ef94e07c33903c382c6e18765b31709ef29b2c313d"
-            }
-        }
     },
     "general":{
         "est_obligatoire": True,
@@ -850,7 +941,8 @@ structure_description_defis = {
         "description": "Liste de fichiers à téléverser",
         "defaut":[
             "..."
-        ]
+        ],
+        "defaut_est_exemple": True
     },
     "drapeau": {
         "est_obligatoire": True,
@@ -860,9 +952,25 @@ structure_description_defis = {
     "indices": {
         "description": "Liste d'indices, en ordre d'apparence. Supporte le markdown.",
         "defaut": [
-            "indice1",
-            "indice2",
-            "..."
+            {
+                "titre": {
+                    "description": "Titre de l'indice",
+                    "defaut": "Indice1"
+                },
+                "description": {
+                    "description": "Contenu de l'indice",
+                    "defaut": "Ceci est un indice"
+                },
+                "points": {
+                    "description": "Coût en nombres de points pour ouvrir l'indice",
+                    "defaut": 50
+                },
+                "prerequis": {
+                    "description": "Liste des indices devant être ouverts avant que celui-ci soit accessible. Cette liste représente l'indexe des indinces dans la présente liste.",
+                    "defaut": [1,2,3],
+                    "est_defaut_exemple": True
+                }
+            }
         ]
     },
     "solution": {
@@ -918,6 +1026,15 @@ structure_description_defis = {
                 "description": "Le défi est caché aux participants."
             }
         ]
+    },
+    "prerequis":{
+        "description": "Liste des défis devant avoir été complété avant de pouvoir accéder à celui-ci. Faites référence aux défis par leur titre.",
+        "defaut": [
+            "Défi1",
+            "Défi2",
+            "..."
+        ],
+        "defaut_est_exemple": True
     },
     "necessite_un_traitement_special": {
         "description": "Mettre à true si l'importation dans ctfd nécessite un traitement spécial",

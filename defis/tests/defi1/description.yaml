@@ -25,7 +25,9 @@ titre: "Défi"
 description: "description"
 
 # Liste de fichiers à téléverser
-fichiers: ['...']
+fichiers:
+  - "..."
+
 
 # flag du défi
 # [OBLIGATOIRE]
@@ -33,8 +35,26 @@ drapeau: "UHACK{adfjkvnalkerfjgbvqap}"
 
 # Liste d'indices, en ordre d'apparence. Supporte 
 # le markdown.
-indices: ['indice1', 'indice2', '...']
-
+indices:
+  - # Titre de l'indice
+    titre: "Indice1"
+    
+    # Contenu de l'indice
+    description: "Ceci est un indice"
+    
+    # Coût en nombres de points pour ouvrir 
+    # l'indice
+    points: 50
+    
+    # Liste des indices devant être ouverts avant 
+    # que celui-ci soit accessible. Cette liste 
+    # représente l'indexe des indinces dans la 
+    # présente liste.
+    prerequis:
+      - 1
+      - 2
+      - 3
+    
 # Solution du défi. Supporte le markdown. Cet 
 # attribut est obligatoire.
 # [OBLIGATOIRE]
@@ -81,6 +101,14 @@ pointage:
 #   cache :
 #     Le défi est caché aux participants.
 etat: "visible"
+
+# Liste des défis devant avoir été complété avant 
+# de pouvoir accéder à celui-ci. Faites référence 
+# aux défis par leur titre.
+prerequis:
+  - "Défi1"
+  - "Défi2"
+  - "..."
 
 # Mettre à true si l'importation dans ctfd 
 # nécessite un traitement spécial
