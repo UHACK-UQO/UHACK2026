@@ -1,4 +1,17 @@
 services:
+  nginx:
+    image: nginx
+    restart: always
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      uhack_partage:
+        ipv4_address: 172.16.10.50
+    network_mode: host
+    dns: 172.16.10.2
+    depends_on:
+      - dnsmasq
+
   dnsmasq:
     image: dockurr/dnsmasq
     restart: always

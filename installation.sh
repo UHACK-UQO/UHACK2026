@@ -24,12 +24,16 @@ sed -iE "s/DOMAINE_GLOBAL=.*/DOMAINE_GLOBAL=${DOMAINE}/gm" courriels/.env
 sed -E 's/url:( ?"?\(https?:\/\/\)?[a-xA-Z0-9_-]+)\.[a-xA-Z0-9_-]+\.[a-xA-Z0-9_-]+/url:\1.${DOMAINE}/gm' ctfd/config.yaml > ctfd/config_prod.yaml
 sed -E "s/%DOMAINE_GLOBAL/${DOMAINE}/gm" infra-reseau/dnsmasq.exemple.conf > infra-reseau/dnsmasq.conf
 sed -iE "s/DOMAINE_GLOBAL=.*/DOMAINE_GLOBAL=${DOMAINE}/gm" mastodon/.env.production
+sed "s/%DOMAINE_GLOBAL/${DOMAINE}/gm" infra-reseau/nginx.exemple.conf > infra-reseau/nginx.conf
 
 echo "Lancement de l'infra réseau."
 if [ -z "$(docker network ls | grep uhack_partage)" ]; then
     docker network create uhack_partage --subnet 172.16.10.0/24
 fi
-docker compose -f infra-reseau/docker-compose.yaml -d
+cd infra-reseau
+DOMAINE_GLOBAL=${DOMAINE} python3 nginx-setup.py ../defis
+docker compose up -d
+cd ..
 
 echo "Installation du serveur SMTP."
 docker compose up -f courriels/docker-compose.yaml -d
@@ -46,6 +50,11 @@ docker compose up -f mastodon/docker-compose.yaml -d
 
 echo "Installation de CTFd"
 docker compose up -f ctfd/docker-compose.yaml -d
+cd ctfd
+python3 -m venv .venv
+.venv/bin/python3 -m pip install -r requirements.txt
+DOMAINE_GLOBAL=${DOMAINE} .venv/bin/python3 ctfd-config.py ./config.yaml
+cd ..
 
 echo "Comptes utilisateurs : "
 jq -c ".utilisateurs[]" coordination/comptes_utilisateurs.json | while read compte; do

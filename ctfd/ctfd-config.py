@@ -364,6 +364,30 @@ def lire_defis(rep : str) -> list[dict]:
                 desc["fichiers"][i] = os.path.abspath(rep + '/' + c + '/' + d + '/' + desc["fichiers"][i])
             
             desc["repertoire"] = os.path.abspath(rep + '/' + c + '/' + d)
+            nom_domaine = (desc["categorie"] + '-' + desc["titre"]).lower()
+            desc["nom_domaine"] = ""
+            for i in range(len(desc["nom_domaine"])):
+                l=desc["nom_domaine"][i]
+                if l in "abcdefghijklmnopqrstuvwxyz0123456789_-":
+                    desc["nom_domaine"] += l
+                elif l == ' ':
+                    desc["nom_domaine"] += ' '
+                elif l in "àâä":
+                    desc["nom_domaine"] += "a"
+                elif l in "èéêë":
+                    desc["nom_domaine"] += "e"
+                elif l == 'ç':
+                    desc["nom_domaine"] += 'c'
+                elif l in "ùûü":
+                    desc["nom_domaine"] += 'u'
+                elif l in "ôòö":
+                    desc["nom_domaine"] += 'o'
+                elif l in "îïì":
+                    desc["nom_domaine"] += 'i'
+                elif l in "ŷÿỳ":
+                    desc["nom_domaine"] += 'y'
+
+            desc["description"] = f"\n\nLe service est exposé sur/The service is exposed at : {d["nom_domaine"]}.defis.{os.getenv("DOMAINE_GLOBAL","aucun_domaine.lan")}"
 
             defis.append(desc)
     
