@@ -1,9 +1,10 @@
 #!/bin/python3
+import json
 import mimetypes
 import os
 import re
+import subprocess
 import sys
-import json
 
 import requests
 import yaml
@@ -361,6 +362,8 @@ def lire_defis(rep : str) -> list[dict]:
 
             for i in range(len(desc["fichiers"])):
                 desc["fichiers"][i] = os.path.abspath(rep + '/' + c + '/' + d + '/' + desc["fichiers"][i])
+            
+            desc["repertoire"] = os.path.abspath(rep + '/' + c + '/' + d)
 
             defis.append(desc)
     
@@ -377,11 +380,14 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
 
     print("Téléversement des défis")
 
+    avis : list[str] = []
+
     for d in defis:
         print(d["categorie"] + '/' + d["titre"])
 
-        if d["type"] != "ctfd":
+        if d["type"] == "dynamique":
             print("[ERREUR] Type de défi non implémenté")
+            avis.append(f"[ERREUR] {d["catégorie"]}/{d["titre"]} est de type {d["type"]}, non supporté")
             continue
 
         # Création du défi
@@ -506,6 +512,7 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
         indice_json = {}
         for i in d["indices"]:
             print(f"\t[ATTENTION] Les prérequis de {d["categotie"]}/{d["titre"]}/{i["titre"]} {i["prerequis"]} risquent de ne pas être posé.")
+            avis.append(f"[ATTENTION] L'indice {d["categorie"]}/{d["titre"]}/{i["titre"]} a des prérequis {i["prerequis"]}. Veuillez les vérifier manuellement.")
 
             prerequis_id = []
             for p in i["prerequis"]:
@@ -531,14 +538,23 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
     # BUG PATCHer un défi ou un indice pour y ajouter des prérequis ne modifie pas les prérequis du coté de CTFd
     print("Ajout des contraintes de prérequis des défis")
     for d in defis:
+        if d["type"] == "dynamique":
+            continue
+
         print(f"\t{d["categorie"]}/{d["titre"]} : ",end="")
-        print("[ATTENTION] Les prérequis risquent de ne pas être posés ",end="")
 
         prerequis_id = []
         for p in d["prerequis"]:
             for d2 in defis:
                 if d2["titre"] == p:
                     prerequis_id.append(d2["id"])
+
+        if len(prerequis_id) == 0:
+            continue
+
+        print("[ATTENTION] Les prérequis risquent de ne pas être posés ",end="")
+        avis.append(f"[ATTENTION] {d["categorie"]}/{d["titre"]} a des prérequis {d["prerequis"]}. Veuillez les vérifier manuellement.")
+
         rep = requests.patch(
             url=f"{config["url"]}/api/v1/challenges/{d["id"]}",
             json={
@@ -558,6 +574,29 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
                     print(f"\t{e}")
         else:
             print("OK")
+
+    print("Déploiement des défis statiques")
+    for d in defis:
+        if d["type"] == "statique":
+            if not d["script_installation"]:
+                print(f"[ERREUR] {d["categorie"]}/{d["titre"]} n'a pas de script d'installation de spécifié. Il ne serat pas déployé.")
+                continue
+            
+            if not os.path.isfile(d["script_installation"]):
+                print(f"[ERREUR] {d["categorie"]}/{d["titre"]} : le script d'installation {d["script_installation"]} n'existe pas ou n'est pas un fichier.")
+                continue
+            
+            print(f"\n{d["categorie"]}/{d["titre"]} :\n{'='*( len(d["catégorie"]) + len(d["titre"]) + 2 )}\n")
+            subprocess.run([f"{d["repertoire"]}/{d["script_installation"]}"], check=False)
+
+    for d in defis:
+        if d["necessite_un_traitement_special"]:
+            avis.append(f"[INFO] {d["categorie"]}/{d["titre"]} indique qu'il nécessite un traitement spécial :\n\t{d["necessite_un_traitement_special"]}")
+    
+    if len(avis) > 0:
+        print("Des avis ont été générés lors du déploiement des défis : ")
+    for a in avis:
+        print(f"- [ ] {a}")
 
 def configurer_utilisateurs(config : dict, capi : str) -> None:
     print("Configuration des utilisateurs")
@@ -918,12 +957,12 @@ structure_description_defis = {
                 "description": "Le défi n'utilise aucune autre ressource de CTFd.\nEx.: Un fichier à télécharger."
             },
             {
-                "nom": "service_unique",
+                "nom": "statique",
                 "description": "Le défi nécessite qu'un service soit exposé, mais ce service est le même pour tous les utilisateurs.\nEx.: Exposer une API REST."
             },
             {
-                "nom": "service_personnel",
-                "description": "Le défi nécessite qu'un service pour chaque utilisateur soit exposé.\nEx.: Exposer un boot2root."
+                "nom": "dynamique",
+                "description": "Le défi nécessite qu'un service pour chaque utilisateur soit exposé.\nEx.: Exposer un boot2root.\nNON SUPPORTÉ"
             }
         ]
     },
@@ -1036,9 +1075,20 @@ structure_description_defis = {
         ],
         "defaut_est_exemple": True
     },
+    "script_installation":{
+        "description": "Si 'type' est 'statique' ou 'dynamique', le script spécifié ici sera appelé pour installer et démarrer le service à exposer.",
+        "defaut": "script.sh",
+        "defaut_est_exemple": True
+    },
+    "ip":{
+        "description": "Si 'type' est 'statique', l'ip spécifiée ici sera utilisé pour rediriger les requêtes http.",
+        "defaut": "172.16.10.210",
+        "defaut_est_exemple": True
+    },
     "necessite_un_traitement_special": {
-        "description": "Mettre à true si l'importation dans ctfd nécessite un traitement spécial",
-        "defaut": False
+        "description": "Indiquez les instructions supplémentaires nécessaires au déploiement de ce défi.",
+        "defaut": "Instructions supplémentaires",
+        "defaut_est_exemple": True
     }
 }
 

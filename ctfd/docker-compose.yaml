@@ -31,7 +31,6 @@ services:
   redis:
     image: redis:alpine
     restart: always
-    # command: sh -c "chown -R root:root /data"
     env_file: .env
     volumes:
       - ./donnees/redis:/data

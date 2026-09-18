@@ -6,13 +6,14 @@
 #   ctfd :
 #     Le défi n'utilise aucune autre ressource de 
 #     Ex.: Un fichier à télécharger.
-#   service_unique :
+#   statique :
 #     Le défi nécessite qu'un service soit 
 #     exposé, mais ce service est le même pour 
 #     tous les Ex.: Exposer une API REST.
-#   service_personnel :
+#   dynamique :
 #     Le défi nécessite qu'un service pour chaque 
 #     utilisateur soit Ex.: Exposer un boot2root.
+#     NON SUPPORTÉ
 # [OBLIGATOIRE]
 type: "ctfd"
 
@@ -55,6 +56,7 @@ indices:
       - 2
       - 3
     
+
 # Solution du défi. Supporte le markdown. Cet 
 # attribut est obligatoire.
 # [OBLIGATOIRE]
@@ -110,6 +112,16 @@ prerequis:
   - "Défi2"
   - "..."
 
-# Mettre à true si l'importation dans ctfd 
-# nécessite un traitement spécial
-necessite_un_traitement_special: False
+
+# Si 'type' est 'statique' ou 'dynamique', le 
+# script spécifié ici sera appelé pour installer 
+# et démarrer le service à exposer.
+script_installation: "script.sh"
+
+# Si 'type' est 'statique', l'ip spécifiée ici 
+# sera utilisé pour rediriger les requêtes http.
+ip: "172.16.10.210"
+
+# Indiquez les instructions supplémentaires 
+# nécessaires au déploiement de ce défi.
+necessite_un_traitement_special: "Instructions supplémentaires"
