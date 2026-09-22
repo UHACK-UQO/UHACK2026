@@ -5,13 +5,14 @@ import os
 sys.path.insert(0,"../coordination/yaml_config")
 import yaml_config
 
-sys.path.insert(0,"../ctfd/ctfd-config")
-import ctfd_config
+import importlib
+sys.path.insert(1,"../ctfd")
+ctfd_config = __import__("ctfd-config")
 
 def main():
     print("Configuration nginx")
 
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 2:
         print("[ERREUR] Veuillez indiquer le répertoire des défis")
         print(message_aide)
         sys.exit()
@@ -24,6 +25,9 @@ def main():
 def configurer_nginx(defis : dict):
     config = ""
     for d in defis:
+        if d["type"] != "dynamique":
+            continue
+
         config += f"""
 server {{
     server_name {d["nom_domaine"]}.defis.{os.getenv("DOMAINE_GLOBAL","aucun_domaine.lan")};

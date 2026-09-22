@@ -13,6 +13,16 @@ sys.path.insert(0,"../coordination/yaml_config")
 import yaml_config
 
 
+NOIR="\033[0;30m"
+ROUGE="\033[0;31m"
+VERT="\033[0;32m"
+JAUNE="\033[0;33m"
+BLEU="\033[0;34m"
+MAUVE="\033[0;35m"
+CYAN="\033[0;36m"
+BLANC="\033[0;37m"
+NEUTRE="\033[0m"
+
 def main():
     # gestion des paramètre
     if "--help" in sys.argv or "-h" in sys.argv or "-?" in sys.argv:
@@ -44,7 +54,7 @@ def main():
         sys.exit()
 
     if len(sys.argv) < 2:
-        print("[ERREUR] Veuillez indiquer le répertoire du fichier de configuration")
+        print(f"{ROUGE}[ERREUR]{NEUTRE} Veuillez indiquer le répertoire du fichier de configuration")
         print(message_aide)
         sys.exit()
     
@@ -99,7 +109,7 @@ def lire_configuration(rep_config : str) -> dict:
 
     fichier_comptes = config["general"]["fichier_utilisateurs"]
     if not os.path.exists(fichier_comptes) or not os.path.isfile(fichier_comptes):
-        print("[ERREUR] : Le répertoire vers le fichier des utilisateurs n'existe pas ou n'est pas un fichier.")
+        print(f"{ROUGE}[ERREUR]{NEUTRE} : Le répertoire vers le fichier des utilisateurs n'existe pas ou n'est pas un fichier.")
         return
 
     comptes : dict = None
@@ -126,7 +136,7 @@ def configurer_ctfd(config : dict):
 
     rep = requests.get(config["url"] + "/setup")
     if "Set-Cookie" not in rep.headers.keys():
-        print("[ERREUR] Il semblerait que CTFd soit déjà configuré, car le site n'a pas fournis de témoin de session.")
+        print(f"{ROUGE}[ERREUR]{NEUTRE} Il semblerait que CTFd soit déjà configuré, car le site n'a pas fournis de témoin de session.")
         return
         
     temoins = rep.headers["Set-Cookie"].split("; ")
@@ -136,7 +146,6 @@ def configurer_ctfd(config : dict):
         if t.startswith("session="):
             temoin_session = t
             break
-    print(temoin_session)
 
     jeton_csrf = re.search(r"'csrfNonce': \"([0-9a-f]*)\"",rep.content.decode("utf8")).group(1)
     
@@ -203,7 +212,7 @@ def configurer_ctfd(config : dict):
         if os.path.exists(image_rep):
             ctf_logo = (os.path.basename(image_rep), open(image_rep,"rb"), mimetypes.guess_type(image_rep)[0])  # noqa: SIM115
         else:
-            print(f"[ERREUR] Le fichier {image_rep} n'est pas accessible ou n'existe pas.")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} Le fichier {image_rep} n'est pas accessible ou n'existe pas.")
 
     ctf_banniere = (None, None, None)
     image_rep = config["apparence"]["banniere"]
@@ -211,7 +220,7 @@ def configurer_ctfd(config : dict):
         if os.path.exists(image_rep):
             ctf_banniere = (os.path.basename(image_rep), open(image_rep,"rb"), mimetypes.guess_type(image_rep)[0])  # noqa: SIM115
         else:
-            print(f"[ERREUR] Le fichier {image_rep} n'est pas accessible ou n'existe pas.")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} Le fichier {image_rep} n'est pas accessible ou n'existe pas.")
 
     ctf_icone = (None, None, None)
     image_rep = config["apparence"]["icone"]
@@ -219,7 +228,7 @@ def configurer_ctfd(config : dict):
         if os.path.exists(image_rep):
             ctf_icone = (os.path.basename(image_rep), open(image_rep,"rb"), mimetypes.guess_type(image_rep)[0])  # noqa: SIM115
         else:
-            print(f"[ERREUR] Le fichier {image_rep} n'est pas accessible ou n'existe pas.")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} Le fichier {image_rep} n'est pas accessible ou n'existe pas.")
 
     config_form_fichiers = {
         "ctf_logo": ctf_logo,
@@ -235,8 +244,9 @@ def configurer_ctfd(config : dict):
         )
     
     if rep.status_code != 200:
-        print(f"[ERREUR] CTFd a répondu avec un code d'erreur {rep.status_code}")
+        print(f"{ROUGE}[ERREUR]{NEUTRE} CTFd a répondu avec un code d'erreur {rep.status_code}")
         print("Indice : Assurez-vous que ctfd (uid 1001) aie les droits d'écriture à son dossier de données.")
+        exit(-1)
     
     print("CTFd configuré avec succès.")
 
@@ -268,7 +278,7 @@ def obtenir_clee_api(config : dict, temoin_session : str) -> str:
     )
 
     if rep.status_code != 200:
-        print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+        print(f"{ROUGE}[ERREUR]{NEUTRE} : Le serveur a répondu avec un code d'erreur {rep.status_code}")
         return None
 
     print("Clée API obtenue avec succès.")
@@ -329,10 +339,10 @@ def lire_defis(rep : str) -> list[dict]:
         return None
 
     if not os.path.exists(rep):
-        print("[ERREUR] le répertoire des défis n'existe pas.")
+        print(f"{ROUGE}[ERREUR]{NEUTRE} le répertoire des défis n'existe pas.")
         return
     if not os.path.isdir(rep):
-        print("[ERREUR] le répertoire des défis n'est pas un dossier.")
+        print(f"{ROUGE}[ERREUR]{NEUTRE} le répertoire des défis n'est pas un dossier.")
         return
 
     defis = []
@@ -366,8 +376,7 @@ def lire_defis(rep : str) -> list[dict]:
             desc["repertoire"] = os.path.abspath(rep + '/' + c + '/' + d)
             nom_domaine = (desc["categorie"] + '-' + desc["titre"]).lower()
             desc["nom_domaine"] = ""
-            for i in range(len(desc["nom_domaine"])):
-                l=desc["nom_domaine"][i]
+            for l in nom_domaine:
                 if l in "abcdefghijklmnopqrstuvwxyz0123456789_-":
                     desc["nom_domaine"] += l
                 elif l == ' ':
@@ -387,7 +396,7 @@ def lire_defis(rep : str) -> list[dict]:
                 elif l in "ŷÿỳ":
                     desc["nom_domaine"] += 'y'
 
-            desc["description"] = f"\n\nLe service est exposé sur/The service is exposed at : {d["nom_domaine"]}.defis.{os.getenv("DOMAINE_GLOBAL","aucun_domaine.lan")}"
+            desc["description"] = f"\n\nLe service est exposé sur/The service is exposed at : {desc["nom_domaine"]}.defis.{os.getenv("DOMAINE_GLOBAL","aucun_domaine.lan")}"
 
             defis.append(desc)
     
@@ -407,11 +416,11 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
     avis : list[str] = []
 
     for d in defis:
-        print(d["categorie"] + '/' + d["titre"])
+        print(CYAN + d["categorie"] + '/' + d["titre"] + NEUTRE)
 
         if d["type"] == "dynamique":
-            print("[ERREUR] Type de défi non implémenté")
-            avis.append(f"[ERREUR] {d["catégorie"]}/{d["titre"]} est de type {d["type"]}, non supporté")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} Type de défi non implémenté")
+            avis.append(f"{ROUGE}[ERREUR]{NEUTRE} {d["categorie"]}/{d["titre"]} est de type {d["type"]}, non supporté")
             continue
 
         # Création du défi
@@ -438,7 +447,7 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
         )
 
         if rep.status_code != 200:
-            print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} : Le serveur a répondu avec un code d'erreur {rep.status_code}")
             
             if not rep.json():
                 return
@@ -467,7 +476,7 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
         )
 
         if rep.status_code != 200:
-            print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} : Le serveur a répondu avec un code d'erreur {rep.status_code}")
             
             if not rep.json():
                 return
@@ -490,7 +499,7 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
                 continue
 
             if not os.path.exists(f) or not os.path.isfile(f):
-                print(f"[ERREUR] : {f} est un dossier ou n'existe pas.")
+                print(f"{ROUGE}[ERREUR]{NEUTRE} : {f} est un dossier ou n'existe pas.")
                 continue
 
             rep = requests.post(
@@ -501,7 +510,7 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
             )
 
             if rep.status_code != 200:
-                print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+                print(f"{ROUGE}[ERREUR]{NEUTRE} : Le serveur a répondu avec un code d'erreur {rep.status_code}")
 
                 if rep.json():
                     for e in rep.json()["errors"]:
@@ -524,7 +533,7 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
             )
 
             if rep.status_code != 200:
-                print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+                print(f"{ROUGE}[ERREUR]{NEUTRE} : Le serveur a répondu avec un code d'erreur {rep.status_code}")
 
                 if rep.json():
                     for e in rep.json()["errors"]:
@@ -535,8 +544,8 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
         # BUG PATCHer un défi ou un indice pour y ajouter des prérequis ne modifie pas les prérequis du coté de CTFd
         indice_json = {}
         for i in d["indices"]:
-            print(f"\t[ATTENTION] Les prérequis de {d["categotie"]}/{d["titre"]}/{i["titre"]} {i["prerequis"]} risquent de ne pas être posé.")
-            avis.append(f"[ATTENTION] L'indice {d["categorie"]}/{d["titre"]}/{i["titre"]} a des prérequis {i["prerequis"]}. Veuillez les vérifier manuellement.")
+            print(f"\t{JAUNE}[ATTENTION]{NEUTRE} Les prérequis de {d["categorie"]}/{d["titre"]}/{i["titre"]} {i["prerequis"]} risquent de ne pas être posé.")
+            avis.append(f"{JAUNE}[ATTENTION]{NEUTRE} L'indice {d["categorie"]}/{d["titre"]}/{i["titre"]} a des prérequis {i["prerequis"]}. Veuillez les vérifier manuellement.")
 
             prerequis_id = []
             for p in i["prerequis"]:
@@ -551,7 +560,7 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
             )
 
             if rep.status_code != 200:
-                print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+                print(f"{ROUGE}[ERREUR]{NEUTRE} : Le serveur a répondu avec un code d'erreur {rep.status_code}")
 
                 if rep.json():
                     for e in rep.json()["errors"]:
@@ -564,6 +573,8 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
     for d in defis:
         if d["type"] == "dynamique":
             continue
+        if len(d["prerequis"]) == 0:
+            continue
 
         print(f"\t{d["categorie"]}/{d["titre"]} : ",end="")
 
@@ -573,11 +584,8 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
                 if d2["titre"] == p:
                     prerequis_id.append(d2["id"])
 
-        if len(prerequis_id) == 0:
-            continue
-
-        print("[ATTENTION] Les prérequis risquent de ne pas être posés ",end="")
-        avis.append(f"[ATTENTION] {d["categorie"]}/{d["titre"]} a des prérequis {d["prerequis"]}. Veuillez les vérifier manuellement.")
+        print(f"{JAUNE}[ATTENTION]{NEUTRE} Les prérequis risquent de ne pas être posés ",end="")
+        avis.append(f"{JAUNE}[ATTENTION]{NEUTRE} {d["categorie"]}/{d["titre"]} a des prérequis {d["prerequis"]}. Veuillez les vérifier manuellement.")
 
         rep = requests.patch(
             url=f"{config["url"]}/api/v1/challenges/{d["id"]}",
@@ -591,7 +599,7 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
         )
 
         if rep.status_code != 200:
-            print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} : Le serveur a répondu avec un code d'erreur {rep.status_code}")
 
             if rep.json():
                 for e in rep.json()["errors"]:
@@ -603,31 +611,33 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
     for d in defis:
         if d["type"] == "statique":
             if not d["script_installation"]:
-                print(f"[ERREUR] {d["categorie"]}/{d["titre"]} n'a pas de script d'installation de spécifié. Il ne serat pas déployé.")
+                print(f"{ROUGE}[ERREUR]{NEUTRE} {d["categorie"]}/{d["titre"]} n'a pas de script d'installation de spécifié. Il ne serat pas déployé.")
                 continue
             
             if not os.path.isfile(d["script_installation"]):
-                print(f"[ERREUR] {d["categorie"]}/{d["titre"]} : le script d'installation {d["script_installation"]} n'existe pas ou n'est pas un fichier.")
+                print(f"{ROUGE}[ERREUR]{NEUTRE} {d["categorie"]}/{d["titre"]} : le script d'installation {d["script_installation"]} n'existe pas ou n'est pas un fichier.")
                 continue
             
-            print(f"\n{d["categorie"]}/{d["titre"]} :\n{'='*( len(d["catégorie"]) + len(d["titre"]) + 2 )}\n")
+            print(f"\n{d["categorie"]}/{d["titre"]} :\n{'='*( len(d["categorie"]) + len(d["titre"]) + 2 )}\n")
             subprocess.run([f"{d["repertoire"]}/{d["script_installation"]}"], check=False)
 
     for d in defis:
         if d["necessite_un_traitement_special"]:
-            avis.append(f"[INFO] {d["categorie"]}/{d["titre"]} indique qu'il nécessite un traitement spécial :\n\t{d["necessite_un_traitement_special"]}")
+            avis.append(f"{CYAN}[INFO]{NEUTRE} {d["categorie"]}/{d["titre"]} indique qu'il nécessite un traitement spécial :\n\t{d["necessite_un_traitement_special"]}")
     
     if len(avis) > 0:
-        print("Des avis ont été générés lors du déploiement des défis : ")
+        print(f"{JAUNE}Des avis ont été générés lors du déploiement des défis : {NEUTRE}")
     for a in avis:
         print(f"- [ ] {a}")
+
+    print("\n")
 
 def configurer_utilisateurs(config : dict, capi : str) -> None:
     print("Configuration des utilisateurs")
 
     fichier_utilisateurs = config["general"]["fichier_utilisateurs"]
     if not os.path.exists(fichier_utilisateurs) or not os.path.isfile(fichier_utilisateurs):
-        print("[ERREUR] : Le répertoire vers le fichier des utilisateurs n'existe pas ou n'est pas un fichier.")
+        print(f"{ROUGE}[ERREUR]{NEUTRE} : Le répertoire vers le fichier des utilisateurs n'existe pas ou n'est pas un fichier.")
         return
 
     utilisateurs : dict = None
@@ -635,24 +645,24 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
         utilisateurs = json.loads(f.read())
     
     if "utilisateurs" not in utilisateurs:
-        print("[ERREUR] : Le fichier des utilisateurs doit contenir la clé 'utilisateurs'")
+        print(f"{ROUGE}[ERREUR]{NEUTRE} : Le fichier des utilisateurs doit contenir la clé 'utilisateurs'")
         return
     if "equipes_ctfd" not in utilisateurs:
-        print("[ERREUR] : Le fichier des utilisateurs doit contenir la clé 'equipes_ctfd'")
+        print(f"{ROUGE}[ERREUR]{NEUTRE} : Le fichier des utilisateurs doit contenir la clé 'equipes_ctfd'")
         return
     if not isinstance(utilisateurs["utilisateurs"], list):
-        print("[ERREUR] : La clé 'utilisateurs' doit être une liste d'objets")
+        print(f"{ROUGE}[ERREUR]{NEUTRE} : La clé 'utilisateurs' doit être une liste d'objets")
         return
     if not isinstance(utilisateurs["equipes_ctfd"], list):
-        print("[ERREUR] : La clé 'equipes_ctfd' doit être une liste d'objets")
+        print(f"{ROUGE}[ERREUR]{NEUTRE} : La clé 'equipes_ctfd' doit être une liste d'objets")
         return
     
     for u in utilisateurs["utilisateurs"]:
         if "nom" not in u:
-            print("[ERREUR] : Les utilisateurs doivent avoir une clé 'nom'")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} : Les utilisateurs doivent avoir une clé 'nom'")
             continue
         if "mdp" not in u:
-            print(f"[ERREUR] : {u["nom"]} ne possède pas de 'mdp'")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} : {u["nom"]} ne possède pas de 'mdp'")
             continue
         
         # Le compte admin est déjà créé
@@ -680,7 +690,7 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
             )
         
         if rep.status_code != 200:
-            print(f"[ERREUR] : Le serveur a répondu avec un code {rep.status_code}")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} : Le serveur a répondu avec un code {rep.status_code}")
             for e in rep.json()["errors"]:
                 print(f"\t\t{e}")
             continue
@@ -691,19 +701,19 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
     print("Configuration des équipes")
     for e in utilisateurs["equipes_ctfd"]:
         if not "nom" in e:
-            print("[ERREUR] : Les équipes doivent avoir une clé 'nom'")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} : Les équipes doivent avoir une clé 'nom'")
             continue
         if not "mdp" in e:
-            print(f"[ERREUR] : L'équipe {e["nom"]} n'a pas de 'mdp'")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} : L'équipe {e["nom"]} n'a pas de 'mdp'")
             continue
         if not "chef" in e:
-            print(f"[ERREUR] : L'équipe {e["nom"]} n'a pas de 'chef'")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} : L'équipe {e["nom"]} n'a pas de 'chef'")
             continue
         if not "membres" in e or not isinstance(e["membres"], list):
-            print(f"[ERREUR] : L'équipe {e["nom"]} n'a pas de 'membres' ou la clé n'est pas une liste")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} : L'équipe {e["nom"]} n'a pas de 'membres' ou la clé n'est pas une liste")
             continue
         if len(e["membres"]) == 0 or len(e["membres"]) > 5:
-            print(f"[ERREUR] : L'équipe {e["nom"]} n'a pas de membres ou a plus de 5 membres")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} : L'équipe {e["nom"]} n'a pas de membres ou a plus de 5 membres")
             continue
 
         print(f"\t{e["nom"]} : ", end="")
@@ -715,7 +725,7 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
                 u_chef = u
                 break
         if u_chef == None:
-            print(f"[ERREUR] : Le chef {e["chef"]} n'existe pas")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} : Le chef {e["chef"]} n'existe pas")
             continue
 
         equipe_json = {
@@ -734,7 +744,7 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
         )
 
         if rep.status_code != 200:
-            print(f"[ERREUR] : Le serveur a répondu avec le code d'erreur {rep.status_code}")
+            print(f"{ROUGE}[ERREUR]{NEUTRE} : Le serveur a répondu avec le code d'erreur {rep.status_code}")
             for e in rep.json()["errors"]:
                 print(f"\t\t{e}")
             continue
@@ -756,7 +766,7 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
                 u_membre = u_chef
             
             if u_membre == None:
-                print(f"[ERREUR] : Le membre {m} n'existe pas")
+                print(f"{ROUGE}[ERREUR]{NEUTRE} : Le membre {m} n'existe pas")
 
             rep = requests.post(
                 url=config["url"]+f"/api/v1/teams/{id_equipe}/members",
@@ -765,7 +775,7 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
             )
 
             if rep.status_code != 200:
-                print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+                print(f"{ROUGE}[ERREUR]{NEUTRE} : Le serveur a répondu avec un code d'erreur {rep.status_code}")
                 for er in rep.json()["errors"]:
                     print(f"\t\t{er}")
 
@@ -776,7 +786,7 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
             )
 
             if rep.status_code != 200:
-                print(f"[ERREUR] : Le serveur a répondu avec un code d'erreur {rep.status_code}")
+                print(f"{ROUGE}[ERREUR]{NEUTRE} : Le serveur a répondu avec un code d'erreur {rep.status_code}")
                 for er in rep.json()["errors"]:
                     print(f"\t\t{er}")
 

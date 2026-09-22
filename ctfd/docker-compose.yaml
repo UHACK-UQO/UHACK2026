@@ -25,8 +25,10 @@ services:
       timeout: 1s
       start_period: 5s
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
   
   redis:
     image: redis:alpine
@@ -36,6 +38,8 @@ services:
       - ./donnees/redis:/data
     networks:
       - interne
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
 
   db:
     image: mysql
@@ -45,6 +49,8 @@ services:
       - ./donnees/db:/var/lib/mysql
     networks:
       - interne
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
 
 networks:
   interne:
