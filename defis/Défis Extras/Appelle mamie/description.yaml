@@ -1,4 +1,4 @@
-type: "Challenges extra"
+type: ctfd
 
 titre: "Appelle mamie"
 
@@ -22,5 +22,3 @@ pointage:
   decroissance: 10
 
 etat: "cache"
-
-necessite_un_traitement_special: False
