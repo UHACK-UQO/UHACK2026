@@ -1,0 +1,10 @@
+Rotation hebdomadaire des journaux. Conserver quatre copies compressées. Les fichiers DEBUG peuvent être purgés après validation.
+
+REF-2332 | état=archivé
+REF-5536 | état=fermé
+REF-4235 | état=archivé
+REF-8830 | état=terminé
+REF-9184 | état=fermé
+REF-1403 | état=terminé
+REF-7923 | état=archivé
+REF-2860 | état=terminé

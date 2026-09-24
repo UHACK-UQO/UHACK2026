@@ -1,0 +1,26 @@
+type: "Principal"
+
+titre: "La rançon"
+
+description: |-
+  Nous avons reçu un message étrange.
+  We received a strange message.
+  Fomat: FLAG_XXX
+
+fichiers: []
+
+drapeau: "FLAG_YOU_MAYBE_HAVE_IT"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

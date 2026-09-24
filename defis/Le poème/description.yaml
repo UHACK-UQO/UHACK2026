@@ -1,0 +1,26 @@
+type: "Communication"
+
+titre: "Le poème"
+
+description: |-
+  À qui ce poème est-il rédigé?
+  Who is this poem written for?
+  Format: FLAG_XXXX
+
+fichiers: []
+
+drapeau: "FLAG_PEACH"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

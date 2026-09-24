@@ -1,0 +1,26 @@
+type: "Services d'urgence"
+
+titre: "Oui allô?"
+
+description: |-
+  N'oublie pas de noter leur emplacement ! C'est la première chose que tu devrais faire...
+  Don't forget to note their location! It's the first thing you should do!
+  Format: FLAG_XXXX
+
+fichiers: []
+
+drapeau: "FLAG_ASSISTANCE"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

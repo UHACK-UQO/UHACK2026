@@ -1,0 +1,10 @@
+LE PREMIER DOMINO / THE FIRST DOMINO
+
+Commencez par 00_NOTE_D_ENQUETE.pdf.
+Start with 00_NOTE_D_ENQUETE.pdf.
+
+Les journaux sont dans le dossier donnees/. Ils utilisent le separateur | et sont tries chronologiquement.
+The logs are in donnees/. They use | as a delimiter and are sorted chronologically.
+
+Ce paquet est autonome. Aucun autre challenge n'est requis.
+This package is self-contained. No other challenge is required.

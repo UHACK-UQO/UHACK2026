@@ -1,0 +1,26 @@
+type: "Déchets"
+
+titre: "Ils vont passer quand ? #2"
+
+description: |-
+  J'ai 7 raisons de me fâcher
+  I have 7 reasons to get angry
+  Format: FLAG_XXXXX
+
+fichiers: []
+
+drapeau: "FLAG_1245"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

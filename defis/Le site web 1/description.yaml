@@ -1,0 +1,24 @@
+type: "Donneés citoyens"
+
+titre: "Le site web 1"
+
+description: |-
+  Format: FLAG_XXX
+
+fichiers: []
+
+drapeau: "FLAG_REGISTRE_CACHE"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

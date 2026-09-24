@@ -1,0 +1,13 @@
+FORUM LEGACY EXPORT - RECORD PRECEDENCE
+Version 2.8 / Internal migration note
+
+The export contains owner records, mentions, mirrors and historical entries.
+For identity attribution, an authoritative account record must meet ALL of the
+following conditions:
+
+    environment = prod
+    status      = active
+    relation    = ACCOUNT_OWNER
+
+QA, development, mirror, mention, disabled, locked and archived rows must not
+be used as identity owners. Repeated aliases are expected during migrations.

@@ -1,0 +1,19 @@
+{
+  "service": "legacy-service-02",
+  "status": "degraded",
+  "checks": [
+    {
+      "name": "disk",
+      "value": 41
+    },
+    {
+      "name": "queue",
+      "value": 39
+    },
+    {
+      "name": "workers",
+      "value": 10
+    }
+  ],
+  "captured_at": "2021-02-12T12:00:00Z"
+}

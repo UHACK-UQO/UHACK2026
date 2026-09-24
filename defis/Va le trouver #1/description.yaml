@@ -1,0 +1,25 @@
+type: "Employés"
+
+titre: "Va le trouver #1"
+
+description: |-
+  Bienvenue au pavillon Alexandre-Taché.
+  Welcome to Alexandre-Tâché building.
+
+fichiers: []
+
+drapeau: "FLAG_ks9FIkmelau9"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

@@ -1,0 +1,24 @@
+type: "Services d'urgence"
+
+titre: "Le chef IT est malade !"
+
+description: |-
+  Format: FLAG_XXXXXXXXXX
+
+fichiers: []
+
+drapeau: "FLAG_CORONAVIRUS"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

@@ -1,0 +1,10 @@
+Champs abandonnés: fax_number, pager_code, legacy_department, import_batch_name.
+
+REF-5696 | état=fermé
+REF-9000 | état=archivé
+REF-9998 | état=archivé
+REF-2622 | état=archivé
+REF-2980 | état=fermé
+REF-7994 | état=fermé
+REF-2071 | état=terminé
+REF-6527 | état=terminé

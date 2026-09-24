@@ -1,0 +1,55 @@
+MANIFESTE DE COLLECTE / COLLECTION MANIFEST
+Prepared before removal from the active investigation file.
+All paths are relative to PIECES_ECARTEES.
+
+SHA256                                                            SIZE       PATH
+2379ee42c1e3d958495e49c9eae7f256cbc0d189879b29e4c9ffba3cb3a1c83d      82881  00_NOTE_D_ENQUETE.pdf
+691386748c50dfcde427288933b310a2d060c187700698c55e82434b819df91d        258  archives/calendrier_01.ics
+2e29ed66e2ae78b1f1525e822027623fd89b1072fc0d0f4687fdef0ea7627ba5        261  archives/calendrier_02.ics
+ac0171fcacf7e797317416e3406d3cf09e79a1684fb6f4cdd6d91db40b5cf9f7        254  archives/calendrier_03.ics
+67a4aef13f608cb180228843b5d3684808296a0a0f48fe1ceb1bec2a04fbbc6d        261  archives/calendrier_04.ics
+46dc26406b33e09f38a7bd773be3b707d32af845a205a912a888b0dbe048e18d      43586  archives/compte_rendu_formation.pdf
+40634225ec71a8c6f1f94c293ec183f40d66c78a2fde78a4976eebd509eb564b        421  archives/courriel_suivi_01.eml
+4559a1749e5cd3cd55e4aacdaf4c8f7e11bd687d4f70e8a80bc3b82de738635e        425  archives/courriel_suivi_02.eml
+199738622e36f24576842f1e167e33d9b96731698d5bc8f054459bbb6331f0fb        425  archives/courriel_suivi_03.eml
+410be96bafb9f5653ba46974912821ad145e5625e5c2b47dd571f3d87808bd06        423  archives/courriel_suivi_04.eml
+21c74a53ba3b4d115a373013983db90d9f041ab4ae6ab247ef6220d5695302e9     101855  archives/export_forum_04.jsonl
+0e6838ca50abfe141058c9b3b1c1cc8b5753ef0e71c62986e19d9f48960cf61a      35756  archives/liste_inscriptions_2022.xlsx
+36e89ccde3b3f22c50dbd6dd0913dcd6d528a3c5326abd1d2e5ce51a22f3eaaa       3462  archives/moderation_queue_2021.jsonl
+d3424d950b09652103934f4bfc6f085043a3987ec102a153ecb9656a6223d74b       5527  cache/archive_worker_01.log
+b7b3c72b6e91258965216da39bf35a3ac78bcd4eb0db80b8b520ba3be5373c79       5512  cache/archive_worker_02.log
+7ba4654349152780ef671c75bb2574deac510495001be78018d312f1dc2e973b       5518  cache/archive_worker_03.log
+ec8e2c57bdc6009aafcb7d74ee3c5cd1b29b286698f34a3f2c5735fa48df9bf6       5518  cache/archive_worker_04.log
+dbe8227f6a8c266c2efdd564b6963864411f8cad5cbcb2886ca7a5e73090b1ad       5512  cache/archive_worker_05.log
+04dfa66238f612e9007766ab8bb73fd1033aab0c18955f0c2b5405e9e23d6043     140679  cache/audit_recuperation.jsonl
+9ddd4de1399e864339360e66a515f1b0a6bb645fc5e8b1a5751a9d3db2f7b26b       4255  cache/message_index.log
+99aaf9d02bb8a11df1c05c59f46fcb7a2cfbe4b4073e48ce575cabb7254819f5        282  cache/service_health_01.json
+13fb34194f61c8f3d81784ba36179dd0844303bf02d9e4eb4634505a6d63a91f        283  cache/service_health_02.json
+3fc80f5c908374e0bd7681febaa51b2100ad3089f9b6302751a70347c562bfa5        281  cache/service_health_03.json
+a4a9747efbda9cf9fd26476786a54a9d86c8ad89f912863fbc10b4d708806e73        282  cache/service_health_04.json
+8ca44733db81dbf9205d7ec32e20834457d1160385439902df2b59c7190755b1        282  cache/service_health_05.json
+ec1683e9d317c70959f560aa55b6a5a948a045fa35ec860a541cf633f2851e67        307  documentation/ancien_plan_reprise.txt
+7f9ececc1761e1180285f04eb620e90581a8b20116e37de2e70623f82f19f696        285  documentation/catalogue_champs_obsoletes.txt
+4d9ee7ae7694c523eec2357fd8eefe6dd45c6992e3841eb467ac71168f926d3d        292  documentation/compte_rendu_capacite.txt
+487881fa28ecf55e2026a8ba8fc4078fe203c8e8fd5c8e29ade4b4cd6884b822      43687  documentation/guide_archivage_2018.pdf
+672f17986c2a377872d44f279866ed67cd000b07bfa1e3d7da588432cc248154        302  documentation/instructions_impression.txt
+b94b1c0cafa822106d2fa6bdd64b09df54e01cba337850e097dcad0f9c76c561        307  documentation/inventaire_licences.txt
+a346e997a2a7ffd495d468c30ac1508ee277c7c36e9cd10d64a080272032567b        306  documentation/journal_deploiement.txt
+20bd34e3883abd779783842f16e3ff3d437d8855261e1fdf89e8f9b6462305a1        306  documentation/liste_controles_qualite.txt
+d9254e5c133d534c23b336414992ece30c92da69aa906f473ced1bfe932b1730        322  documentation/memo_fournisseur.txt
+63a8e333db96b338986a42091a0137644fb83adae18bf6017e2407c321c6a5be        950  documentation/notes_migration_v3.txt
+a8d2d8a8034db0c9b42c2027d4bde76d19ac742025ac39ef64f661050470f9c0        316  documentation/notes_reunion_2020.txt
+1b49c24376a9d51642b14e36abb0de51376cf39d06ff095fc947876caa10ec53        326  documentation/politique_nommage.txt
+bf9a8e83af845674f06ce2711555309bb9dae1a6014406453f4d3343af17d8e7        339  documentation/procedure_rotation_journaux.txt
+8ea195f74596bda66c8e37928cc057cc84f5118e75bcca5e59d00aa1f1c7a115      43720  documentation/rapport_maintenance_reseau.pdf
+c3d6cb476d0aa4956a883624ff1ebbac86e96db4215172ad4b63e14cf27f0e22        494  documentation/schema_forum_legacy.txt
+2a61ba0cce0547318b87117962d1f39ef9d9ed045efc984d45b44b4e8e265e93        321  documentation/suivi_correctifs.txt
+5434851b1f100d1ee4b533776d5a1e774ead8f407a6a630d9cf496db0a029e6b       7809  exports/export_evenements_01.jsonl
+6d5cae9683edae5e724eb12c62f9bf16c52ba8d07d062f3d7c6d094ac8810c51       7829  exports/export_evenements_02.jsonl
+5949916b96b724c4de774147f000bd835beebc431a692d2a1f6a68adc60172bb       7818  exports/export_evenements_03.jsonl
+2d2843a24ba8335d137bf404488091e06f42cc3bc1b8d87af106098e70608de2       7785  exports/export_evenements_04.jsonl
+27b4946d64ab1d1898ff0cd368872f184f07e82e69483e0f0c1527c06a6d4846       7817  exports/export_evenements_05.jsonl
+a465008c4ea32f4ca6546468ec87ec2ce3018132dd66e902eb244b1eb73bc0ec       1574  exports/rapport_activite_01.html
+74c38f4b2dd69b712d61183bf4381597f407c43b331347d75b1a4ed7448698ec       1577  exports/rapport_activite_02.html
+91d4229bbb9026fea423d8267dde54e733c93ab8c117b4046b70fc65ba085aa3       1588  exports/rapport_activite_03.html
+4feee97c3add10138f71a8b19a40455707dab435317ff47cdc605df07e00bf89       1581  exports/rapport_activite_04.html

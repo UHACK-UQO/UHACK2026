@@ -1,0 +1,26 @@
+type: "Challenges extra"
+
+titre: "Comment vous avez fait?"
+
+description: |-
+  La mairesse aimerait obtenir un document expliquant brièvement comment vous avez résolu CHAQUE problème jusqu'à présent. Envoyez votre document à Alexanne.
+  The mayor would like to obtain a document explaining briefly how you resolved EACH challenge until now. Send your document to Alexanne.
+  Format: FLAG_XXXXX
+
+fichiers: []
+
+drapeau: "FLAG_L4CHEZZ_P4SS_L44_P4T4T33"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

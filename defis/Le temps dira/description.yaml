@@ -1,0 +1,24 @@
+type: "Employés"
+
+titre: "Le temps dira"
+
+description: |-
+  Format: FLAG_XXXX
+
+fichiers: []
+
+drapeau: "FLAG_PRECISIONMATTERS"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

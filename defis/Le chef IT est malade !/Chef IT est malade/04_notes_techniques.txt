@@ -1,0 +1,13 @@
+NOTES TECHNIQUES — ANCIEN FORMAT
+================================
+
+1. Les contrôles marqués REJECTED ne sont jamais utilisés dans le résultat final.
+2. Pour une même série, l'ordre chronologique des contrôles VALID doit être conservé.
+3. Les anciennes expressions utilisent les symboles chimiques comme variables.
+4. La valeur numérique associée à chaque symbole provient du registre des éléments.
+5. Le résultat numérique de chaque contrôle est conservé sous forme d'un entier compris entre 1 et 26.
+6. Dans les rapports historiques, la valeur 1 correspond à A et la valeur 26 à Z.
+
+Note d'archive :
+Les valeurs TEMP, rpm, numéros de lots et codes d'erreur système ne font pas partie
+du calcul scientifique de la série.

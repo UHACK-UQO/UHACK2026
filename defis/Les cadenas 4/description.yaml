@@ -1,0 +1,25 @@
+type: "Eau"
+
+titre: "Les cadenas 4"
+
+description: |-
+  Intermédiaire
+  Intermediate
+
+fichiers: []
+
+drapeau: "FLAG_MCS09972J"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

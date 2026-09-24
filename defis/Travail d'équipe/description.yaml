@@ -1,0 +1,26 @@
+type: "Employés"
+
+titre: "Travail d'équipe"
+
+description: |-
+  Avec tout ce qui se passe, il est important de faire du travail d'équipe. Finissez TOUS les niveaux. Venez montrer à la mairesse lorsque terminé (PAS DE CAPTURE D'ÉCRAN)
+  With everything that's going on, it's important to do teamwork. Finish ALL levels. Come show the mayor when you're done (NO SCREENSHOT).
+  https://fireboy-andwatergirl.io/
+
+fichiers: []
+
+drapeau: "FLAG_WHO_DIED_THE_MOST_LOL"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

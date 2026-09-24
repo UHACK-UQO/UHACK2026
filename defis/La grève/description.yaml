@@ -1,0 +1,25 @@
+type: "Réputation"
+
+titre: "La grève"
+
+description: |-
+  6 affiches de grève ont été cachées. Prenez-les en photo et envoyez ça à la mairesse pour votre récompense.
+  6 strike posters are hidden. Take a photo of each and send them to the mayor for your reward.
+
+fichiers: []
+
+drapeau: "FLAG_ALLONS_PIQUETER"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

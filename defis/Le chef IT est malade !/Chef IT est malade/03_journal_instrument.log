@@ -1,0 +1,18 @@
+2026-09-18 08:14:02 SYS    BOOT        status=OK
+2026-09-18 08:14:19 QC     ARN-55      status=REJECTED reason=baseline
+2026-09-18 08:15:03 RUN    ARN-31      status=VALID sample=V-17
+2026-09-18 08:15:41 RUN    ARN-07      status=VALID sample=V-17
+2026-09-18 08:16:09 QC     ARN-02      status=REJECTED reason=duplicate
+2026-09-18 08:16:34 RUN    ARN-44      status=VALID sample=V-17
+2026-09-18 08:17:08 RUN    ARN-12      status=VALID sample=V-17
+2026-09-18 08:17:27 SYS    TEMP        value=-18 unit=C
+2026-09-18 08:18:01 RUN    ARN-58      status=VALID sample=V-17
+2026-09-18 08:18:39 RUN    ARN-03      status=VALID sample=V-17
+2026-09-18 08:19:12 QC     ARN-77      status=REJECTED reason=checksum
+2026-09-18 08:19:44 RUN    ARN-26      status=VALID sample=V-17
+2026-09-18 08:20:18 RUN    ARN-49      status=VALID sample=V-17
+2026-09-18 08:20:49 SYS    ROTOR       value=3200 unit=rpm
+2026-09-18 08:21:07 RUN    ARN-18      status=VALID sample=V-17
+2026-09-18 08:21:56 RUN    ARN-62      status=VALID sample=V-17
+2026-09-18 08:22:33 RUN    ARN-35      status=VALID sample=V-17
+2026-09-18 08:22:59 SYS    EXPORT      status=FAILED code=E41

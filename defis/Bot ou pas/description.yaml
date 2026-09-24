@@ -1,0 +1,26 @@
+type: "Désinformation"
+
+titre: "Bot ou pas ?"
+
+description: |-
+  Nous ne pouvons plus déterminer ce qui est fait par un bot ou pas.
+  We can’t determine what’s made by a bot or not.
+  Format: FLAG_XXXXX
+
+fichiers: []
+
+drapeau: "FLAG_726"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

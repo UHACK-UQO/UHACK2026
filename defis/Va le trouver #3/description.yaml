@@ -1,0 +1,25 @@
+type: "Communication"
+
+titre: "Va le trouver #3"
+
+description: |-
+  Ceux qui se ressemblent se rassemblent.
+  Those who are alike get together,
+
+fichiers: []
+
+drapeau: "FLAG_nv30728qohf"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

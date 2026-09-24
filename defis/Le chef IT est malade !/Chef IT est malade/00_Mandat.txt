@@ -1,0 +1,12 @@
+CHALLENGE — ÉCHANTILLON V-17
+==============================
+
+Une série de contrôles provenant d'un ancien système d'analyse a été récupérée.
+Les résultats finaux ne sont plus lisibles, mais les équations, le journal de
+l'instrument et quelques notes techniques ont survécu.
+
+Votre objectif est de retrouver le mot final associé à l'échantillon V-17, afin de déterminer quelle maladie le chef d'IT a.
+
+NOTES :
+- Tous les calculs peuvent être faits à la main.
+- Les décimales ne sont pas nécessaires.

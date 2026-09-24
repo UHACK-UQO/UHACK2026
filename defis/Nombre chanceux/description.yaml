@@ -1,0 +1,26 @@
+type: "Électricité"
+
+titre: "Nombre chanceux"
+
+description: |-
+  Devine le numéro entre 1 et 500 pour recevoir une superbe récompense !
+  Guess the number between 1 and 500 to receive a great reward!
+  Format: FLAG_XXXXX
+
+fichiers: []
+
+drapeau: "FLAG_120"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

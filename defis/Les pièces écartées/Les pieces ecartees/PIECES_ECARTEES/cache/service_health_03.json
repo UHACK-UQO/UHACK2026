@@ -1,0 +1,19 @@
+{
+  "service": "legacy-service-03",
+  "status": "healthy",
+  "checks": [
+    {
+      "name": "disk",
+      "value": 63
+    },
+    {
+      "name": "queue",
+      "value": 95
+    },
+    {
+      "name": "workers",
+      "value": 9
+    }
+  ],
+  "captured_at": "2021-03-13T12:00:00Z"
+}

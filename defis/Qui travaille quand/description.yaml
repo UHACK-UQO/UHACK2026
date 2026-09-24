@@ -1,0 +1,26 @@
+type: "Employés"
+
+titre: "Qui travaille quand ?!"
+
+description: |-
+  Il y a tellement de modifications...
+  There's so many modifications...
+  Format: FLAG_XX_XX_XX_XX_XX
+
+fichiers: []
+
+drapeau: "FLAG_25.75_25.5_26.25_26.5_29.25_24.5"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False
