@@ -1,0 +1,26 @@
+type: "Communication"
+
+titre: "Pictogrammes de comms"
+
+description: |-
+  Voici le dossier des pictogrammes à utiliser dans les communications officielles.
+  Here's the file of pictograms to use in official communications.
+  Format: FLAG_XXX
+
+fichiers: []
+
+drapeau: "FLAG_PUT_4_SMI1LE_0N"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

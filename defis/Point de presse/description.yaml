@@ -1,0 +1,24 @@
+type: "Communication"
+
+titre: "Point de presse"
+
+description: |-
+  Format: FLAG_XXX
+
+fichiers: []
+
+drapeau: "FLAG_GR0SSE_ANN0NCE"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

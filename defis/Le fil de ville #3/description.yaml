@@ -1,0 +1,24 @@
+type: "Employés"
+
+titre: "Le fil de ville #3"
+
+description: |-
+  Format: FLAG_xxx
+
+fichiers: []
+
+drapeau: "FLAG_colormesurprised"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

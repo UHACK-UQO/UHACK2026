@@ -1,0 +1,26 @@
+type: "Employés"
+
+titre: "C'est relaxant"
+
+description: |-
+  Il est important de relaxer de temps en temps...complète un dessin de la catégorie People et vient le montrer à la mairesse pour qu'elle l'admire.
+  It's important to relax from time to time...complete a drawing in the People category and come show it to the mayor so she can admire it.
+  [https://www.crazygames.com/game/numicolor](https://www.crazygames.com/game/numicolor)
+
+fichiers: []
+
+drapeau: "FLAG_YOUPI_DOUPI_C_REUSSI"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 50
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False
