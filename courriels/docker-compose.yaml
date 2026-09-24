@@ -17,19 +17,24 @@ services:
       - ./installation:/tmp/installation
       - ../coordination/comptes_utilisateurs.json:/tmp/comptes.json
     networks:
-      uhack_partage:
-        ipv4_address: 172.16.10.20
-    dns: 172.16.10.2
+      - externe
+    ports:
+      - 143:143 # IMAP
+      - 25:25   # SMTP
+    dns: 173.30.10.1
 
   roundcube:
     image: roundcube/roundcubemail
     restart: always
     env_file: .env
+    ports:
+      - 1060:80
     networks:
-      uhack_partage:
-        ipv4_address: 172.16.10.40
-    dns: 172.16.10.2
+      - externe
+    dns: 173.30.10.1
 
 networks:
-  uhack_partage:
-    external: true
+  externe:
+    ipam:
+      config:
+        - subnet: 173.30.10.0/24

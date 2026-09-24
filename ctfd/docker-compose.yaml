@@ -15,10 +15,10 @@ services:
       - ./donnees/ctfd/uploads:/var/uploads
       - ./donnees/ctfd/logs:/var/log/CTFd
     networks:
-      interne:
-      uhack_partage:
-        ipv4_address: 172.16.10.30
-    dns: 172.16.10.2
+      - interne
+      - externe
+    ports: 
+      - 1050:8000
     healthcheck: 
       test: ["CMD", "bash", "-c", "curl -f https://localhost:8000 &> /dev/null; if [ $? -eq 0 ]; then printf '{\"status\":\"healthy\"}'; else printf 'null'; fi"]
       interval: 1s
@@ -54,5 +54,8 @@ services:
 
 networks:
   interne:
-  uhack_partage:
-    external: true
+    internal: true
+  externe:
+    ipam:
+      config:
+        - subnet: 173.20.10.0/24

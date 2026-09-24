@@ -1133,9 +1133,9 @@ structure_description_defis = {
         "defaut": "script.sh",
         "defaut_est_exemple": True
     },
-    "ip":{
-        "description": "Si 'type' est 'statique', l'ip spécifiée ici sera utilisé pour rediriger les requêtes http.",
-        "defaut": "172.16.10.210",
+    "port":{
+        "description": "Si 'type' est 'statique', le port spécifiée ici sera utilisé pour rediriger les requêtes http.",
+        "defaut": 8000,
         "defaut_est_exemple": True
     },
     "necessite_un_traitement_special": {

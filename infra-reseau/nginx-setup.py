@@ -43,7 +43,7 @@ server {{
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header Proxy "";
 
-        proxy_pass http://{d["ip"]};
+        proxy_pass http://172.16.10.1:{d["port"]};
     }}
 }}\n
 """

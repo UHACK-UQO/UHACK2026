@@ -120,7 +120,7 @@ script_installation: "script.sh"
 
 # Si 'type' est 'statique', l'ip spécifiée ici 
 # sera utilisé pour rediriger les requêtes http.
-ip: "172.16.10.210"
+port: "8080"
 
 # Indiquez les instructions supplémentaires 
 # nécessaires au déploiement de ce défi.

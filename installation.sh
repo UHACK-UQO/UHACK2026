@@ -74,10 +74,10 @@ desinstaller() {
     printf "\nDésinstallation du CTF\n\n"
 
     if [ $(systemctl status systemd-resolved > /dev/null ; echo $?) = 0 ]; then
-        sed -i -E "s/^DNS=172.16.10.2$/#DNS=/gm" /etc/systemd/resolved.conf
+        sed -i -E "s/^DNS=173.10.10.2$/#DNS=/gm" /etc/systemd/resolved.conf
         systemctl restart systemd-resolved
     else
-        sed '0,/^nameserver=172.16.10.2$/{s///}' /etc/resolv.conf
+        sed '0,/^nameserver=173.10.10.2$/{s///}' /etc/resolv.conf
     fi
 
     docker compose -f courriels/docker-compose.yaml down
@@ -126,9 +126,6 @@ installer() {
             -days 7300 -sha256 -extensions v3_ca \
             -out "infra-reseau/TLS/${DOMAINE}.cert.pem"
 
-    if [ -z "$(docker network ls | grep uhack_partage)" ]; then
-        docker network create uhack_partage --subnet 172.16.10.0/24 > /dev/null
-    fi
     cd infra-reseau
     DOMAINE_GLOBAL=${DOMAINE} python3 nginx-setup.py ../defis
     printf '\n===== Docker =====\n'
@@ -137,23 +134,23 @@ installer() {
     cd ..
     if [ $(systemctl status systemd-resolved > /dev/null ; echo $?) = 0 ]; then
         config="$(grep -E "^#?DNS=.*$" /etc/systemd/resolved.conf | sed "s/ //gm")"
-        if [ $config != "DNS=172.16.10.2" ] && [ $config != "DNS=" ] && [ $config != "#DNS=" ]; then
+        if [ $config != "DNS=173.10.10.2" ] && [ $config != "DNS=" ] && [ $config != "#DNS=" ]; then
             echo "Pour pouvoir accéder au ctf, vous aurez besoin de rediriger vos requêtes DNS à travers les services du ctf."
             echo "Votre configuration sytemd-resolved comporte le serveur DNS suivant : ${config}"
-            printf "Souhaitez-vous le remplacer par celui du ctf (172.16.10.2)? [O/n] : "
+            printf "Souhaitez-vous le remplacer par celui du ctf (173.10.10.2)? [O/n] : "
             read choix
             if [ "$choix" = "O" ] || [ "$choix" = "o" ]; then
-                sed -i -E "s/^DNS=.*$/DNS=172.16.10.2/gm" /etc/systemd/resolved.conf
+                sed -i -E "s/^DNS=.*$/DNS=173.10.10.2/gm" /etc/systemd/resolved.conf
             else
                 echo "Arrêt de l'installation"
                 exit
             fi
         else
-            sed -i -E "s/^#?DNS=.*$/DNS=172.16.10.2/gm" /etc/systemd/resolved.conf
+            sed -i -E "s/^#?DNS=.*$/DNS=173.10.10.2/gm" /etc/systemd/resolved.conf
         fi
         systemctl restart systemd-resolved > /dev/null
     else
-        sed -i -E '0,/^nameserver=(.*)$/{s//namserver=172.16.10.2\nameserver=\1/}' /etc/resolv.conf
+        sed -i -E '0,/^nameserver=(.*)$/{s//namserver=173.10.10.2\nameserver=\1/}' /etc/resolv.conf
     fi
 
     echo ""

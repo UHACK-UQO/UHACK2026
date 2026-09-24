@@ -1,4 +1,4 @@
-type: statique
+type: ctfd
 
 titre: "Le site web 1"
 
@@ -24,10 +24,6 @@ etat: "cache"
 # et démarrer le service à exposer.
 script_installation: "installation.sh"
 
-# Si 'type' est 'statique', l'ip spécifiée ici 
+# Si 'type' est 'statique', le port spécifiée ici 
 # sera utilisé pour rediriger les requêtes http.
-ip: "127.0.0.1"
-
-# Indiquez les instructions supplémentaires 
-# nécessaires au déploiement de ce défi.
-necessite_un_traitement_special: "Ce défi nécessite de pouvoir spécifier un port et non une ip"
+port: 8000
