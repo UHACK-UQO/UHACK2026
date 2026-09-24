@@ -1,0 +1,29 @@
+type: ctfd
+
+titre: "Le chef IT est malade !"
+
+description: |-
+  Format: FLAG_XXXXXXXXXX
+
+fichiers:
+  - 00_Mandat.txt
+  - 01_registre_elements.csv
+  - 02_controles_V17.txt
+  - 03_journal_instrument.log
+  - 04_notes_techniques.txt
+  - 05_profil_structurel.txt
+  - 06_parametres_archive.txt
+
+drapeau: "FLAG_CORONAVIRUS"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

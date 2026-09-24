@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Les cadenas 1"
+
+description: |-
+  Très facile
+  Very easy
+
+fichiers: []
+
+drapeau: "FLAG_MALS928JF"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 50
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+
+etat: "cache"

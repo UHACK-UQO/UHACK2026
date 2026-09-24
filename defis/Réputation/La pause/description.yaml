@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "La pause"
+
+description: |-
+  Il faut prendre une petite pause...allez voir Patrick et affrontez une autre équipe au UNO
+  It's time to take a little break...go see Patrick and face another team at UNO
+
+fichiers: []
+
+drapeau: "FLAG_un0_r3v3r6e"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"

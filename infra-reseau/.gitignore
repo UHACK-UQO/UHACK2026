@@ -1,0 +1,3 @@
+dnsmasq.conf
+*nginx.conf
+TLS/*.pem

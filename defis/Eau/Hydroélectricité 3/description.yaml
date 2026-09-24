@@ -1,0 +1,24 @@
+type: ctfd
+
+titre: "Hydroélectricité 3"
+
+description: |-
+  There is such a beauty in truth, thank you
+  https://www.youtube.com/watch?v=axWId0PugPc
+  Format: FLAG_XXXX
+
+fichiers: []
+
+drapeau: "FLAG_GODSPEED_GODBLESS"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

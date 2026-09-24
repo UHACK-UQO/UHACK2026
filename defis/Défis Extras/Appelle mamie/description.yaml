@@ -1,0 +1,24 @@
+type: ctfd
+
+titre: "Appelle mamie"
+
+description: |-
+  Mamie a reçu un courriel louche et aimerait vous l'envoyer pour investigation, appellez-la au 438-391-4262 pour tenter de le recevoir !
+  Mamy received a weird email and wants to send it to you for investigation, call her at 438-391-42622 to try and receive it!
+  Format:  FLAG_XXXXXX
+
+fichiers: []
+
+drapeau: "FLAG_A7Q9-M4VX-22LP-K8T3"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"

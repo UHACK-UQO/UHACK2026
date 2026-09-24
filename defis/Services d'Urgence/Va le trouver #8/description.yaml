@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Va le trouver #8"
+
+description: |-
+  Il y a un feu aux résidences.
+  There's a fire at the residences.
+
+fichiers: []
+
+drapeau: "FLAG_JF72csdeehf0"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"

@@ -1,0 +1,25 @@
+type: ctfd
+
+titre: "La liste des requêtes"
+
+description: |-
+  Malgré les problèmes des données citoyennes, nous avons réussi à obtenir la dernière version des requêtes citoyennes actives.
+  Even with the citizen data issues, we were able to obtain the last version of the active citizen requests.
+  Format: FLAG_XXX
+
+fichiers:
+  - "./Requêtes actives citoyens.xlsx"
+
+drapeau: "FLAG_DIGITAL"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

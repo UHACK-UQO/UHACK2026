@@ -1,10 +1,8 @@
 services:
   ctfd:
-    image: ctfd/ctfd:latest
+    image: ctfd/ctfd:3.8.5
     restart: always
-    env_file:
-      - ../coordination/nom_domaine.env
-      - .env
+    env_file: .env
     environment:
       - SECRET_KEY=$CTFD_SECRET_KEY
       - DATABASE_URL=$CTFD_DATABASE_URL
@@ -16,29 +14,32 @@ services:
     volumes:
       - ./donnees/ctfd/uploads:/var/uploads
       - ./donnees/ctfd/logs:/var/log/CTFd
-      - ./resolv.conf:/etc/resolv.conf
     networks:
       interne:
       uhack_partage:
         ipv4_address: 172.16.10.30
+    dns: 172.16.10.2
     healthcheck: 
       test: ["CMD", "bash", "-c", "curl -f https://localhost:8000 &> /dev/null; if [ $? -eq 0 ]; then printf '{\"status\":\"healthy\"}'; else printf 'null'; fi"]
       interval: 1s
       timeout: 1s
       start_period: 5s
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
   
   redis:
     image: redis:alpine
     restart: always
-    # command: sh -c "chown -R root:root /data"
     env_file: .env
     volumes:
       - ./donnees/redis:/data
     networks:
       - interne
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
 
   db:
     image: mysql
@@ -48,6 +49,8 @@ services:
       - ./donnees/db:/var/lib/mysql
     networks:
       - interne
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
 
 networks:
   interne:

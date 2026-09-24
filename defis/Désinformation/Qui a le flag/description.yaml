@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Qui a le flag?"
+
+description: |-
+  Bein...quelqu'un a un flag....
+  Well...someone has a flag....
+
+fichiers: []
+
+drapeau: "FLAG_PK_TU_REGARDES_MES_FESSES"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

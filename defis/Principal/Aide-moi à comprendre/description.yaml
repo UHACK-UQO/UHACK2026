@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Aide-moi à comprendre"
+
+description: |-
+  La mairesse demande une documentation claire de la situation afin de mieux comprendre l’incident et ses impacts potentiels. Incluez tout ce que vous jugez nécessaire pour produire un compte rendu complet et utile. Votre rendu sera évalué, puis retourné avec des commentaires si des éléments doivent être corrigés ou ajoutés. Le flag sera remis lorsque la documentation sera jugée satisfaisante.
+  The mayor is requesting clear documentation of the situation to better understand the incident and its potential impacts. Include anything you believe is necessary to produce a complete and useful report. Your submission will be reviewed and returned with feedback if elements need to be corrected or added. The flag will be provided once the documentation is deemed satisfactory.
+
+fichiers: []
+
+drapeau: "FLAG_k0bu26dgp"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

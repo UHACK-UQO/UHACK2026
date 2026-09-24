@@ -1,0 +1,22 @@
+type: ctfd
+
+titre: "Le site web 4"
+
+description: |-
+  Format: FLAG_XXX
+
+fichiers: []
+
+drapeau: "FLAG_DOSSIER_ARCHIVE"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

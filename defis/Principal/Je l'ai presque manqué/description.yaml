@@ -1,0 +1,22 @@
+type: ctfd
+
+titre: "Je l'ai presque manqué"
+
+description: |-
+  Format: FLAG_XXXX
+
+fichiers: []
+
+drapeau: "FLAG_JENSUISUNEGALEMENT"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

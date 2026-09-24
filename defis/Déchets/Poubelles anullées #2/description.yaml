@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Poubelles anullées ?! #2"
+
+description: |-
+  >.>
+  Format: FLAG_XXXXX
+
+fichiers: []
+
+drapeau: "FLAG_TU_AS_UNE_BONNE_PAIRE_DE_YEUX"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

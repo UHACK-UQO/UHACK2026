@@ -1,0 +1,24 @@
+type: ctfd
+
+titre: "Le nonogramme"
+
+description: |-
+  On s'est fait demander de compléter ça apparament. Tu as du pain sur la planche. Termine tous les niveaux de challenge PETIT. Montre à la mairesse.
+  We've apparently been told to complete this. You got work to do. Finish all the SMALL challenges levels. Show it to the mayor.
+  https://www.crazygames.com/game/nonogram-square
+
+fichiers: []
+
+drapeau: "FLAG_jespere_que_tu_as_apprecie"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

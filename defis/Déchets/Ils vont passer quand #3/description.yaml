@@ -1,0 +1,24 @@
+type: ctfd
+
+titre: "Ils vont passer quand ? #3"
+
+description: |-
+  J'ai 7 raisons de me fâcher
+  I have 7 reasons to get angry
+  Format: FLAG_XXXXX
+
+fichiers: []
+
+drapeau: "FLAG_QZMFVK"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

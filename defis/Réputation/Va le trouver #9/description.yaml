@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Va le trouver #9"
+
+description: |-
+  Check mes biceps.
+  Look at my biceps.
+
+fichiers: []
+
+drapeau: "FLAG_0193mvjlsiefwf"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"

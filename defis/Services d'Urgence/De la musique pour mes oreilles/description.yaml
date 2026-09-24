@@ -1,0 +1,25 @@
+type: ctfd
+
+titre: "De la musique pour mes oreilles"
+
+description: |-
+  On va survivre!!
+  We're going to survive!!
+  Format: FLAG_XXXXX
+
+fichiers:
+  - "./De la musique pour mes oreilles.png"
+
+drapeau: "FLAG_GHOSTBUSTERS"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
