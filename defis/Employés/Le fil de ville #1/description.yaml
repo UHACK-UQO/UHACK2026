@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Le fil de ville #1"
+
+description: |-
+  Format: FLAG_XXX
+
+fichiers:
+  - "./Le fil de ville.html"
+
+drapeau: "FLAG_V4SETV1EN8"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

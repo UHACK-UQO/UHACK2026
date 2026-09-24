@@ -1,4 +1,4 @@
-type: "Employés"
+type: ctfd
 
 titre: "C'est relaxant"
 
@@ -22,5 +22,3 @@ pointage:
   decroissance: 10
 
 etat: "cache"
-
-necessite_un_traitement_special: False

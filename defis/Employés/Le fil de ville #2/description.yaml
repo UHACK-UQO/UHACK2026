@@ -1,13 +1,13 @@
-type: "Employés"
+type: ctfd
 
-titre: "Le fil de ville #1"
+titre: "Le fil de ville #2"
 
 description: |-
   Format: FLAG_XXX
 
 fichiers: []
 
-drapeau: "FLAG_V4SETV1EN8"
+drapeau: "FLAG_4LT3RN4T1V3"
 
 indices: []
 
@@ -20,5 +20,3 @@ pointage:
   decroissance: 10
 
 etat: "cache"
-
-necessite_un_traitement_special: False
