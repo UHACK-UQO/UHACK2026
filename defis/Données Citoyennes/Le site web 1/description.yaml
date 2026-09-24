@@ -1,0 +1,33 @@
+type: statique
+
+titre: "Le site web 1"
+
+description: |-
+  Format: FLAG_XXX
+
+drapeau: "FLAG_REGISTRE_CACHE"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+# Si 'type' est 'statique' ou 'dynamique', le 
+# script spécifié ici sera appelé pour installer 
+# et démarrer le service à exposer.
+script_installation: "installation.sh"
+
+# Si 'type' est 'statique', l'ip spécifiée ici 
+# sera utilisé pour rediriger les requêtes http.
+ip: "127.0.0.1"
+
+# Indiquez les instructions supplémentaires 
+# nécessaires au déploiement de ce défi.
+necessite_un_traitement_special: "Ce défi nécessite de pouvoir spécifier un port et non une ip"

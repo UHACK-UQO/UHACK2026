@@ -1,0 +1,24 @@
+type: ctfd
+
+titre: "C'est du sérieux ou pas ?"
+
+description: |-
+  Format: FLAG_XXXX
+
+fichiers:
+  - "./C'est du sérieux ou pas.pdf"
+  - "./Exemple_Challenge.mp4"
+
+drapeau: "FLAG_C3TAIT_MAG1FIIIIIIIIIIQUE"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"

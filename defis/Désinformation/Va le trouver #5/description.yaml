@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Va le trouver #5"
+
+description: |-
+  Va toucher du gazon. Le vert c'est bon pour toi.
+  Go touch grass. Green is good for you.
+
+fichiers: []
+
+drapeau: "FLAG_mcn28HJS099"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

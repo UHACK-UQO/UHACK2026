@@ -1,0 +1,25 @@
+type: ctfd
+
+titre: "Les criquets"
+
+description: |-
+  L'électricien croit avoir entendu des criquets pendant la nuit.
+  The electrician seems to have heard grasshoppers during the night.
+  Format: FLAG_XXXXX
+
+fichiers:
+  - "./criquets.wav"
+
+drapeau: "FLAG_PERSPICACE"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

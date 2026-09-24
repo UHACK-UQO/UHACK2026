@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Les cadenas 3"
+
+description: |-
+  Facile-Intermédiaire
+  Easy-Intermediate
+
+fichiers: []
+
+drapeau: "FLAG_1MF7S97W"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"

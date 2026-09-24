@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Va le trouver #10"
+
+description: |-
+  Va stalker.
+  Go stalk.
+
+fichiers: []
+
+drapeau: "FLAG_OLEE-OLEE-OLEE-OLEE"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"

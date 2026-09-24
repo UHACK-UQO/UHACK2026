@@ -1,0 +1,29 @@
+type: ctfd
+
+titre: "L'équipe de feu"
+
+description: |-
+  Qui est qui ? Prenez la première lettre du nom de famille de chacun...
+  Who's who? Take the first letter of the last name of each...
+  Format: FLAG_XXXXXXX
+
+fichiers: 
+  - "1.pdf"
+  - "2.png"
+  - "3.jpeg"
+  - "4.jpeg"
+  - "5.jpeg"
+
+drapeau: "FLAG_HFPRP"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 50
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+
+etat: "cache"

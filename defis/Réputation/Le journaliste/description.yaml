@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Le journaliste"
+
+description: |-
+  Quelqu'un va venir vous voir, faites attention!
+  Someone's coming to see you, be careful!
+
+fichiers: []
+
+drapeau: "FLAG_j0uKKd27f"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

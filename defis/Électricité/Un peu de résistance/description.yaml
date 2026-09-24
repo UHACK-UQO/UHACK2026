@@ -1,0 +1,29 @@
+type: ctfd
+
+titre: "Un peu de résistance"
+
+description: |-
+  Feuilles de maintenance rétablies
+  Trois feuilles de maintenance ont été rétablisées suite à une faute électrique. Tout doit rester en séquence...
+  
+  Maintenance sheets recovered
+  Three maintenance sheets were recovered following an electrical fault. Everything must stay in sequence...
+  Allez chercher vos papiers dans le bureau de la mairesse / Go get your papers in the mayor's office
+  Format: FLAG_XXXXX
+
+fichiers:
+  - "ALittleResistance.pdf"
+
+drapeau: "FLAG_CURRENTRESTORED"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

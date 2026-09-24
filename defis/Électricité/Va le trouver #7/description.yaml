@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Va le trouver #7"
+
+description: |-
+  Roulez vert.
+  Drive green.
+
+fichiers: []
+
+drapeau: "FLAG_92749524753"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"

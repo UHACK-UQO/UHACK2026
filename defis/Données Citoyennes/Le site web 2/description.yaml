@@ -1,0 +1,22 @@
+type: ctfd
+
+titre: "Le site web 2"
+
+description: |-
+  Format: FLAG_XXX
+
+fichiers: []
+
+drapeau: "FLAG_DONNEES_MASQUEES"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

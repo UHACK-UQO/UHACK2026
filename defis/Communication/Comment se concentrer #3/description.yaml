@@ -1,0 +1,25 @@
+type: ctfd
+
+titre: "Comment se concentrer #3"
+
+description: |-
+  Le patron IT a besoin de retrouver ses 3 chansons préférées.
+  The IT boss needs to find his 3 favorite songs.
+  Format: FLAG_ANNEEPUBLICATION
+
+fichiers:
+  - "./Comment se concentrer3.mp3"
+
+drapeau: "FLAG_1967"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

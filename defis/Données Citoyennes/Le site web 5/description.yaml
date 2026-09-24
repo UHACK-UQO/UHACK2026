@@ -1,0 +1,22 @@
+type: ctfd
+
+titre: "Le site web 5"
+
+description: |-
+  Format: FLAG_XXX
+
+fichiers: []
+
+drapeau: "FLAG_ACCES_RESTREINT"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

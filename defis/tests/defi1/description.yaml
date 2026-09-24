@@ -15,7 +15,7 @@
 #     utilisateur soit Ex.: Exposer un boot2root.
 #     NON SUPPORTÉ
 # [OBLIGATOIRE]
-type: "ctfd"
+type: ctfd
 
 # Titre du défi
 # [OBLIGATOIRE]

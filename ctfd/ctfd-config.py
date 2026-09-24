@@ -629,7 +629,7 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
                 print(f"{ROUGE}[ERREUR]{NEUTRE} {d["categorie"]}/{d["titre"]} n'a pas de script d'installation de spécifié. Il ne serat pas déployé.")
                 continue
             
-            if not os.path.isfile(d["script_installation"]):
+            if not os.path.isfile(d["repertoire"] + '/' + d["script_installation"]):
                 print(f"{ROUGE}[ERREUR]{NEUTRE} {d["categorie"]}/{d["titre"]} : le script d'installation {d["script_installation"]} n'existe pas ou n'est pas un fichier.")
                 continue
             

@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Va le trouver #2"
+
+description: |-
+  Ça pue.
+  It stinks.
+
+fichiers: []
+
+drapeau: "FLAG_qiw936xkaHUYGT"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"
