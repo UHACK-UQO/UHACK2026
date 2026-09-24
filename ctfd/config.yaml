@@ -1,6 +1,6 @@
 # URL de connection à la plateforme ctfd.
 # [OBLIGATOIRE]
-url: "http://ctfd.uhack.ctf"
+url: "https://ctfd.uhack.ctf"
 
 # Paramètres généraux du CTF
 # [OBLIGATOIRE]

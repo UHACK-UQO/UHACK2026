@@ -94,11 +94,12 @@ desinstaller() {
             infra-reseau/dnsmasq.conf \
             infra-reseau/nginx.conf \
             infra-reseau/defis.nginx.conf \
+            infra-reseau/TLS/*.pem \
             mastodon/installation/*.bool \
             mastodon/installation/*.mdp \
             mastodon/postgres*/ \
             mastodon/public/ \
-            mastodon/redis/
+            mastodon/redis/ 
 }
 
 installer() {
@@ -119,6 +120,12 @@ installer() {
 
     echo ""
     echo "Lancement de l'infra réseau."
+    openssl req -config infra-reseau/TLS/openssl.cnf \
+            -nodes -new -x509 \
+            -keyout "infra-reseau/TLS/${DOMAINE}.key.pem" \
+            -days 7300 -sha256 -extensions v3_ca \
+            -out "infra-reseau/TLS/${DOMAINE}.cert.pem"
+
     if [ -z "$(docker network ls | grep uhack_partage)" ]; then
         docker network create uhack_partage --subnet 172.16.10.0/24 > /dev/null
     fi
@@ -183,7 +190,7 @@ installer() {
     .venv/bin/python3 -m pip install -r requirements.txt > /dev/null
     chown -R 1001:1001 donnees/ctfd
     printf "En attente du lancement de CTFd"
-    while [ $(curl -f http://ctfd.${DOMAINE} &> /dev/null ; echo $?) != 0 ]; do
+    while [ $(curl -fk https://ctfd.${DOMAINE} &> /dev/null ; echo $?) != 0 ]; do
         sleep 1
         printf '.'
     done

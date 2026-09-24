@@ -31,6 +31,10 @@ def configurer_nginx(defis : dict):
         config += f"""
 server {{
     server_name {d["nom_domaine"]}.defis.{os.getenv("DOMAINE_GLOBAL","aucun_domaine.lan")};
+    listen 443 ssl;
+
+    ssl_certificate     /etc/ssl/{os.getenv("DOMAINE_GLOBAL","aucun_domaine.lan")}.cert.pem;
+    ssl_certificate_key /etc/ssl/{os.getenv("DOMAINE_GLOBAL","aucun_domaine.lan")}.key.pem;
 
     location / {{
         proxy_set_header Host $host;

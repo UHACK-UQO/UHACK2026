@@ -6,7 +6,13 @@ import re
 import subprocess
 import sys
 
+# NOTE toutes les requêtes sont faites avec 'verify=False', puisque
+#   CTFd est servis sur https avec un certificat auto-signé.
 import requests
+from urllib3.exceptions import InsecureRequestWarning
+
+requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
+
 import yaml
 
 sys.path.insert(0,"../coordination/yaml_config")
@@ -134,7 +140,7 @@ def configurer_ctfd(config : dict):
 
     print("Configuration de la plateforme à l'adresse " + config["url"])
 
-    rep = requests.get(config["url"] + "/setup")
+    rep = requests.get(config["url"] + "/setup", verify=False)
     if "Set-Cookie" not in rep.headers.keys():
         print(f"{ROUGE}[ERREUR]{NEUTRE} Il semblerait que CTFd soit déjà configuré, car le site n'a pas fournis de témoin de session.")
         return
@@ -240,7 +246,8 @@ def configurer_ctfd(config : dict):
         url=config["url"] + "/setup", 
         data=config_form, 
         files=config_form_fichiers,
-        headers={"Cookie":temoin_session}
+        headers={"Cookie":temoin_session},
+        verify=False
         )
     
     if rep.status_code != 200:
@@ -267,14 +274,16 @@ def obtenir_clee_api(config : dict, temoin_session : str) -> str:
 
     rep = requests.get(
         url=config["url"]+"/settings",
-        headers={"Cookie": temoin_session}
+        headers={"Cookie": temoin_session},
+        verify=False
         )
     jeton_csrf = re.search(r"'csrfNonce': \"([0-9a-f]*)\"",rep.content.decode("utf8")).group(1)
 
     rep = requests.post(
         url=config["url"]+"/api/v1/tokens",
         json={"description":"Clée API de ctfd-config.py"},
-        headers={"Cookie":temoin_session, "CSRF-Token":jeton_csrf}
+        headers={"Cookie":temoin_session, "CSRF-Token":jeton_csrf},
+        verify=False
     )
 
     if rep.status_code != 200:
@@ -443,7 +452,8 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
         rep = requests.post(
             url=config["url"]+"/api/v1/challenges",
             json=defis_json,
-            headers={"Authorization":f"Token {capi}"}
+            headers={"Authorization":f"Token {capi}"},
+            verify=False
         )
 
         if rep.status_code != 200:
@@ -472,7 +482,8 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
         rep = requests.post(
             url=config["url"] + "/api/v1/flags",
             json=defis_json,
-            headers={"Authorization": f"Token {capi}"}
+            headers={"Authorization": f"Token {capi}"},
+            verify=False
         )
 
         if rep.status_code != 200:
@@ -506,7 +517,8 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
                 url=config["url"] + "/api/v1/files",
                 data=defis_form,
                 files={"file":(os.path.basename(f),open(f,"rb"),mimetypes.guess_type(f))},  # noqa: SIM115
-                headers={"Authorization": f"Token {capi}"}
+                headers={"Authorization": f"Token {capi}"},
+                verify=False
             )
 
             if rep.status_code != 200:
@@ -529,7 +541,8 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
             rep = requests.post(
                 url=f"{config["url"]}/api/v1/hints",
                 json=indice_json,
-                headers={"Authorization": f"Token {capi}"}
+                headers={"Authorization": f"Token {capi}"},
+                verify=False
             )
 
             if rep.status_code != 200:
@@ -556,7 +569,8 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
             rep = requests.patch(
                 url=f"{config["url"]}/api/v1/hints/{i["ctfd_id"]}",
                 json={"prerequesites":{"requirements":prerequis_id}},
-                headers={"Authorization": f"Token {capi}"}
+                headers={"Authorization": f"Token {capi}"},
+                verify=False
             )
 
             if rep.status_code != 200:
@@ -595,7 +609,8 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
                     "prerequesites":prerequis_id
                 }
             },
-            headers={"Authorization": f"Token {capi}"}
+            headers={"Authorization": f"Token {capi}"},
+            verify=False
         )
 
         if rep.status_code != 200:
@@ -686,7 +701,8 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
         rep = requests.post(
             url=config["url"] + "/api/v1/users",
             json=utilisateurs_json,
-            headers={"Authorization":f"Token {capi}"}
+            headers={"Authorization":f"Token {capi}"},
+            verify=False
             )
         
         if rep.status_code != 200:
@@ -740,7 +756,8 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
         rep = requests.post(
             url=config["url"] + "/api/v1/teams",
             json=equipe_json,
-            headers={"Authorization":f"Token {capi}"}
+            headers={"Authorization":f"Token {capi}"},
+            verify=False
         )
 
         if rep.status_code != 200:
@@ -771,7 +788,8 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
             rep = requests.post(
                 url=config["url"]+f"/api/v1/teams/{id_equipe}/members",
                 json={"user_id":u_membre["ctfd_id"]},
-                headers={"Authorization":f"Token {capi}"}
+                headers={"Authorization":f"Token {capi}"},
+                verify=False
             )
 
             if rep.status_code != 200:
@@ -782,7 +800,8 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
             rep = requests.patch(
                 url=config["url"]+f"/api/v1/teams/{id_equipe}",
                 json={"captain_id":u_chef["ctfd_id"]},
-                headers={"Authorization":f"Token {capi}"}
+                headers={"Authorization":f"Token {capi}"},
+                verify=False
             )
 
             if rep.status_code != 200:
