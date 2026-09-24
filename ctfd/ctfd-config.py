@@ -36,6 +36,9 @@ def main():
         sys.exit()
 
     if "--defaut" in sys.argv or "-d" in sys.argv:
+        for e in yaml_config.valider_structure(structure_config):
+            print(f"{ROUGE}[ERREUR]{NEUTRE} {e}")
+
         argi = sys.argv.index("-d" if "-d" in sys.argv else "--defaut")
         rep = ""
         if len(sys.argv) == argi + 1 or sys.argv[argi + 1].startswith('-'):
@@ -48,6 +51,9 @@ def main():
         sys.exit()
 
     if "--defis-infos" in sys.argv or "-i" in sys.argv:
+        for e in yaml_config.valider_structure(structure_config):
+            print(f"{ROUGE}[ERREUR]{NEUTRE} {e}")
+        
         argi = sys.argv.index("-i" if "-i" in sys.argv else "--defis-infos")
         rep = ""
         if len(sys.argv) == argi + 1 or sys.argv[argi + 1].startswith('-'):
@@ -59,12 +65,12 @@ def main():
             f.write(yaml_config.creer_yaml_defaut(structure_description_defis))
         sys.exit()
 
-    if len(sys.argv) < 2:
-        print(f"{ROUGE}[ERREUR]{NEUTRE} Veuillez indiquer le répertoire du fichier de configuration")
+    if len(sys.argv) < 2 or not os.path.exists(sys.argv[-1]):
+        print(f"{ROUGE}[ERREUR]{NEUTRE} {sys.argv[-1]} n'est pas un fichier, n'existe pas ou n'est pas le répertoire de fichier de configuration.")
         print(message_aide)
         sys.exit()
     
-    rep_config = sys.argv[1]
+    rep_config = sys.argv[-1]
 
     # Configuration de CTFd
 
@@ -623,6 +629,12 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
             print("OK")
 
     print("Déploiement des défis statiques")
+    if not config["defis_installation"]["est_local"]:
+        ip=config["defis_installation"]["ip"]
+        usr=config["defis_installation"]["utilisateur"]
+        mdp=config["defis_installation"]["mdp"]
+        subprocess.call(f"sshpass {mdp} ssh-copy-id -o StrictHostKeyChecking=no {usr}@{ip}", shell=True, check=False)
+        
     for d in defis:
         if d["type"] == "statique":
             if not d["script_installation"]:
@@ -634,7 +646,11 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
                 continue
             
             print(f"\n{d["categorie"]}/{d["titre"]} :\n{'='*( len(d["categorie"]) + len(d["titre"]) + 2 )}\n")
-            subprocess.run([f"{d["repertoire"]}/{d["script_installation"]}"], check=False)
+            if config["defis_installation"]["est_local"]:
+                subprocess.run([f"{d["repertoire"]}/{d["script_installation"]}"], check=False)
+            else:
+                subprocess.call([f"scp -o StrictHostKeyChecking=no ./{d["repertoire"]} \"{usr}@{ip}:{d["titre"]}\""], check=False)
+                subprocess.call([f"ssh -o StrictHostKeyChecking=no {usr}@{ip} \"{d["titre"]}/{d["script_installation"]}\""], check=False)
 
     for d in defis:
         if d["necessite_un_traitement_special"]:
@@ -877,7 +893,7 @@ structure_config = {
             },
             "fichier_utilisateurs": {
                 "est_obligatoire": True,
-                "Description": "Répertoire du fichier JSON listant les utilisateurs et leurs équipes.",
+                "description": "Répertoire du fichier JSON listant les utilisateurs et leurs équipes.",
                 "defaut": "../coordination/comptes_utilisateurs.json",
             },
             "debut":{
@@ -994,6 +1010,30 @@ structure_config = {
                         "description": "Les comptes ne sont visibles qu'aux admins"
                     }
                 ]
+            }
+        }
+    },
+    "defis_installation":{
+        "description": "Paramètres d'installation des défis statiques et dynamiques",
+        "defaut":{
+            "est_local":{
+                "description": "Les défis sont installés sur la machine sur laquelle ce script est exécuté ou pas.",
+                "defaut": True
+            },
+            "ip":{
+                "description": "Adresse IP de la machine sur laquelle installer les défis",
+                "defaut": "0.0.0.0",
+                "defaut_est_exemple": True
+            },
+            "utilisateur":{
+                "description": "Utilisateur auquel ce script se connectera sur la machine d'installation pour installer les défis",
+                "defaut":"root",
+                "defaut_est_exemple": True
+            },
+            "mdp":{
+                "description": "Mot de passe de l'utilisateur auquel ce script se connectera pour installer les défis",
+                "defaut": "mot_de_passe",
+                "defaut_est_exemple": True
             }
         }
     }

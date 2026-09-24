@@ -148,9 +148,11 @@ desinstaller() {
 }
 
 installer() {
-    desinstaller
-
     printf '\nInstallation du CTF\n\n'
+
+    if [ -z "~/.ssh/*.pub" ]; then
+        ssh-keygen -f ~/.ssh/id_ed25519 -t ed25519 -N "" &> /dev/null
+    fi
 
     printf "Veuillez indiquer le nom de domaine du CTF : "
     read DOMAINE
@@ -320,7 +322,7 @@ installer_reseau_distant() {
     usr="$2"
     mdp="$3"
 
-    echo "$mdp" | ssh-copy-id -o StrictHostKeyChecking=no "$usr@$ip"
+    sshpass -p "$mdp"  ssh-copy-id -o StrictHostKeyChecking=no "$usr@$ip"
     scp -o StrictHostKeyChecking=no ./infra-reseau/ "$usr@$ip:infra-reseau/"
 
     printf '\n===== Docker =====\n'
@@ -336,7 +338,7 @@ installer_courriels_distant() {
     usr="$2"
     mdp="$3"
 
-    echo "$mdp" | ssh-copy-id -o StrictHostKeyChecking=no "$usr@$ip"
+    sshpass -p "$mdp"  ssh-copy-id -o StrictHostKeyChecking=no "$usr@$ip"
     scp -o StrictHostKeyChecking=no ./courriels/ "$usr@$ip:courriels/"
     scp -o StrictHostKeyChecking=no ./coordination/ "$usr@$ip:coordination/"
 
@@ -360,7 +362,7 @@ installer_mastodon_distant() {
     usr="$2"
     mdp="$3"
 
-    echo "$mdp" | ssh-copy-id -o StrictHostKeyChecking=no "$usr@$ip"
+    sshpass -p "$mdp"  ssh-copy-id -o StrictHostKeyChecking=no "$usr@$ip"
     scp -o StrictHostKeyChecking=no ./mastodon/ "$usr@$ip:mastodon/"
     scp -o StrictHostKeyChecking=no ./coordination/ "$usr@$ip:coordination/"
 
@@ -382,7 +384,7 @@ installer_ctfd_distant() {
     usr="$2"
     mdp="$3"
 
-    echo "$mdp" | ssh-copy-id -o StrictHostKeyChecking=no "$usr@$ip"
+    sshpass -p "$mdp"  ssh-copy-id -o StrictHostKeyChecking=no "$usr@$ip"
     scp -o StrictHostKeyChecking=no ./ctfd/ "$usr@$ip:ctfd/"
     scp -o StrictHostKeyChecking=no ./coordination/ "$usr@$ip:coordination/"
 
