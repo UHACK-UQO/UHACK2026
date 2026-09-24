@@ -1,0 +1,19 @@
+{
+  "service": "legacy-service-05",
+  "status": "retired",
+  "checks": [
+    {
+      "name": "disk",
+      "value": 45
+    },
+    {
+      "name": "queue",
+      "value": 73
+    },
+    {
+      "name": "workers",
+      "value": 13
+    }
+  ],
+  "captured_at": "2021-05-15T12:00:00Z"
+}

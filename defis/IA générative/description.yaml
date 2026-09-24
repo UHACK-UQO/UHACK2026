@@ -1,0 +1,25 @@
+type: "Réseaux sociaux"
+
+titre: "IA générative"
+
+description: |-
+  Quelques photos semblent être générées par l'IA...
+  Some pictures seem to be AI generated...
+
+fichiers: []
+
+drapeau: "FLAG_r0ch3_4rbr3_l4c"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

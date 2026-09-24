@@ -1,0 +1,25 @@
+type: "Challenges extra"
+
+titre: "Merci"
+
+description: |-
+  Allez-dire merci pour leur travail aux organisateurs
+  Go say thank you for your work to the organizers
+
+fichiers: []
+
+drapeau: "FLAG_M3RCI_BOKOU_BONNE_NUITT"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 50
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

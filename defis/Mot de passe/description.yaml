@@ -1,0 +1,26 @@
+type: "Communication"
+
+titre: "Mot de passe"
+
+description: |-
+  Dépêche-toi  à trouver le mot de passe !
+  Hurry up to find the password!
+  Format: FLAG_XXXX
+
+fichiers: []
+
+drapeau: "FLAG_EMP-121-UB-570"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

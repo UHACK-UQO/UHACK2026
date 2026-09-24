@@ -1,0 +1,10 @@
+Correctifs appliqués aux environnements de développement. La production n'était pas incluse dans cette fenêtre.
+
+REF-8953 | état=archivé
+REF-8478 | état=terminé
+REF-3195 | état=terminé
+REF-9253 | état=archivé
+REF-2131 | état=fermé
+REF-6196 | état=terminé
+REF-1233 | état=fermé
+REF-6379 | état=terminé

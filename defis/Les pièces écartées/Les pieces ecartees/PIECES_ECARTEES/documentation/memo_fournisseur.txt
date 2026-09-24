@@ -1,0 +1,10 @@
+Le renouvellement du contrat de soutien a été reporté au prochain trimestre. Aucun changement aux comptes utilisateurs.
+
+REF-6631 | état=fermé
+REF-9471 | état=fermé
+REF-8245 | état=archivé
+REF-1130 | état=fermé
+REF-9369 | état=archivé
+REF-5717 | état=fermé
+REF-9887 | état=terminé
+REF-7012 | état=fermé

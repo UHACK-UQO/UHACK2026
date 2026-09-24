@@ -1,0 +1,27 @@
+ACCOUNT RECOVERY MIGRATION NOTES
+Revision 3.2 - archived operational copy
+
+CONTACT KEY GENERATION
+
+The recovery audit does not preserve the original email address. It stores a
+deterministic contact key so records can be reconciled with the registration
+export during a migration.
+
+1. normalized_email = lowercase(trim(email))
+2. source_value = normalized_email + "|" + tenant_id
+3. digest = SHA256(source_value encoded as UTF-8)
+4. contact_key = first 16 hexadecimal characters of digest
+
+Validation example
+------------------
+email            = Test.User@Example.org
+tenant_id        = TENANT-03
+normalized_email = test.user@example.org
+source_value     = test.user@example.org|TENANT-03
+contact_key      = 57284faac5c5dfe5
+
+Common failures:
+- hashing the original mixed-case email;
+- adding spaces around the separator;
+- using the registration ID instead of the tenant ID;
+- keeping the full digest instead of its first 16 hexadecimal characters.

@@ -1,0 +1,26 @@
+type: "Réputation"
+
+titre: "Suis-je millionnaire ?"
+
+description: |-
+  Le chef IT souhaite tester tes compétences. Gagne le million sous la catégorie technologie. Montre le à la mairesse.
+  The IT chief wishes to test your skills. Win the million under the category technology. Show it to the mayor.
+  https://www.crazygames.com/game/millionaire-quiz
+
+fichiers: []
+
+drapeau: "FLAG_THANK_GOODNESS_YOU_WON"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

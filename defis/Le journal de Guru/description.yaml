@@ -1,0 +1,26 @@
+type: "Réputation"
+
+titre: "Le journal de Guru"
+
+description: |-
+  SVP trouvez le secret dans le journal de Guru....
+  PLEASE find the secret in Guru's journal...
+  Format: FLAG_XXX
+
+fichiers: []
+
+drapeau: "FLAG_DILIGENCE"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

@@ -1,0 +1,26 @@
+type: "Déchets"
+
+titre: "Gardez ça propre"
+
+description: |-
+  Ça commence à être sale...ramassez votre table et prenez une photo de toute votre équipe jetant des déchets dans une poubelle. Envoyez ça à Alexanne pour obtenir une récompense...
+  It's starting to get dirty...clean your table from trash and take a picture of your whole team throwing trash in the trash can. Send it to Alexanne to get a reward...
+  Format: FLAG_XXXX
+
+fichiers: []
+
+drapeau: "FLAG_8u9kLOs2v"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 50
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

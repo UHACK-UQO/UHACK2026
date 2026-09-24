@@ -1,0 +1,10 @@
+Build 18 installé. Deux avertissements de compatibilité ont été acceptés par l'équipe de test.
+
+REF-4415 | état=archivé
+REF-8504 | état=archivé
+REF-6879 | état=terminé
+REF-5098 | état=archivé
+REF-1778 | état=fermé
+REF-8818 | état=fermé
+REF-6125 | état=terminé
+REF-8773 | état=archivé

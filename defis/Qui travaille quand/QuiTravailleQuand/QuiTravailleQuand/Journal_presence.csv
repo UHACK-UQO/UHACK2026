@@ -1,0 +1,60 @@
+Date,Employe,Heure,Evenement,Note,,,,ATTENDANCE LOG,,,,
+2026-07-13,Lily,9:57,ENTREE,Badge porte principale,,,,Date,Employee,Time,Event,Note
+2026-07-13,Lily,16:31,SORTIE,Badge porte principale,,,,2026-07-13,Lily,9:57,ENTRY,Main entrance badge
+2026-07-13,Bruno,9:54,ENTREE,Badge porte principale,,,,2026-07-13,Lily,16:31,EXIT,Main entrance badge
+2026-07-13,Bruno,16:02,SORTIE,Depart autorise,,,,2026-07-13,Bruno,9:54,ENTRY,Main entrance badge
+2026-07-13,Myriam,7:56,ENTREE,Remplacement Lily,,,,2026-07-13,Bruno,16:02,EXIT,Authorized departure
+2026-07-13,Myriam,10:04,SORTIE,Fin remplacement,,,,2026-07-13,Myriam,7:56,ENTRY,Lily replacement
+2026-07-13,John,7:27,ENTREE,Badge porte principale,,,,2026-07-13,Myriam,10:04,EXIT,End of replacement
+2026-07-13,John,15:03,SORTIE,Depart,,,,2026-07-13,John,7:27,ENTRY,Main entrance badge
+2026-07-13,Sofia,11:54,ENTREE,Badge porte principale,,,,2026-07-13,John,15:03,EXIT,Departure
+2026-07-13,Sofia,18:02,SORTIE,Badge porte principale,,,,2026-07-13,Sofia,11:54,ENTRY,Main entrance badge
+2026-07-13,Karim,7:55,ENTREE,Badge porte principale,,,,2026-07-13,Sofia,18:02,EXIT,Main entrance badge
+2026-07-13,Karim,14:01,SORTIE,Badge porte principale,,,,2026-07-13,Karim,7:55,ENTRY,Main entrance badge
+2026-07-14,Myriam,8:43,ENTREE,Retard transport - debut remunere a 08:45,,,,2026-07-13,Karim,14:01,EXIT,Main entrance badge
+2026-07-14,Myriam,14:02,SORTIE,Fin quart echange,,,,2026-07-14,Myriam,8:43,ENTRY,Transportation delay - paid start at 08:45
+2026-07-14,Bruno,9:28,ENTREE,Retard confirme - debut remunere a 09:30,,,,2026-07-14,Myriam,14:02,EXIT,End of exchanged shift
+2026-07-14,Bruno,17:33,SORTIE,Fin quart echange,,,,2026-07-14,Bruno,9:28,ENTRY,Confirmed late arrival - paid start at 09:30
+2026-07-14,Sofia,9:55,ENTREE,Badge porte principale,,,,2026-07-14,Bruno,17:33,EXIT,End of exchanged shift
+2026-07-14,Sofia,18:02,SORTIE,Badge porte principale,,,,2026-07-14,Sofia,9:55,ENTRY,Main entrance badge
+2026-07-14,Karim,12:55,ENTREE,Badge porte principale,,,,2026-07-14,Sofia,18:02,EXIT,Main entrance badge
+2026-07-14,Karim,20:15,SORTIE,Depart anticipe confirme,,,,2026-07-14,Karim,12:55,ENTRY,Main entrance badge
+2026-07-15,John,8:55,ENTREE,Badge porte principale,,,,2026-07-14,Karim,20:15,EXIT,Confirmed early departure
+2026-07-15,John,17:04,SORTIE,Badge porte principale,,,,2026-07-15,John,8:55,ENTRY,Main entrance badge
+2026-07-15,Karim,7:28,ENTREE,Retard signale,,,,2026-07-15,John,17:04,EXIT,Main entrance badge
+2026-07-15,Karim,15:02,SORTIE,Badge porte principale,,,,2026-07-15,Karim,7:28,ENTRY,Reported late arrival
+2026-07-15,Lily,11:56,ENTREE,Quart deplace,,,,2026-07-15,Karim,15:02,EXIT,Main entrance badge
+2026-07-15,Lily,17:17,SORTIE,Depart approuve,,,,2026-07-15,Lily,11:56,ENTRY,Moved shift
+2026-07-15,Bruno,11:55,ENTREE,Reunion technique,,,,2026-07-15,Lily,17:17,EXIT,Approved departure
+2026-07-15,Bruno,14:03,SORTIE,Fin reunion,,,,2026-07-15,Bruno,11:55,ENTRY,Technical meeting
+2026-07-15,Myriam,13:56,ENTREE,Quart corrige,,,,2026-07-15,Bruno,14:03,EXIT,End of meeting
+2026-07-15,Myriam,20:01,SORTIE,Badge porte principale,,,,2026-07-15,Myriam,13:56,ENTRY,Corrected shift
+2026-07-16,Sofia,6:54,ENTREE,Badge porte principale,,,,2026-07-15,Myriam,20:01,EXIT,Main entrance badge
+2026-07-16,Sofia,13:02,SORTIE,Rendez-vous,,,,2026-07-16,Sofia,6:54,ENTRY,Main entrance badge
+2026-07-16,John,7:55,ENTREE,Badge porte principale,,,,2026-07-16,Sofia,13:02,EXIT,Appointment
+2026-07-16,John,14:01,SORTIE,Depart approuve,,,,2026-07-16,John,7:55,ENTRY,Main entrance badge
+2026-07-16,Lily,8:26,ENTREE,Badge porte principale,,,,2026-07-16,John,14:01,EXIT,Approved departure
+2026-07-16,Lily,16:17,SORTIE,Remplacement John,,,,2026-07-16,Lily,8:26,ENTRY,Main entrance badge
+2026-07-16,Bruno,11:56,ENTREE,Remplacement Karim,,,,2026-07-16,Lily,16:17,EXIT,John replacement
+2026-07-16,Bruno,15:47,SORTIE,Fin remplacement,,,,2026-07-16,Bruno,11:56,ENTRY,Karim replacement
+2026-07-16,Karim,15:41,ENTREE,Badge porte principale,,,,2026-07-16,Bruno,15:47,EXIT,End of replacement
+2026-07-16,Karim,18:02,SORTIE,Badge porte principale,,,,2026-07-16,Karim,15:41,ENTRY,Main entrance badge
+2026-07-16,Myriam,11:15,ENTREE,Retard non justifie,,,,2026-07-16,Karim,18:02,EXIT,Main entrance badge
+2026-07-16,Myriam,19:02,SORTIE,Badge porte principale,,,,2026-07-16,Myriam,11:15,ENTRY,Unjustified late arrival
+2026-07-17,John,9:11,ENTREE,Affectation supplementaire,,,,2026-07-16,Myriam,19:02,EXIT,Main entrance badge
+2026-07-17,John,12:47,SORTIE,Fin affectation,,,,2026-07-17,John,9:11,ENTRY,Additional assignment
+2026-07-17,John,12:57,ENTREE,Quart regulier,,,,2026-07-17,John,12:47,EXIT,End of assignment
+2026-07-17,John,19:01,SORTIE,Badge porte principale,,,,2026-07-17,John,12:57,ENTRY,Regular shift
+2026-07-17,Lily,8:56,ENTREE,Badge porte principale,,,,2026-07-17,John,19:01,EXIT,Main entrance badge
+2026-07-17,Lily,15:02,SORTIE,Fin remplacement Sofia,,,,2026-07-17,Lily,8:56,ENTRY,Main entrance badge
+2026-07-17,Sofia,8:55,ENTREE,Badge porte principale,,,,2026-07-17,Lily,15:02,EXIT,End of Sofia replacement
+2026-07-17,Sofia,13:02,SORTIE,Rendez-vous,,,,2026-07-17,Sofia,8:55,ENTRY,Main entrance badge
+2026-07-17,Sofia,14:56,ENTREE,Retour rendez-vous,,,,2026-07-17,Sofia,13:02,EXIT,Appointment
+2026-07-17,Sofia,17:02,SORTIE,Badge porte principale,,,,2026-07-17,Sofia,14:56,ENTRY,Return from appointment
+2026-07-17,Bruno,7:56,ENTREE,Badge porte principale,,,,2026-07-17,Sofia,17:02,EXIT,Main entrance badge
+2026-07-17,Bruno,14:30,SORTIE,Depart approuve,,,,2026-07-17,Bruno,7:56,ENTRY,Main entrance badge
+2026-07-17,Myriam,11:56,ENTREE,Badge porte principale,,,,2026-07-17,Bruno,14:30,EXIT,Approved departure
+2026-07-17,Myriam,18:03,SORTIE,Badge porte principale,,,,2026-07-17,Myriam,11:56,ENTRY,Main entrance badge
+2026-07-17,Karim,9:56,ENTREE,Inventaire urgent,,,,2026-07-17,Myriam,18:03,EXIT,Main entrance badge
+2026-07-17,Karim,14:30,SORTIE,Inventaire termine,,,,2026-07-17,Karim,9:56,ENTRY,Urgent inventory
+,,,,,,,,2026-07-17,Karim,14:30,EXIT,Inventory completed

@@ -1,0 +1,18 @@
+CONTRÔLES RÉCUPÉRÉS — V-17
+==========================
+
+Format : IDENTIFIANT = EXPRESSION
+
+ARN-58 = 2 * N
+ARN-18 = (2 * O) + C - (4 * H)
+ARN-07 = (S + N + O - H) / 2
+ARN-35 = P + N - (3 * H)
+ARN-12 = ((2 * S) + C - O) / 2
+ARN-26 = P + N
+ARN-31 = (P + C) / N
+ARN-62 = (2 * P) - O - H
+ARN-03 = O - N
+ARN-49 = S - N
+ARN-44 = P + C - (3 * H)
+
+Note : les identifiants ne sont pas présentés dans leur ordre d'exécution.

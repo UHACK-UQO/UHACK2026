@@ -1,0 +1,25 @@
+type: "Désinformation"
+
+titre: "Mettre au clair"
+
+description: |-
+  Les citoyens sont inquiets puisque plusieurs fausses informations circulent sur les réseaux. Faites une vidéo pour répondre à leurs questions de manière professionnelle. Envoyez la vidéo à Alexanne.
+  The citizens are worried since a lot of false information is going around on the medias. Make a video to answer their questions in a professional way. Send the video to Alexanne.
+
+fichiers: []
+
+drapeau: "FLAG_XXj8iP0ke"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

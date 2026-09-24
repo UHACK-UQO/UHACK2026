@@ -1,0 +1,26 @@
+type: "Réputation"
+
+titre: "On mange du poulet"
+
+description: |-
+  La réputation de la ville est en péril. Atteignez le challenge du 922m. Montrez à la mairesse.
+  The city's reputation is in jeopardy. Obtain the 922m achievement. Show it to the mayor.
+  https://www.crazygames.com/game/chicken-clicker
+
+fichiers: []
+
+drapeau: "FLAG_H0P3_YOUR_FINGER_IS_OK_SORRY"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

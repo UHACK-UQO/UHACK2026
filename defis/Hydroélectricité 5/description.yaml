@@ -1,0 +1,27 @@
+type: "Eau"
+
+titre: "Hydroélectricité 5"
+
+description: |-
+  Comment se nomme l'une des premières ligne qui fait 100km de long ?
+  How is named one of the first line that makes 100km length wise?
+  https://www.youtube.com/watch?v=axWId0PugPc
+  Format: FLAG_XXXX
+
+fichiers: []
+
+drapeau: "FLAG_SHAWINIGAN_WATER_AND_POWER"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 50
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

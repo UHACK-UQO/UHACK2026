@@ -1,0 +1,10 @@
+Contrôler l'encodage UTF-8, les fins de ligne, les horodatages et les noms de colonnes avant un import.
+
+REF-6429 | état=fermé
+REF-3287 | état=fermé
+REF-5388 | état=fermé
+REF-1770 | état=fermé
+REF-5182 | état=archivé
+REF-4557 | état=terminé
+REF-6932 | état=archivé
+REF-5310 | état=terminé

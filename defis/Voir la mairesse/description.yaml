@@ -1,0 +1,25 @@
+type: "Réseaux sociaux"
+
+titre: "Voir la mairesse"
+
+description: |-
+  La mairesse a des questions pour toi.
+  The mayor has questions for you.
+
+fichiers: []
+
+drapeau: "FLAG_Y0UP1_D8UP1"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

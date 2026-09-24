@@ -1,0 +1,26 @@
+type: "Communication"
+
+titre: "Le communiqué mélangé"
+
+description: |-
+  Le communiqué envoyé aux citoyens est tout mélangé ! Remet-le en ordre et envoyez le à Alexanne le plus rapidement possible !
+  The statement sent to citizens is all mixed up! Put it back in order and send it to Alexanne as fast as possible!
+  Format: FLAG_XXXXX
+
+fichiers: []
+
+drapeau: "FLAG_js09JUkal33"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

@@ -1,0 +1,25 @@
+Pour le rapport final, présentez les résultats dans l’ordre des numéros d’employés, et non dans l’ordre alphabétique.
+
+Numéros d’employés actifs :
+
+2047 - Bruno
+2061 - Sofia
+2088 - Lily
+2103 - Karim
+2120 - John
+2144 - Myriam
+
+============================================================
+MANAGEMENT MESSAGE
+============================================================
+
+For the final report, present the results in employee-number order, not alphabetical order.
+
+Active employee numbers:
+
+2047 - Bruno
+2061 - Sofia
+2088 - Lily
+2103 - Karim
+2120 - John
+2144 - Myriam

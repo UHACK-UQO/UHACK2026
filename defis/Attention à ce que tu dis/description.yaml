@@ -1,0 +1,26 @@
+type: "Réputation"
+
+titre: "Attention à ce que tu dis"
+
+description: |-
+  Ci-joint est le script pour l'attaché de presse. Une exigence légale n’a pas été respectée.
+  Attached is the script for the press attaché. A legal requirement isn’t being respected here—what is it?
+  Format: FLAG_XXXXXXX_XXXXXXXXX
+
+fichiers: []
+
+drapeau: "FLAG_LOI_101"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

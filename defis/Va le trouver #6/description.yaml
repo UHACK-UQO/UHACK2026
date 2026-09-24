@@ -1,0 +1,25 @@
+type: "Eau"
+
+titre: "Va le trouver #6"
+
+description: |-
+  J'ai soif.
+  I'm thirsty.
+
+fichiers: []
+
+drapeau: "FLAG_QJU63Kxsh8"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 50
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False

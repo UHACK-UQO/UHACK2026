@@ -1,0 +1,25 @@
+type: "Eau"
+
+titre: "Les cadenas 5"
+
+description: |-
+  Difficile
+  Hard
+
+fichiers: []
+
+drapeau: "FLAG_NWWOIKSD8"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
+
+necessite_un_traitement_special: False
