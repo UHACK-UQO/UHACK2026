@@ -96,6 +96,7 @@ arreter() {
 }
 
 desinstaller() {
+    # TODO désinstaller les dépendances
     printf "\nDésinstallation du CTF\n\n"
 
     if [ $(systemctl status systemd-resolved > /dev/null ; echo $?) = 0 ]; then
@@ -151,27 +152,7 @@ installer() {
     printf '\nInstallation du CTF\n\n'
 
     printf '\nInstallation des dépendances\n\n'
-    # TODO Supporter d'autres gestionnaires de packets
-
-    apt update
-    apt install jq sshpass git python3 python3-venv
-
-    printf '\tInstallation de docker...\n\n'
-    # Add Docker's official GPG key:
-    apt install ca-certificates curl
-    install -m 0755 -d /etc/apt/keyrings
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-    chmod a+r /etc/apt/keyrings/docker.asc
-
-    # Add the repository to Apt sources:
-    printf "Types: deb\n\
-URIs: https://download.docker.com/linux/ubuntu\n\
-Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")\n\
-Components: stable\n\
-Architectures: $(dpkg --print-architecture)\n\
-Signed-By: /etc/apt/keyrings/docker.asc" > /etc/apt/sources.list.d/docker.sources
-
-    apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    ./installer_dependances.sh
 
     if [ -z "~/.ssh/*.pub" ]; then
         ssh-keygen -f ~/.ssh/id_ed25519 -t ed25519 -N "" &> /dev/null
@@ -346,7 +327,9 @@ installer_reseau_distant() {
     mdp="$3"
 
     sshpass -p "$mdp"  ssh-copy-id -o StrictHostKeyChecking=no "$usr@$ip"
-    scp -o StrictHostKeyChecking=no ./infra-reseau/ "$usr@$ip:infra-reseau/"
+    scp -r -o StrictHostKeyChecking=no "./infra-reseau/" "$usr@$ip"
+    scp -o StrictHostKeyChecking=no "./installer_dependances.sh" "$usr@$ip:installer_dependances.sh"
+    ssh -o StrictHostKeyChecking=no "$usr@$ip" ./installer_dependances.sh "$mdp"
 
     printf '\n===== Docker =====\n'
     ssh -o StrictHostKeyChecking=no "$usr@$ip" docker compose up -d
@@ -362,8 +345,10 @@ installer_courriels_distant() {
     mdp="$3"
 
     sshpass -p "$mdp"  ssh-copy-id -o StrictHostKeyChecking=no "$usr@$ip"
-    scp -o StrictHostKeyChecking=no ./courriels/ "$usr@$ip:courriels/"
-    scp -o StrictHostKeyChecking=no ./coordination/ "$usr@$ip:coordination/"
+    scp -r -o StrictHostKeyChecking=no "./courriels/" "$usr@$ip"
+    scp -r -o StrictHostKeyChecking=no "./coordination/" "$usr@$ip"
+    scp -o StrictHostKeyChecking=no "./installer_dependances.sh" "$usr@$ip:installer_dependances.sh"
+    ssh -o StrictHostKeyChecking=no "$usr@$ip" ./installer_dependances.sh "$mdp"
 
     printf '\n===== Docker =====\n'
     ssh -o StrictHostKeyChecking=no "$usr@$ip" docker compose -f courriels/docker-compose.yaml up -d
@@ -386,8 +371,10 @@ installer_mastodon_distant() {
     mdp="$3"
 
     sshpass -p "$mdp"  ssh-copy-id -o StrictHostKeyChecking=no "$usr@$ip"
-    scp -o StrictHostKeyChecking=no ./mastodon/ "$usr@$ip:mastodon/"
-    scp -o StrictHostKeyChecking=no ./coordination/ "$usr@$ip:coordination/"
+    scp -r -o StrictHostKeyChecking=no "./mastodon/" "$usr@$ip"
+    scp -r -o StrictHostKeyChecking=no "./coordination/" "$usr@$ip"
+    scp -o StrictHostKeyChecking=no "./installer_dependances.sh" "$usr@$ip:installer_dependances.sh"
+    ssh -o StrictHostKeyChecking=no "$usr@$ip" ./installer_dependances.sh "$mdp"
 
     printf '\n===== Docker =====\n'
     ssh -o StrictHostKeyChecking=no docker compose -f mastodon/docker-compose.yaml up -d
@@ -408,8 +395,10 @@ installer_ctfd_distant() {
     mdp="$3"
 
     sshpass -p "$mdp"  ssh-copy-id -o StrictHostKeyChecking=no "$usr@$ip"
-    scp -o StrictHostKeyChecking=no ./ctfd/ "$usr@$ip:ctfd/"
-    scp -o StrictHostKeyChecking=no ./coordination/ "$usr@$ip:coordination/"
+    scp -r -o StrictHostKeyChecking=no "./ctfd/" "$usr@$ip"
+    scp -r -o StrictHostKeyChecking=no "./coordination/" "$usr@$ip"
+    scp -o StrictHostKeyChecking=no "./installer_dependances.sh" "$usr@$ip:installer_dependances.sh"
+    ssh -o StrictHostKeyChecking=no "$usr@$ip" ./installer_dependances.sh "$mdp"
 
     printf '\n===== Docker =====\n'
     ssh -o StrictHostKeyChecking=no docker compose -f ctfd/docker-compose.yaml up -d
