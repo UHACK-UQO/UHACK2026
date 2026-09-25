@@ -1,0 +1,49 @@
+# Type de défi
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Souvenirs de tournée"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  La crise des déchets a au moins un point positif : l'équipe communication
+  de la ville publie chaque jour de jolies photos des bennes et des camions
+  pour rassurer les habitants. Trois clichés ont été publiés ce matin sur le
+  site de la mairie, récupérés dans `photos_bennes.zip`.
+
+  Un habitant un peu curieux (ou les attaquants eux-mêmes) a remarqué
+  que l'un des fichiers fait quelques octets de plus que les autres. Les
+  navigateurs et les visionneuses s'arrêtent au bon endroit ; les
+  enquêteurs, eux, lisent la fin.
+
+# Liste de fichiers à téléverser
+fichiers: ['photos_bennes.zip']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{apres_fin_jpeg_5d2c}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  fonction: "logarithmique"
+  # Nombre de points minimum.
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+etat: "cache"
+# Mettre à true si l'importation dans ctfd
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

@@ -1,0 +1,96 @@
+# Type de défi CTFd. Déterminé par le fait que le défi
+# nécessite ou non qu'un service soit exposé, et si oui,
+# si ce service est partagé entre tous les utilisateurs
+# ou personnel à chacun.
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource de 
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit 
+#     exposé, mais ce service est le même pour 
+#     tous les Ex.: Exposer une API REST.
+#   service_personnel :
+#     Le défi nécessite qu'un service pour chaque 
+#     utilisateur soit Ex.: Exposer un boot2root.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Les traces qu'on ne supprime pas"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  Les attaquants ont exigé pour rançon la gratuité du stationnement
+  sur tout le territoire pendant un siècle — la mairie refuse de
+  négocier. Pendant ce temps, l'équipe forensic termine l'analyse du
+  journal d'accès de la GED qui archive les actes d'état civil.
+
+  Un compte de service nommé `svc_export_nocturne` est suspecté d'avoir
+  exfiltré la base entière une nuit de septembre. Problème : quand les
+  enquêteurs ont ouvert le journal, **aucune ligne** de ce compte n'y
+  figurait. Le responsable du serveur assure avoir « tout remis en ordre
+  ».
+
+  Sous SQLite, `DELETE` ne détruit pas les octets : tant qu'aucune
+  nouvelle écriture ne recycle la place, les lignes supprimées restent
+  dans l'espace non alloué du fichier. Cherchez ce qui dort encore dans
+  `journal_acces_ged_2026-09.sqlite`.
+
+  Fichier fourni : `journal_acces_ged_2026-09.sqlite`
+
+# Liste de fichiers à téléverser
+fichiers: ['journal_acces_ged_2026-09.sqlite']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{la_corbeille_garde_les_actes}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi. Le nombre 
+# de points diminue à mesure que de plus en plus 
+# de solutions sont soumises au défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  # Valeurs acceptées :
+  #   constant :
+  #     Le nombre de points reste constant tout 
+  #     au long de l'événement. Avec cette 
+  #     option, les paramètres `pointage.minimum` 
+  #     et `pointage.decroissance` n'ont aucun 
+  #     effet.
+  #   lineaire :
+  #     Le nombre de points diminue au même 
+  #     rythme en fonction du nombre de solutions 
+  #     soumises.
+  #   logarithmique :
+  #     Le nombre de points chute drastiquement 
+  #     avec les premières soumissions et de plus 
+  #     en plus doucement avec les suivantes.
+  fonction: "logarithmique"
+  # Nombre de points minimum. La décroissance ne 
+  # passera pas en-dessous de ce niveau
+  minimum: 10
+  # Taux de décroissance des points. Est 
+  # interprété différemment dépendamment de 
+  # `pointage.fonction`.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+# Valeurs acceptées :
+#   visible :
+#     Les participants peuvent voir les défis
+#   cache :
+#     Le défi est caché aux participants.
+etat: "cache"
+# Mettre à true si l'importation dans ctfd 
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

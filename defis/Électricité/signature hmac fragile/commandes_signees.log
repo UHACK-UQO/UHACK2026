@@ -1,0 +1,5 @@
+# journal des ordres signés acceptés par la passerelle SCADA
+# format : horodatage_reception;message;tag_hmac_24bits
+2026-09-24T08:00:01Z;FERMER_DJ3;2026-09-24T08:12:04Z;df59b6
+2026-09-24T09:00:02Z;LIRE_TENSION_J7;2026-09-24T09:31:47Z;1d2959
+2026-09-24T010:00:03Z;FERMER_DJ8;2026-09-24T13:05:19Z;1ff0c9

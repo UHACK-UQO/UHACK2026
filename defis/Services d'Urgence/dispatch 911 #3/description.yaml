@@ -1,0 +1,43 @@
+type: "ctfd"
+
+titre: "Dispatch 911 : l'exfiltration effacée (épisode 3/3)"
+
+description: |
+  **ARC-08 — Services d'urgence · Épisode 3/3 (fin de la série)**
+
+  L'intrusion est confirmée, le malware identifié (épisodes 1 et 2). Reste la
+  question qui fera trembler la mairie : **qu'a exfiltré l'attaquant, et
+  comment l'a-t-il caché ?** Vous récupérez l'image disque complète du serveur
+  du dispatch 911 (`image_disque_dispatch.img`, système de fichiers ext4).
+
+  L'attaquant connaît son affaire : les journaux ont été
+  remplacés puis effacés, un binaire porte des **dates modifiées (timestomp)**
+  pour passer inaperçu, et l'on soupçonne que le journal d'audit **original**
+  — celui qui décrit l'exfiltration des enregistrements d'appels — a été
+  détruit. Sur un ext4, les inodes effacés ne se livrent pas avec `lsdel` :
+  il faudra fouiller le **journal du système de fichiers**, **carver l'espace
+  libre** et confronter les métadonnées des fichiers survivants.
+
+  Le drapeau a été brisé en **trois fragments** disséminés dans l'image.
+  Chaque fragment est étiqueté (`FRAGMENT-1-…`, `FRAGMENT-2-…`,
+  `FRAGMENT-3-…` greffé au binaire suspect) : retrouvez-les tous, remettez-les
+  dans l'ordre, et l'exfiltration du dispatch 911 n'aura plus de secret.
+
+  *Outils suggérés : `debugfs`, `strings`, `blkls` (sleuthkit), `foremost`,
+  un montage en lecture seule, et beaucoup de patience.*
+
+fichiers:
+  - image_disque_dispatch.img
+drapeau: "UHACK{j0urn4l_d3p1st3_r3c0nstruit}"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+etat: "cache"
+necessite_un_traitement_special: False

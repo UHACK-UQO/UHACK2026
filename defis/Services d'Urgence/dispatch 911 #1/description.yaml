@@ -1,0 +1,40 @@
+type: "ctfd"
+
+titre: "Dispatch 911 : la porte d'entrée (épisode 1/3)"
+
+description: |
+  **ARC-08 — Services d'urgence · Épisode 1/3**
+
+  Les attaquants ont détourné le centre d'appels d'urgence de la ville :
+  les appels au 911 sont redirigés et les enregistrements falsifiés. Au milieu
+  du chaos, l'équipe de réponse à incident a isolé le serveur du dispatch et en
+  a extrait les journaux d'authentification du 22 septembre, ainsi qu'un
+  export de l'historique de commandes retrouvé dans un compte local.
+
+  Votre mission, enquêteur : **établir comment l'attaquant est entré** sur ce
+  serveur. Un mot de passe faible ? Un service exposé ? Remontez la chronologie
+  dans les journaux, identifiez la première porte d'entrée… puis fouillez ce
+  que l'intrus a laissé derrière lui.
+
+  Le drapeau est caché quelque part dans les fichiers fournis.
+
+  *Cet épisode est le premier d'une série forensic en trois parties sur
+  l'intrusion du dispatch 911. Les épisodes suivants vous attendent une fois la
+  porte d'entrée identifiée.*
+
+fichiers:
+  - auth_dispatch_2026-09-22.log
+  - bash_history_dispatch.txt
+drapeau: "UHACK{p0rt3_3ntr33_p4r_f0rc3_brut3}"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+etat: "cache"
+necessite_un_traitement_special: False

@@ -1,0 +1,17 @@
+RAPPORT D'INTERCEPTION - GENDARMERIE / CELLULE CYBER
+Date : 2026-09-24
+Source : capture radio municipale, canal 3 (462,5625 MHz), 07h41
+
+1. Nous avons intercepté le courriel interne ci-joint
+   ("courriel_interne_2026-09-24.eml") envoyé en clair
+   avant que la mairie ne coupe ses serveurs de messagerie.
+
+2. Nous avons également capturé la consigne radio chiffrée qui a été
+   diffusée quelques minutes plus tard ("consigne_radio_2026-09-24.txt").
+
+3. Hypothèse des analystes : le message radio utilise le chiffrement
+   décrit dans le courriel. La clé aurait pu être communiquée en clair
+   dans ce même courriel (négligence classique en période de crise).
+
+Objectif : retrouver la consigne en clair. Elle contient le code de
+validation à transmettre au centre de crise.

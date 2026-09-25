@@ -1,0 +1,66 @@
+# Type de défi CTFd.
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource.
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit exposé, partagé pour tous.
+#   service_personnel :
+#     Le défi nécessite une instance par équipe.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Électricité — Le plan qui voit rouge (intermédiaire)"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  **Arc Électricité — défi indépendant — difficulté intermédiaire.**
+
+  Dans les papiers du bureau d'études énergie, on a retrouvé le plan
+  unifilaire à jour de la sous-station 7. Rien d'anormal à première
+  vue : jeu de barres J7, disjoncteurs DJ41 à DJ43, fils aux couleurs
+  de l'arc-en-ciel, étiquettes de repérage... un plan très *coloré*,
+  même. Un peu trop, souffle l'ingénieure en chef, qui jure que le
+  plan d'origine était en noir et blanc.
+
+  Elle ajoute, en grimaçant : « Et ce n'est pas tout. L'appareil de
+  mesure qui a servi à tracer ces fils a été **ré-étalonné** cet été.
+  Le point de départ du balayage spectral n'est plus forcément là où
+  le règlement le suppose. Le bon réglage est consigné quelque part —
+  un plan se respecte toujours annoté, métadonnées comprises. »
+
+  **Votre mission :** les attaquants ont griffonné quelque chose
+  sur ce plan. Retrouvez le message caché : c'est le drapeau. Trois
+  étapes — repérer les fils qui comptent (les autres sont du décor),
+  les balayer dans le bon ordre, et appliquer l'étalonnage en vigueur
+  avant de décoder.
+
+fichiers: ['plan_unifilaire_sous_station7.png']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{99.9999N_199.999O}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  fonction: "logarithmique"
+  # Nombre de points minimum.
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+etat: "cache"
+# Mettre à true si l'importation dans ctfd nécessite un traitement spécial
+necessite_un_traitement_special: False

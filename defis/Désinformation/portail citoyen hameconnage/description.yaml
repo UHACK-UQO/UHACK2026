@@ -1,0 +1,74 @@
+# Type de défi
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource.
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit
+#     exposé, mais ce service est le même pour
+#     tous les utilisateurs. Ex.: Exposer une API REST.
+#   service_personnel :
+#     Le défi nécessite un service pour chaque
+#     utilisateur. Ex.: Exposer un boot2root.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Le portail qui pêche trop"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  Un agent comptable de la mairie a reçu ce matin un
+  courriel l'invitant à « revalider ses accès » sur le portail citoyen en
+  raison de l'incident informatique. Il a cliqué, saisi ses identifiants…
+  puis s'est rendu compte que l'adresse du site était étrange.
+
+  L'attachée de presse a saisi la capture réseau de son poste avant de le
+  débrancher. Elle montre la visite complète du faux portail.
+
+  Retrouvez le **jeton antifraude** interne de la mairie — c'est le flag,
+  au format `UHACK{...}`. Attention : ni le cookie de session posé par le
+  faux portail, ni le champ caché du formulaire ne contiennent le jeton
+  complet à eux seuls. Chacun encode (en base64) une moitié du jeton ; il
+  faudra décoder les deux et les recombiner dans le bon ordre.
+
+# Liste de fichiers à téléverser
+fichiers: ['capture_portail_citoyen_2026-09-24.pcap']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{portail_falsifie_recense}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi. Le nombre
+# de points diminue à mesure que de plus en plus
+# de solutions sont soumises au défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  # Valeurs acceptées :
+  #   constant / lineaire / logarithmique
+  fonction: "logarithmique"
+  # Nombre de points minimum. La décroissance ne
+  # passera pas en-dessous de ce niveau
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+# Valeurs acceptées :
+#   visible :
+#     Les participants peuvent voir le défi
+#   cache :
+#     Le défi est caché aux participants.
+etat: "cache"
+# Mettre à true si l'importation dans ctfd
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

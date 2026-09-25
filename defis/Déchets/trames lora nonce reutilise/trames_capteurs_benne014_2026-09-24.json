@@ -1,0 +1,16 @@
+{
+  "remarque_operateur": "Deux trames captur\u00e9es sur la passerelle vers 03h12. Elles utilisent toutes les deux la m\u00eame cl\u00e9 et, semble-t-il, le m\u00eame nonce. Le chiffrement est AES-CTR (128 bits).",
+  "nonce_reutilise": "4d2a19c0f7e3b8a6d4c2f0e1938576ab",
+  "trames": [
+    {
+      "heure": "2026-09-24T03:12:07Z",
+      "port": 2,
+      "ciphertext_hex": "5e3407240b66ceeadca080c2cff0fa39bfcdb128cb9e6fa35a5d499b2c3b1c642da2151a4c5e2902e0147bff83e20d714b182d62b7a6e2f9c1510344b4075a870de5db218b9c98c36fe37656beb245c8c2d7dbba0c75c532e694980fba5abb172c77d8e9d62f118a4e2ec4fc1cd54ba3628102fb4d23f5a53fd7b613ecbe03d7d9"
+    },
+    {
+      "heure": "2026-09-24T03:12:07Z",
+      "port": 3,
+      "ciphertext_hex": "553b787d017ac4fd84dfca97929bb538a3c9ba2cdb9833f515424eca1c4e65165dad0848100d7e6bbf4137a6d8ba30321d7d7b31ebf0b0fcc9505d4da459529a02b1ec0bf4"
+    }
+  ]
+}

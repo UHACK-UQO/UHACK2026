@@ -1,0 +1,62 @@
+# Type de défi
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Le grand détournement de flux"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  Pendant que la ville négociait avec **les attaquants** — toujours
+  ces 4 831 672 mouchoirs en papier, en billets de cinq, un mardi, à 6h12 —
+  son équipe SOC a déposé une sonde sur le segment du serveur web
+  municipal. Résultat : `capture_perimetre_2026-09-23.pcap`, environ trois
+  minutes de trafic au cœur de la nuit.
+
+  Au milieu d'une activité qui *semble* normale (navigation interne,
+  résolutions DNS classiques, petits pings de supervision), un analyste
+  remarque que le serveur web **parle beaucoup trop** à l'extérieur, et à
+  des destinataires étranges. L'exfiltration n'a pas lieu par un seul canal :
+  elle est **découpée, numérotée et répartie** sur trois protocoles
+  différents, avec du trafic de leurre pour brouiller les pistes.
+
+  Votre mission :
+
+  1. Repérer les trois canaux d'exfiltration et ignorer les leurres ;
+  2. Réassembler chaque canal **dans l'ordre** (les fragments portent des
+     numéros, mais ils n'arrivent pas forcément dans le bon ordre) ;
+  3. Décoder les fragments (un encodage courant du monde RFC) et concaténer
+     les trois parties dans le bon ordre — la partie 1 annonce la couleur,
+     la partie 2 voyage autrement, la partie 3 voyage en mode « sonde ».
+
+  Outils suggérés : `tshark`, `scapy`, `tcpflow`, Wireshark.
+
+# Liste de fichiers à téléverser
+fichiers: ['capture_perimetre_2026-09-23.pcap']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{3xf1ltr4t10n_mult1pr0t0c0l3_r3c0nst1tu33}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  fonction: "logarithmique"
+  # Nombre de points minimum.
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+etat: "cache"
+# Mettre à true si l'importation dans ctfd nécessite un traitement spécial
+necessite_un_traitement_special: False

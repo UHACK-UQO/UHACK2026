@@ -1,0 +1,24 @@
+DOSSIER FORENSIQUE N° ARC-03/447 — DISPATCH MUNICIPAL
+
+Contexte : pendant l'attaque, un opérateur du dispatch municipal a
+enregistré 20 secondes du canal radio 2 (fréquence entraide
+technique) sur son poste, « au cas où ». L'archive
+archive_canal2_dispatch_2026-09-24.zip vient d'être versée au
+dossier ; elle ne contient, en apparence, qu'un seul fichier
+(enregistrement_dispatch_canal2_2026-09-24.wav).
+
+L'écoute de cet enregistrement ne révèle rien d'anormal : grésillement,
+tonalités d'ouverture, échanges codifiés entre équipes.
+
+Cependant, la main courante du poste indique qu'un second fichier
+(« test micro ») avait été créé juste avant l'incident — et il
+n'apparaît plus dans le listing de l'archive (`unzip -l`, explorateur
+de fichiers...). Le collègue qui a saisi le rapport soupçonne que
+l'attaquant a simplement retiré l'entrée du répertoire central du ZIP
+avant de partir, sans réécrire l'archive : les octets du fichier
+supprimé du listing pourraient donc être encore présents, plus loin
+dans le flux binaire.
+
+Retrouvez ce second fichier par analyse de la structure de l'archive
+(recherche d'un second en-tête de fichier local, extraction manuelle),
+et restituez le code qu'il contient.

@@ -1,0 +1,64 @@
+# Type de défi CTFd.
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource.
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit exposé, partagé pour tous.
+#   service_personnel :
+#     Le défi nécessite une instance par équipe.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Électricité — Épisode 3/3 : Effacer pour mieux voler"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  **Arc Électricité — épisode 3/3.**
+
+  Deuxième nuit de rançon. Les attaquants ont réalisé que la RTU47
+  était grillée (épisodes 1 et 2) et tente maintenant de **faire
+  disparaître ses traces** pendant qu'il vide les archives de la
+  sous-station. La capture ci-jointe est le dernier relevé du lien
+  10.7.0.0/24 avant la coupure totale du Vieux-Marché.
+
+  L'attaquant est méthodique : journal découpé en fragments, fragments
+  chiffrés avec sa propre sauce, fragments éparpillés dans plusieurs
+  flux et dans le désordre, leurres insérés pour vous faire perdre du
+  temps, et tout ça noyé dans le trafic habituel de la sous-station.
+
+  **Votre mission :** reconstruisez la ligne du journal SCADA qui a été
+  dérobée et arrachez le drapeau qu'elle contient. Tout ce qu'il faut est
+  dans la capture — la clé de voûte, les fragments, et même les indices
+  pour savoir quels fragments sont les bons. La chronologie apparente
+  des paquets est un leurre : ne la croyez surtout pas.
+
+fichiers: ['capture_exfil_station7_2026-09-25.pcap']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{exfil_reconstituee_7_fragments_journal_scada}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  fonction: "logarithmique"
+  # Nombre de points minimum.
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+etat: "cache"
+# Mettre à true si l'importation dans ctfd nécessite un traitement spécial
+necessite_un_traitement_special: False

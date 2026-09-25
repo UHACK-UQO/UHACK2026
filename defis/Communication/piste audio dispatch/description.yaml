@@ -1,0 +1,38 @@
+type: "ctfd"
+
+titre: "Bruit de fond suspect"
+
+description: |
+  Un opérateur du dispatch municipal a enregistré 20 secondes du canal
+  radio 2 (fréquence entraide technique) pendant l'attaque, « au cas
+  où ». L'archive de sa session (`archive_canal2_dispatch_2026-09-24.zip`)
+  est versée au dossier de crise.
+
+  L'écoute de l'unique fichier listé dans l'archive ne révèle rien
+  d'anormal : grésillement, tonalités d'ouverture, échanges codifiés
+  entre équipes. Mais la main courante du poste mentionne un second
+  fichier (« test micro ») créé juste avant l'incident — introuvable
+  dans le listing de l'archive. L'attaquant aurait simplement retiré
+  l'entrée du répertoire central du ZIP avant de partir, sans réécrire
+  l'archive : les octets du fichier « supprimé » du listing peuvent
+  très bien être encore présents plus loin dans le flux binaire.
+
+  Retrouvez ce second fichier par analyse de la structure de
+  l'archive, et transmettez le code découvert au centre de crise.
+
+fichiers:
+  - archive_canal2_dispatch_2026-09-24.zip
+  - dossier_forensique_447_2026-09-24.txt
+drapeau: "UHACK{P1ST3_4UD10_4S54SS1N33}"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+etat: "cache"
+necessite_un_traitement_special: False

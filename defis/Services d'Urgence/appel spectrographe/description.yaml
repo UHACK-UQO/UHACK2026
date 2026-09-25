@@ -1,0 +1,34 @@
+type: "ctfd"
+
+titre: "L'appel détourné"
+
+description: |
+  **ARC-08 — Services d'urgence**
+
+  Une habitante a enregistré sur son répondeur un appel au 911 passé dans la
+  nuit : la ligne a été détournée par les attaquants et l'appelant a
+  laissé un message avant de raccrocher. L'enregistrement sonne presque
+  normal — tonalité, une voix étouffée, un décrochage — mais les analystes du
+  centre de traitement municipal sont formels : **quelque chose se cache dans
+  ce fichier**.
+
+  Écoutez l'appel… puis écoutez-le autrement. Le drapeau est inscrit dans
+  l'enregistrement, mais pas pour les oreilles : il vous faudra regarder le
+  signal **dans le domaine fréquentiel** (spectrogramme). Audacity, SoX ou
+  un script maison feront l'affaire.
+
+fichiers:
+  - appel_detourne_2026-09-24.wav
+drapeau: "UHACK{3c0ut3_l3_sp3ctr3}"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+etat: "cache"
+necessite_un_traitement_special: False

@@ -1,0 +1,43 @@
+type: "ctfd"
+
+titre: "Dispatch 911 : la mémoire ne ment pas (épisode 2/3)"
+
+description: |
+  **ARC-08 — Services d'urgence · Épisode 2/3**
+
+  Grâce à votre enquête sur la porte d'entrée (épisode 1), l'équipe de réponse
+  a confirmé la compromission du serveur du dispatch 911. Le serveur a été
+  isolé dans la nuit et une **capture mémoire complète** (format LiME) a été
+  réalisée avant tout redémarrage — tant pis pour le rançongiciel des
+  attaquants, on ne redémarre rien tant que la mémoire n'est pas sécurisée.
+
+  Le disque dur reste en analyse, mais la mémoire vive peut déjà répondre à
+  trois questions :
+
+  1. **Quel processus malveillant** tourne actuellement sur le serveur ? Il se
+     déguise en nom anodin…
+  2. **Comment l'attaquant survit à un redémarrage ?** Cherchez la persistance
+     laissée en mémoire.
+  3. **Où sont envoyées les données détournées ?** Un artefact compressé est
+     caché dans la capture — à vous de le carver et de le décompresser.
+
+  Le drapeau se trouve dans la configuration du malware.
+
+  *Série forensic 2/3. L'épisode final reconstruira l'exfiltration et
+  l'anti-forensique de l'attaquant.*
+
+fichiers:
+  - capture_memoire_dispatch.lime
+drapeau: "UHACK{p3rs1st4nc3_syst3md_tr0uv33}"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+etat: "cache"
+necessite_un_traitement_special: False

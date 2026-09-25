@@ -1,0 +1,49 @@
+# Type de défi
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Le bus capteurs parle trop"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  Les capteurs de remplissage des bennes remontent leurs mesures par MQTT
+  vers le broker municipal. Depuis l'attaque, les niveaux affichés par le
+  dispatch ne correspondent plus à rien : des bennes vides annoncées
+  pleines, des tournées réorganisées sur de fausses alertes.
+
+  La DSI a miroiré le port du broker pendant une heure
+  (`capture_mqtt_bennes_2026-09-24.pcap`). Les capteurs légitimes publient
+  leurs rapports périodiques ; quelqu'un d'autre, lui, publie autre chose.
+
+  Retrouvez l'ordre que les attaquants ont envoyé par le bus.
+# Liste de fichiers à téléverser
+fichiers: ['capture_mqtt_bennes_2026-09-24.pcap']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{mqtt_topic_detourne_8f6b}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  fonction: "logarithmique"
+  # Nombre de points minimum.
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+etat: "cache"
+# Mettre à true si l'importation dans ctfd
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

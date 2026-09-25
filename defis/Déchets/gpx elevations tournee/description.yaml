@@ -1,0 +1,50 @@
+# Type de défi
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "La tournée modèle"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  Le service informatique a récupéré sur le téléphone du chef d'exploitation
+  la trace GPS de la tournée du camion C-101, exportée par l'application du
+  dispatch (`tournee_flotte_2026-09-24.gpx`). Les waypoints listent les
+  bennes, le track retrace le parcours : tout semble en ordre.
+
+  Pourtant, cette trace a été publiée telle quelle sur le portail des
+  données ouvertes de la ville — et les attaquants s'en sont servi
+  comme d'un moyen de communication. Les altitudes enregistrées par le GPS
+  sont étrangement régulières pour un parcours en plaine.
+
+  Quel message la tournée transportait-elle ?
+# Liste de fichiers à téléverser
+fichiers: ['tournee_flotte_2026-09-24.gpx']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{gpx_elevations_codees_a4e9}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  fonction: "logarithmique"
+  # Nombre de points minimum.
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+etat: "cache"
+# Mettre à true si l'importation dans ctfd
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

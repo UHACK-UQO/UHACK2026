@@ -1,0 +1,53 @@
+# Type de défi
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Mise à jour forcée sur la benne 014"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  La collecte des déchets est à l'arrêt depuis ce matin : les capteurs de
+  remplissage des bennes affichent des niveaux incohérents et la flotte de
+  camions ne reçoit plus de tournées. Les attaquants revendiquent
+  l'attaque et exigent, en plus d'une rançon, que la ville renomme la déchèterie
+  du quartier sud en leur honneur.
+
+  Un technicien a arraché la carte mémoire du capteur LoRa de la benne 014
+  (rue de la Poste). Le dump est disponible : `firmware_benne_2026-09-23.bin`.
+  L'en-tête du fichier est partiellement écrasé, mais la partition système
+  semble encore présente quelque part dans l'image.
+
+  On dit que l'attaquant laisse parfois une trace de sa séance de travail
+  quand il s'attend à revenir.
+
+# Liste de fichiers à téléverser
+fichiers: ['firmware_benne_2026-09-23.bin']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{firmware_benne_compromis_4f7a}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  fonction: "logarithmique"
+  # Nombre de points minimum.
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+etat: "cache"
+# Mettre à true si l'importation dans ctfd
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

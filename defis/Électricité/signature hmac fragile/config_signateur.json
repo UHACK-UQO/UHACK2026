@@ -1,0 +1,15 @@
+{
+  "signateur": {
+    "algorithme": "HMAC-SHA256",
+    "troncature_bits": 24,
+    "derivation": "cle = SHA256(sel || pin_6_chiffres)",
+    "sel": "SEVILLE-SS7-RTU",
+    "pin": "STOCKE_DANS_MODULE_SECURITE_HSM",
+    "remarque_fabricant": "La troncature a 24 bits est conforme au profil interoperabilite CIPE-SCADA 2019 (annulee en 2022)."
+  },
+  "automates": [
+    "RTU47",
+    "RTU48",
+    "RTU49"
+  ]
+}

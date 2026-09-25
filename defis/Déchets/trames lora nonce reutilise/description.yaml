@@ -1,0 +1,53 @@
+# Type de défi
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Le nonce qui en dit trop"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  Les attaquants ont non seulement gelé la collecte des déchets, mais ils
+  donnent maintenant des ordres aux bennes elles-mêmes : certaines remontent
+  des niveaux de remplissage fictifs pour paralyser la planification des
+  tournées.
+
+  La passerelle LoRaWAN municipale a capturé deux trames arrivées à la même
+  seconde sur la benne 014 (`trames_capteurs_benne014_2026-09-24.json`).
+  Le format applicatif des trames est décrit dans
+  `protocole_lorawan_ville.md`. La DSI parie que le développeur qui a écrit
+  la passerelle a mal utilisé son mode de chiffrement : deux trames ne
+  devraient jamais partager le même nonce.
+
+# Liste de fichiers à téléverser
+fichiers:
+  - 'trames_capteurs_benne014_2026-09-24.json'
+  - 'protocole_lorawan_ville.md'
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{nonce_reutilise_gaffe_3b1d}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  fonction: "logarithmique"
+  # Nombre de points minimum.
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+etat: "cache"
+# Mettre à true si l'importation dans ctfd
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

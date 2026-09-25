@@ -1,0 +1,34 @@
+type: "ctfd"
+
+titre: "Les pixels de la rançon"
+
+description: |
+  Pour accompagner la rançon en jus de betterave, le compte piraté de la
+  ville publie des **communiqués illustrés** des attaquants. L'équipe
+  communication a remarqué que chaque image semble « trop lourde » pour ce
+  qu'elle montre, et que les métadonnées ont été soigneusement remplies —
+  peut-être un peu trop.
+
+  Le dernier visuel (`communique_rancon.png`) cache quelque chose. Les
+  attaquants adorent les messages en plusieurs étapes : ce qui se voit n'est
+  jamais ce qui compte, et ce qui se lit n'est qu'une direction vers la
+  couche suivante.
+
+  Méfiez-vous des fausses pistes déposées là pour faire perdre du temps.
+  Le drapeau se reconstruit au bout du chemin.
+
+fichiers: ['communique_rancon.png']
+
+drapeau: "UHACK{le_message_coule_dans_le_canal_vert}"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+etat: "cache"
+necessite_un_traitement_special: False
