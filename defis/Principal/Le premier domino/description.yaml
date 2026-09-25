@@ -21,6 +21,6 @@ pointage:
   minimum: 20
   decroissance: 10
 
-etat: "cache"
+etat: "visible"
 
 necessite_un_traitement_special: "[ATTENTION] Ce défi nécessite d'ajouter des fichiers, mais lesquels?"

@@ -22,4 +22,4 @@ pointage:
   minimum: 15
   decroissance: 10
 
-etat: "cache"
+etat: "visible"
