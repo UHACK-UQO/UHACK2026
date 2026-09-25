@@ -150,6 +150,29 @@ desinstaller() {
 installer() {
     printf '\nInstallation du CTF\n\n'
 
+    printf '\nInstallation des dépendances\n\n'
+    # TODO Supporter d'autres gestionnaires de packets
+
+    apt update
+    apt install jq sshpass git python3 python3-venv
+
+    printf '\tInstallation de docker...\n\n'
+    # Add Docker's official GPG key:
+    apt install ca-certificates curl
+    install -m 0755 -d /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    chmod a+r /etc/apt/keyrings/docker.asc
+
+    # Add the repository to Apt sources:
+    printf "Types: deb\n\
+URIs: https://download.docker.com/linux/ubuntu\n\
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")\n\
+Components: stable\n\
+Architectures: $(dpkg --print-architecture)\n\
+Signed-By: /etc/apt/keyrings/docker.asc" > /etc/apt/sources.list.d/docker.sources
+
+    apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
     if [ -z "~/.ssh/*.pub" ]; then
         ssh-keygen -f ~/.ssh/id_ed25519 -t ed25519 -N "" &> /dev/null
     fi
