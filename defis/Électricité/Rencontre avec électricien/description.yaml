@@ -1,0 +1,26 @@
+type: ctfd
+
+titre: "Rencontre avec électricien"
+
+description: |
+  Il a beaucoup de charisme.
+  He has a lot of charisma.
+  https://drive.google.com/file/d/1LroFJVTvAdwgC_4TBPbpr7bWhTqWtGLs/view?usp=sharing
+
+  Format: FLAG_XXXX
+
+fichiers: []
+
+drapeau: "FLAG_SURTENSION"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
