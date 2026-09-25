@@ -1,0 +1,41 @@
+type: "ctfd"
+
+titre: "Canaux brouillés — épisode 2/3 : Le masque jetable jeté deux fois"
+
+description: |
+  Grâce à l'épisode précédent, la cellule cyber lisait à nouveau les
+  consignes radio… jusqu'à ce que les attaquants changent de
+  méthode. Leur nouvel outil est présenté comme « mathématiquement
+  inviolable » : un **masque jetable**, appliqué octet par octet
+  (XOR) sur chaque message.
+
+  Mais un masque jetable n'est inviolable que s'il est utilisé **une
+  seule fois**. Or ce matin, le standardiste du service météo a
+  retransmis en clair sur le canal d'entraide un bulletin qui existait
+  aussi en version chiffrée — et les attaquants ont diffusé leur propre
+  consigne juste après, avec apparemment la même suite secrète.
+
+  Les deux captures chiffrées et le bulletin météo en clair sont dans
+  le dossier d'analyse. Reconstituez le message des attaquants et
+  récupérez le code de validation.
+
+  *(Épisode 2 sur 3 de l'enquête « Canaux brouillés ».)*
+
+fichiers:
+  - bulletin_meteo_chiffre.hex
+  - consigne_attaquants_chiffre.hex
+  - bulletin_meteo_clair.txt
+  - note_analyse_masque_2026-09-24.txt
+drapeau: "UHACK{0TP_R3U7IL1S3_1MP4RD0NN4BL3}"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+etat: "cache"
+necessite_un_traitement_special: False

@@ -1,0 +1,68 @@
+# Type de défi CTFd.
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource.
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit exposé, partagé pour tous.
+#   service_personnel :
+#     Le défi nécessite une instance par équipe.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Électricité — Épisode 1/3 : La première brèche"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  **Arc Électricité — épisode 1/3.**
+
+  Les attaquants viennent de couper l'alimentation du quartier des
+  Écluses et exige désormais... une rançon de 12 847 crêpes bretonnes,
+  « servies tièdes, sans fioritures ». Derrière cette exigence absurde, la
+  menace est réelle : le SCADA des sous-stations est compromis et des
+  coupures ciblées s'enchaînent.
+
+  Le chef d'exploitation du réseau électrique vous confie une capture
+  réseau enregistrée ce matin sur la sous-station 7, juste avant la
+  première coupure. Tout semblait normal côté supervision... mais quelque
+  part dans ce fichier, quelqu'un a ouvert une porte dérobée.
+
+  **Votre mission :** identifiez la machine compromise et la **première
+  commande** exécutée par l'intrus. Le drapeau est de la forme
+  `UHACK{<machine>_<premiere_commande_sans_arguments>}` — machine en
+  minuscules telle qu'elle apparaît dans la capture (ex. `rtu47`), puis la
+  commande brute (`ls`, `whoami`, `uname`...). Les deux joints par un
+  tiret bas, tout en minuscules.
+
+  *(Épisode 2/3 : « Canal de commande caché » — la machine que vous allez
+  identifier n'a pas fini de parler.)*
+
+fichiers: ['capture_sous_station7_2026-09-24.pcap']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{rtu47_uname}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  fonction: "logarithmique"
+  # Nombre de points minimum.
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+etat: "cache"
+# Mettre à true si l'importation dans ctfd nécessite un traitement spécial
+necessite_un_traitement_special: False

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="DispatchDechets/4.2" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata><name>Tournée matinale — flotte collecte</name><time>2026-09-24T05:45:00Z</time></metadata>
+  <wpt lat="48.85660" lon="2.35220"><name>BENNE-014</name><desc>Benne à ordures ménagères</desc></wpt>
+  <wpt lat="48.85710" lon="2.36100"><name>BENNE-027</name><desc>Benne à ordures ménagères</desc></wpt>
+  <wpt lat="48.85090" lon="2.36850"><name>BENNE-033</name><desc>Benne à ordures ménagères</desc></wpt>
+  <wpt lat="48.84630" lon="2.35670"><name>BENNE-041</name><desc>Benne à ordures ménagères</desc></wpt>
+  <wpt lat="48.84480" lon="2.34510"><name>BENNE-052</name><desc>Benne à ordures ménagères</desc></wpt>
+  <wpt lat="48.85120" lon="2.33980"><name>BENNE-068</name><desc>Benne à ordures ménagères</desc></wpt>
+  <wpt lat="48.85830" lon="2.34790"><name>BENNE-071</name><desc>Benne à ordures ménagères</desc></wpt>
+  <wpt lat="48.85340" lon="2.37420"><name>BENNE-089</name><desc>Benne à ordures ménagères</desc></wpt>
+  <trk><name>TM-0917 camion C-101</name><trkseg>
+    <trkpt lat="48.849411" lon="2.331351"><ele>45.55</ele><time>2026-09-24T05:48:00Z</time></trkpt>
+    <trkpt lat="48.850450" lon="2.332456"><ele>44.48</ele><time>2026-09-24T05:49:00Z</time></trkpt>
+    <trkpt lat="48.850952" lon="2.333511"><ele>44.41</ele><time>2026-09-24T05:50:00Z</time></trkpt>
+    <trkpt lat="48.851861" lon="2.334157"><ele>44.43</ele><time>2026-09-24T05:51:00Z</time></trkpt>
+    <trkpt lat="48.852560" lon="2.335051"><ele>44.4b</ele><time>2026-09-24T05:52:00Z</time></trkpt>
+    <trkpt lat="48.853416" lon="2.336252"><ele>47.7b</ele><time>2026-09-24T05:53:00Z</time></trkpt>
+    <trkpt lat="48.854468" lon="2.337604"><ele>46.67</ele><time>2026-09-24T05:54:00Z</time></trkpt>
+    <trkpt lat="48.855177" lon="2.338399"><ele>47.70</ele><time>2026-09-24T05:55:00Z</time></trkpt>
+    <trkpt lat="48.855618" lon="2.339164"><ele>47.78</ele><time>2026-09-24T05:56:00Z</time></trkpt>
+    <trkpt lat="48.856606" lon="2.339833"><ele>45.5f</ele><time>2026-09-24T05:57:00Z</time></trkpt>
+    <trkpt lat="48.857265" lon="2.340809"><ele>46.65</ele><time>2026-09-24T05:58:00Z</time></trkpt>
+    <trkpt lat="48.858195" lon="2.341470"><ele>46.6c</ele><time>2026-09-24T05:59:00Z</time></trkpt>
+    <trkpt lat="48.858919" lon="2.342472"><ele>46.65</ele><time>2026-09-24T06:00:00Z</time></trkpt>
+    <trkpt lat="48.859665" lon="2.343439"><ele>47.76</ele><time>2026-09-24T06:01:00Z</time></trkpt>
+    <trkpt lat="48.860382" lon="2.344810"><ele>46.61</ele><time>2026-09-24T06:02:00Z</time></trkpt>
+    <trkpt lat="48.861094" lon="2.346204"><ele>47.74</ele><time>2026-09-24T06:03:00Z</time></trkpt>
+    <trkpt lat="48.861688" lon="2.347457"><ele>46.69</ele><time>2026-09-24T06:04:00Z</time></trkpt>
+    <trkpt lat="48.862479" lon="2.348496"><ele>46.6f</ele><time>2026-09-24T06:05:00Z</time></trkpt>
+    <trkpt lat="48.863338" lon="2.349580"><ele>46.6e</ele><time>2026-09-24T06:06:00Z</time></trkpt>
+    <trkpt lat="48.863821" lon="2.350398"><ele>47.73</ele><time>2026-09-24T06:07:00Z</time></trkpt>
+    <trkpt lat="48.864341" lon="2.351644"><ele>45.5f</ele><time>2026-09-24T06:08:00Z</time></trkpt>
+    <trkpt lat="48.865144" lon="2.352650"><ele>46.63</ele><time>2026-09-24T06:09:00Z</time></trkpt>
+    <trkpt lat="48.866136" lon="2.353838"><ele>46.6f</ele><time>2026-09-24T06:10:00Z</time></trkpt>
+    <trkpt lat="48.866877" lon="2.355066"><ele>46.64</ele><time>2026-09-24T06:11:00Z</time></trkpt>
+    <trkpt lat="48.867934" lon="2.355998"><ele>46.65</ele><time>2026-09-24T06:12:00Z</time></trkpt>
+    <trkpt lat="48.868424" lon="2.356709"><ele>46.65</ele><time>2026-09-24T06:13:00Z</time></trkpt>
+    <trkpt lat="48.868833" lon="2.357635"><ele>47.73</ele><time>2026-09-24T06:14:00Z</time></trkpt>
+    <trkpt lat="48.869498" lon="2.358741"><ele>45.5f</ele><time>2026-09-24T06:15:00Z</time></trkpt>
+    <trkpt lat="48.870565" lon="2.360068"><ele>46.61</ele><time>2026-09-24T06:16:00Z</time></trkpt>
+    <trkpt lat="48.871305" lon="2.361332"><ele>43.34</ele><time>2026-09-24T06:17:00Z</time></trkpt>
+    <trkpt lat="48.872268" lon="2.362231"><ele>46.65</ele><time>2026-09-24T06:18:00Z</time></trkpt>
+    <trkpt lat="48.873332" lon="2.363431"><ele>43.39</ele><time>2026-09-24T06:19:00Z</time></trkpt>
+    <trkpt lat="48.874355" lon="2.364333"><ele>47.7d</ele><time>2026-09-24T06:20:00Z</time></trkpt>
+  </trkseg></trk>
+</gpx>

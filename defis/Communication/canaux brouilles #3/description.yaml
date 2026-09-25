@@ -1,0 +1,43 @@
+type: "ctfd"
+
+titre: "Canaux brouillés — épisode 3/3 : Le module obsolète"
+
+description: |
+  L'enquête touche à sa fin. Les deux premières failles des attaquants
+  étaient de l'amateurisme ; la troisième est une erreur de conception.
+  Pour sécuriser leurs ordres de rançon, les attaquants sont passés au
+  **chiffrement asymétrique RSA** — mais avec une bibliothèque obsolète,
+  « RSALegacyFast », qui génère des **exposants privés anormalement
+  courts** pour accélérer les déchiffrements sur leur matériel radio
+  embarqué.
+
+  L'équipe d'infiltration a exfiltré un extrait de la configuration du
+  module, et la cellule cyber a intercepté un message chiffré destiné à
+  leur chef, accompagné de sa clé publique (récupérée sur un relais
+  compromis).
+
+  Trouvez la faiblesse, retrouvez l'exposant privé et déchiffrez le
+  message : il contient leur mot de passe maître de la journée.
+
+  *(Épisode 3 sur 3 de l'enquête « Canaux brouillés » — l'attaque
+  demande de mettre les mains dans les fractions continues, mais tout
+  est faisable avec Python et la bibliothèque standard.)*
+
+fichiers:
+  - cle_publique_attaquants.pem
+  - message_attaquants_chiffre.bin
+  - extrait_config_securelink.conf
+  - note_analyse_rsa_2026-09-24.txt
+drapeau: "UHACK{3XPO5ANT_PR1V3_TR0P_P3T1T}"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+etat: "cache"
+necessite_un_traitement_special: False

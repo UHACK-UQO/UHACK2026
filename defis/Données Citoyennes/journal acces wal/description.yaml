@@ -1,0 +1,96 @@
+# Type de défi CTFd. Déterminé par le fait que le défi
+# nécessite ou non qu'un service soit exposé, et si oui,
+# si ce service est partagé entre tous les utilisateurs
+# ou personnel à chacun.
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource de 
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit 
+#     exposé, mais ce service est le même pour 
+#     tous les Ex.: Exposer une API REST.
+#   service_personnel :
+#     Le défi nécessite qu'un service pour chaque 
+#     utilisateur soit Ex.: Exposer un boot2root.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "La copie de travail qui en sait trop"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  En fuyant, l'administrateur système de la ville a arraché le serveur de
+  l'état civil et confié son disque à l'équipe d'incident. Il jure que la
+  base des actes est intacte, mais qu'il a « tout fait sauter dès la
+  première alerte ». Les attaquants réclament toujours leur rançon —
+  cette fois en cartes de bibliothèque à vie pour chacun de leurs membres.
+
+  Sur le disque, vous trouvez deux fichiers qui se suivent :
+  `registre_etat_civil.sqlite` et `registre_etat_civil.sqlite-wal`. La
+  copie de travail a été volée **pendant** que la base tournait, et tout
+  ne s'est peut-être pas passé comme l'administrateur le croit.
+
+  SQLite écrit ses dernières transactions dans son journal WAL avant de
+  les consolider dans la base principale. Ouvrez la base **correctement**
+  et regardez ce qui s'y trouve vraiment.
+
+  Fichiers fournis : `registre_etat_civil.sqlite`,
+  `registre_etat_civil.sqlite-wal`
+
+# Liste de fichiers à téléverser
+fichiers: ['registre_etat_civil.sqlite', 'registre_etat_civil.sqlite-wal']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{le_journal_noublie_rien}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi. Le nombre 
+# de points diminue à mesure que de plus en plus 
+# de solutions sont soumises au défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  # Valeurs acceptées :
+  #   constant :
+  #     Le nombre de points reste constant tout 
+  #     au long de l'événement. Avec cette 
+  #     option, les paramètres `pointage.minimum` 
+  #     et `pointage.decroissance` n'ont aucun 
+  #     effet.
+  #   lineaire :
+  #     Le nombre de points diminue au même 
+  #     rythme en fonction du nombre de solutions 
+  #     soumises.
+  #   logarithmique :
+  #     Le nombre de points chute drastiquement 
+  #     avec les premières soumissions et de plus 
+  #     en plus doucement avec les suivantes.
+  fonction: "logarithmique"
+  # Nombre de points minimum. La décroissance ne 
+  # passera pas en-dessous de ce niveau
+  minimum: 10
+  # Taux de décroissance des points. Est 
+  # interprété différemment dépendamment de 
+  # `pointage.fonction`.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+# Valeurs acceptées :
+#   visible :
+#     Les participants peuvent voir les défis
+#   cache :
+#     Le défi est caché aux participants.
+etat: "cache"
+# Mettre à true si l'importation dans ctfd 
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

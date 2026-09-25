@@ -1,0 +1,70 @@
+# Type de défi
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Télématique de flotte en clair... presque"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  La télémétrie des camions de collecte transite par le protocole propriétaire
+  **FleetLink** (UDP port 47001) du prestataire de la flotte. Depuis l'attaque,
+  des camions reçoivent des itinéraires absurdes en pleine tournée et finissent
+  coincés dans des impasses.
+
+  Une capture du lien télémétrie est disponible
+  (`capture_flotte_fleetlink_2026-09-24.pcap`). Le prestataire a publié sa
+  documentation après la crise — trop tard :
+
+  ```
+  Paquet FleetLink v1 :
+  | offset | taille | champ              |
+  |--------|--------|--------------------|
+  | 0      | 2      | magie "FL"         |
+  | 2      | 1      | version (1)        |
+  | 3      | 1      | type               |
+  | 4      | 2      | numéro de séquence |
+  | 6      | 2      | longueur du corps  |
+  | 8      | ...    | corps du message   |
+  ```
+
+  Types connus : `0x01` position, `0x02` niveau de benne, `0x7F`
+  accusé de réception. Le corps n'est **pas** chiffré, seulement
+  obfusqué : chaque octet est XORé avec une clé dérivée du numéro de
+  séquence, selon une formule qui figurait dans le wiki interne du
+  prestataire, révélée par la fuite :
+
+  > `cle(i) = (seq * 7 + 3 + i) mod 256` — où `i` est la position de
+  > l'octet dans le corps et `seq` le numéro de séquence du paquet.
+
+  Retrouvez ce que les attaquants ont transmis à la flotte.
+# Liste de fichiers à téléverser
+fichiers: ['capture_flotte_fleetlink_2026-09-24.pcap']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{fleetlink_casse_1c7e}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  fonction: "logarithmique"
+  # Nombre de points minimum.
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+etat: "cache"
+# Mettre à true si l'importation dans ctfd
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

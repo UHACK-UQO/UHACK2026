@@ -1,0 +1,99 @@
+# Type de défiCTFd.
+#     utilisateurs.
+#     exposé.
+#     
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource de 
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit 
+#     exposé, mais ce service est le même pour 
+#     tous les Ex.: Exposer une API REST.
+#   service_personnel :
+#     Le défi nécessite qu'un service pour chaque 
+#     utilisateur soit Ex.: Exposer un boot2root.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Un écho qui en dit trop"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  Dernière lubie des attaquants : exiger que le PLU de la ville
+  soit réécrit pour imposer une aire de jeux pour chats dans chaque
+  cour d'immeuble. La négociation patine ; l'analyse réseau, elle,
+  avance.
+
+  Cette seconde capture du périmètre a beau être **quasi silencieuse**,
+  quelque chose cloche : le poste GED envoie des pings de supervision
+  très réguliers vers deux résolveurs publics (8.8.8.8, 1.1.1.1)... et,
+  de temps en temps, vers une adresse externe que personne n'a jamais
+  expliquée.
+
+  ICMP Echo n'est pas fait pour transporter des données, mais rien
+  n'empêche d'en abuser : la longueur de la charge utile trahit les
+  paquets anormaux (un vrai ping a une taille de charge fixe et
+  reconnaissable), et l'en-tête ICMP contient tout ce qu'il faut pour
+  déchiffrer ce qu'ils cachent. Attention : l'ordre d'arrivée dans la
+  capture n'est pas l'ordre du message — seul le numéro de séquence
+  ICMP fait foi.
+
+  Fichier fourni : `capture_icmp_perimetre_2026-09-24.pcap`
+
+# Liste de fichiers à téléverser
+fichiers: ['capture_icmp_perimetre_2026-09-24.pcap']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{icmp_echo_qui_en_dit_trop}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi. Le nombre 
+# de points diminue à mesure que de plus en plus 
+# de solutions sont soumises au défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  # Valeurs acceptées :
+  #   constant :
+  #     Le nombre de points reste constant tout 
+  #     au long de l'événement. Avec cette 
+  #     option, les paramètres `pointage.minimum` 
+  #     et `pointage.decroissance` n'ont aucun 
+  #     effet.
+  #   lineaire :
+  #     Le nombre de points diminue au même 
+  #     rythme en fonction du nombre de solutions 
+  #     soumises.
+  #   logarithmique :
+  #     Le nombre de points chute drastiquement 
+  #     avec les premières soumissions et de plus 
+  #     en plus doucement avec les suivantes.
+  fonction: "logarithmique"
+  # Nombre de points minimum. La décroissance ne 
+  # passera pas en-dessous de ce niveau
+  minimum: 10
+  # Taux de décroissance des points. Est 
+  # interprété différemment dépendamment de 
+  # `pointage.fonction`.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+# Valeurs acceptées :
+#   visible :
+#     Les participants peuvent voir les défis
+#   cache :
+#     Le défi est caché aux participants.
+etat: "cache"
+# Mettre à true si l'importation dans ctfd 
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

@@ -1,0 +1,77 @@
+# Type de défi
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource.
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit
+#     exposé, mais ce service est le même pour
+#     tous les utilisateurs. Ex.: Exposer une API REST.
+#   service_personnel :
+#     Le défi nécessite un service pour chaque
+#     utilisateur. Ex.: Exposer un boot2root.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "La signature qui en dit trop"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  Pour rassurer les habitants, la mairie publie désormais
+  chaque consigne **avec sa signature numérique RSA** : le texte de la
+  consigne circule par radio et affichage, et le site de la mairie publie
+  la signature, que tout le monde peut vérifier avec la clef publique.
+
+  Problème : la prestataire informatique a déployé une « bibliothèque
+  provisoire » dont la note interne fuiter ce matin. On y lit que le
+  schéma de remplissage (padding) « sera activé dans une prochaine
+  version »…
+
+  Le fichier joint contient la procédure officielle d'authentification, un
+  vecteur de test du prestataire, et surtout la **signature de la consigne
+  du jour** — publiée seule, sans le texte.
+
+  Retrouvez le texte exact de la consigne. Il contient le code de
+  vérification au format `UHACK{...}`.
+
+# Liste de fichiers à téléverser
+fichiers: ['procedure_auth_consignes_2026-09-24.txt']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{rsa_sans_remplissage_e3}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi. Le nombre
+# de points diminue à mesure que de plus en plus
+# de solutions sont soumises au défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  # Valeurs acceptées :
+  #   constant / lineaire / logarithmique
+  fonction: "logarithmique"
+  # Nombre de points minimum. La décroissance ne
+  # passera pas en-dessous de ce niveau
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+# Valeurs acceptées :
+#   visible :
+#     Les participants peuvent voir le défi
+#   cache :
+#     Le défi est caché aux participants.
+etat: "cache"
+# Mettre à true si l'importation dans ctfd
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

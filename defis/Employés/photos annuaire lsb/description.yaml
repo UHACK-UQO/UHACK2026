@@ -1,0 +1,50 @@
+# Type de défiCTFd.
+# Valeurs acceptées :
+#   ctfd : le défi n'utilise aucune autre ressource que des fichiers.
+#   service_unique / service_personnel : nécessite un service exposé.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Sourire, vous êtes badges"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  La photographie officielle de l'annuaire intranet a été repensée cette
+  année : badge apparent, lanyard rouge, fond uni. Les attaquants ont
+  eu accès au dossier `annuaire_intranet_2026.zip` avant l'équipe
+  communication — et ils ont laissé une signature dans l'une des cinq photos.
+
+  L'image altérée est visuellement identique aux autres : même sourire,
+  même badge. Pour la retrouver et lire son message, il faut descendre
+  jusqu'au niveau des bits, là où l'œil ne voit plus rien.
+
+# Liste de fichiers à téléverser
+fichiers: ['annuaire_intranet_2026.zip']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{sourire_pour_le_badge_photo}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  fonction: "logarithmique"
+  # Nombre de points minimum.
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+etat: "cache"
+# Mettre à true si l'importation dans ctfd nécessite un traitement spécial
+necessite_un_traitement_special: False

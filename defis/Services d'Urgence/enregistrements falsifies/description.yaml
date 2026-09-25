@@ -1,0 +1,37 @@
+type: "ctfd"
+
+titre: "Enregistrements 911 : le faux du vrai"
+
+description: |
+  **ARC-08 — Services d'urgence**
+
+  Pour rassurer la population, la mairie a publié les **enregistrements
+  officiels des appels au 911** du 22 septembre, accompagnés d'un manifeste
+  d'intégrité SHA-256 émis par le greffe municipal. Mais une rumeur court
+  dans les couloirs : les attaquants auraient **falsifié un appel**
+  *après* la publication du manifeste — la preuve que les enregistrements
+  servis aux citoyens ne correspondent pas à la réalité.
+
+  Votre mission : vérifiez l'intégrité de chaque enregistrement contre le
+  manifeste, identifiez celui qui a été touché, et prouvez la falsification
+  par l'empreinte.
+
+  **Le drapeau est `UHACK{...}` suivi des 32 premiers caractères
+  hexadécimaux (minuscules) du SHA-256 du fichier falsifié** tel qu'il se
+  présente dans l'archive — la marque irréfutable de la version trafiquée.
+
+fichiers:
+  - enregistrements_911_2026-09-22.zip
+drapeau: "UHACK{74c4d2ab3cf47e3a56275570a927b8e2}"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+etat: "cache"
+necessite_un_traitement_special: False

@@ -1,0 +1,92 @@
+# Type de défiCTFd.
+#     utilisateurs.
+#     exposé.
+#     
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource de 
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit 
+#     exposé, mais ce service est le même pour 
+#     tous les Ex.: Exposer une API REST.
+#   service_personnel :
+#     Le défi nécessite qu'un service pour chaque 
+#     utilisateur soit Ex.: Exposer un boot2root.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Actes falsifiés — épisode 1/3 : le scanneur bavard"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  Les attaquants ont non seulement chiffré la base de l'état civil
+  de la ville, mais des documents scannés « officiels » circulent déjà avec
+  des modifications invisibles. La mairie a récupéré une copie d'un acte
+  de naissance, supposément issue du registre original.
+
+  On jurerait que ce document est authentique… et pourtant, le moindre
+  appareil photo ou scanner laisse parfois des confidences derrière lui.
+
+  **Épisode 1/3** de la série « Actes falsifiés » (ARC-04 — données
+  citoyens). Ce qui se cache dans les métadonnées de ce document vous
+  mènera à l'épisode 2.
+
+  Fichier fourni : `acte_naissance_0447.jpg`
+
+# Liste de fichiers à téléverser
+fichiers: ['acte_naissance_0447.jpg']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{commentaire_exif_du_falsificateur}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi. Le nombre 
+# de points diminue à mesure que de plus en plus 
+# de solutions sont soumises au défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  # Valeurs acceptées :
+  #   constant :
+  #     Le nombre de points reste constant tout 
+  #     au long de l'événement. Avec cette 
+  #     option, les paramètres `pointage.minimum` 
+  #     et `pointage.decroissance` n'ont aucun 
+  #     effet.
+  #   lineaire :
+  #     Le nombre de points diminue au même 
+  #     rythme en fonction du nombre de solutions 
+  #     soumises.
+  #   logarithmique :
+  #     Le nombre de points chute drastiquement 
+  #     avec les premières soumissions et de plus 
+  #     en plus doucement avec les suivantes.
+  fonction: "logarithmique"
+  # Nombre de points minimum. La décroissance ne 
+  # passera pas en-dessous de ce niveau
+  minimum: 10
+  # Taux de décroissance des points. Est 
+  # interprété différemment dépendamment de 
+  # `pointage.fonction`.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+# Valeurs acceptées :
+#   visible :
+#     Les participants peuvent voir les défis
+#   cache :
+#     Le défi est caché aux participants.
+etat: "cache"
+# Mettre à true si l'importation dans ctfd 
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

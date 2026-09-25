@@ -1,0 +1,36 @@
+type: "ctfd"
+
+titre: "Le détournement des appels 911"
+
+description: |
+  **ARC-08 — Services d'urgence**
+
+  Les opérateurs du centre d'appels ne comprennent plus rien : depuis
+  14h37, des appels au 911 aboutissent… ailleurs. Des habitants rapportent
+  avoir été « mis en relation » avec un interlocuteur étrange. L'équipe
+  réseau de la Ville a posé une sonde sur le lien SIP du dispatch et vous
+  remet la capture correspondante (`capture_dispatch_2026-09-24.pcap`).
+
+  Votre mission : confirmer le mécanisme du détournement. Comment un appel
+  d'urgence peut-il être redirigé sans que le standard ne s'en aperçoive ?
+  Repérez les réponses anormales du serveur, identifiez où les appels sont
+  renvoyés… et trouvez ce que les attaquants ont glissé dans l'un des
+  messages.
+
+  *Filtre utile dans Wireshark : `sip`.*
+
+fichiers:
+  - capture_dispatch_2026-09-24.pcap
+drapeau: "UHACK{r3d1r3ct10n_302_s1p}"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+etat: "cache"
+necessite_un_traitement_special: False

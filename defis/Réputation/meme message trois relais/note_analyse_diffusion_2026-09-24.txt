@@ -1,0 +1,24 @@
+NOTE D'ANALYSE — CELLULE CYBER, 2026-09-24 20h10
+
+Trois relais de presse partenaires de la ville ont reçu, presque à la même
+minute, un « communiqué » attribué aux attaquants annonçant une fuite de
+données compromettante pour la mairie. Chaque relais a sa propre clé
+publique RSA (e = 3, sans remplissage — la marque de fabrique des attaquants),
+et chacun a reçu un chiffré différent :
+
+  - cle_publique_relais_presse_independante.pem / communique_chiffre_presse_independante.bin
+  - cle_publique_relais_gazette_regionale.pem / communique_chiffre_gazette_regionale.bin
+  - cle_publique_relais_flash_actu.pem / communique_chiffre_flash_actu.bin
+
+Hypothèse de l'analyste de garde : par flemme (ou par manque de temps), les
+attaquants ont chiffré EXACTEMENT LE MÊME message pour les trois relais, juste
+avec trois clés différentes. Aucun chiffré pris seul ne se déchiffre par une
+simple racine cubique (le message est trop grand pour un seul module) — mais
+les trois modules sont indépendants (premiers entre eux). Un vieux rapport
+d'audit traîne dans les archives de la DSI : « chiffrer un unique message
+avec un exposant public court sous plusieurs clés distinctes permet de le
+retrouver par un argument arithmétique (théorème des restes chinois), sans
+aucune clé privée, dès que les modules sont premiers entre eux et que le
+message reste petit devant leur produit. »
+
+Objectif : retrouver le communiqué en clair et la preuve qu'il contient.

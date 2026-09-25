@@ -1,0 +1,13 @@
+NOTE D'ANALYSE — CELLULE CYBER, 2026-09-24 18h04
+
+Bonne nouvelle : l'équipe d'infiltration a récupéré un extrait de la
+configuration chiffrée des attaquants (extrait_config_securelink.conf).
+On y apprend que leur bibliothèque RSA génère des clés de 1024 bits
+avec un exposant privé d'AU PLUS 250 bits — un choix catastrophique.
+
+On a aussi intercepté ce matin un message chiffré destiné à leur chef
+(message_attaquants_chiffre.bin) ainsi que sa clé publique extraite
+d'un relais compromis (cle_publique_attaquants.pem).
+
+Le message devrait contenir leur mot de passe maître de la journée.
+Exploitez la faiblesse de génération pour retrouver le clair.

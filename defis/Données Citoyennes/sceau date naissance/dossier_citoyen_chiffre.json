@@ -1,0 +1,10 @@
+{
+  "reference_dossier": "ETATCIV-2026-04471",
+  "titulaire": "un habitant",
+  "note_ged": "Champ sensible chiffre par l'agent charge du dossier avant le chiffrage complet de la base. Il a assure a la DSI qu'il utilisait 'quelque chose que le titulaire ne peut pas oublier'.",
+  "chiffrement": {
+    "algorithme": "AES-128-CBC",
+    "iv_hex": "8f3c2a19d4e75b0681c9f2a3d4e5b607",
+    "champ_chiffre_b64": "Yluum4u/F3cFwz4jhFqn9aAcZsjmQVNEEFNb8AJtGqPDHyRzpRatR5XTsL0+GAcV"
+  }
+}

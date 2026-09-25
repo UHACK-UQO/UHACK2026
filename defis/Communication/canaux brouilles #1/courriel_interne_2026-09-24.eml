@@ -1,0 +1,22 @@
+De: coordination-technique@mairie-uhack.fr
+A: poste-radio@mairie-uhack.fr
+Date: 2026-09-24 06:12:07 +0200
+Objet: URGENT - passer au chiffrement des consignes radio
+
+Bonjour,
+
+Les attaquants écoutent nos canaux en clair depuis hier soir.
+À partir de la prochaine consigne, tout passe en chiffrement classique
+par décalage alphabétique à clé répétée (la méthode Vigenère dont on
+s'est entraînés au gymnase en juin).
+
+Comme d'habitude, la clé du jour est le mot de code qui figure dans la
+note de service de la veille. Pour aujourd'hui c'est VERROU, et on
+ne la réutilisera jamais après ce soir.
+
+Envoie la consigne chiffrée sur le canal 3 de la radio municipale
+(462,5625 MHz) comme d'habitude. Les patrouilles n'ont pas de moyen
+numérique sécurisé, elles déchiffreront à la main.
+
+Le chef de poste
+Centre de coordination des services techniques

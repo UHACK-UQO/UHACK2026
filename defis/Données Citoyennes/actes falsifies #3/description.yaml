@@ -1,0 +1,104 @@
+# Type de défiCTFd.
+#     utilisateurs.
+#     exposé.
+#     
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource de 
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit 
+#     exposé, mais ce service est le même pour 
+#     tous les Ex.: Exposer une API REST.
+#   service_personnel :
+#     Le défi nécessite qu'un service pour chaque 
+#     utilisateur soit Ex.: Exposer un boot2root.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Actes falsifiés — épisode 3/3 : le fantôme du JPEG"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  Dernière pièce du lot du SCANSTATION-04 : un acte de décès. Les deux
+  premiers épisodes ont prouvé que le falsificateur travaille vite, mais
+  pas proprement.
+
+  Ce document a été **réenregistré deux fois** : le scan original a été
+  sauvegardé en JPEG qualité 92, puis une zone a été retouchée et le
+  fichier réenregistré en qualité 85. La double insertion laisse une
+  empreinte : une analyse par niveau d'erreur (ELA — réenregistrer
+  l'image et comparer les blocs 8×8) localise la zone falsifiée.
+
+  Mais ce n'est pas tout. Le falsificateur a aussi glissé un fragment
+  binaire directement dans les **coefficients DCT quantifiés** du canal
+  luminance (Y) du document final — dans les bits de poids faible,
+  à raison d'un bit tous les 9 coefficients. Le point de départ n'est
+  **pas** fixe dans le document : c'est le premier bloc 8×8 que l'ELA
+  désigne comme suspect (le coin haut-gauche de la zone à une seule
+  compression) qui donne l'ancre — sans localiser cette zone, impossible
+  de savoir où commencer à lire. Le fragment est préfixé par le magic
+  `JD` suivi d'une longueur sur 2 octets (big-endian).
+
+  **Épisode 3/3** de la série « Actes falsifiés » (ARC-04 — données
+  citoyens). Il faudra un outil capable de lire les coefficients DCT
+  bruts d'un JPEG (en Python : `jpegio`, ou équivalent).
+
+  Fichier fourni : `acte_deces_0088.jpg`
+
+# Liste de fichiers à téléverser
+fichiers: ['acte_deces_0088.jpg']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{le_jpeg_ne_pardonne_pas_le_reusinage}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi. Le nombre 
+# de points diminue à mesure que de plus en plus 
+# de solutions sont soumises au défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  # Valeurs acceptées :
+  #   constant :
+  #     Le nombre de points reste constant tout 
+  #     au long de l'événement. Avec cette 
+  #     option, les paramètres `pointage.minimum` 
+  #     et `pointage.decroissance` n'ont aucun 
+  #     effet.
+  #   lineaire :
+  #     Le nombre de points diminue au même 
+  #     rythme en fonction du nombre de solutions 
+  #     soumises.
+  #   logarithmique :
+  #     Le nombre de points chute drastiquement 
+  #     avec les premières soumissions et de plus 
+  #     en plus doucement avec les suivantes.
+  fonction: "logarithmique"
+  # Nombre de points minimum. La décroissance ne 
+  # passera pas en-dessous de ce niveau
+  minimum: 10
+  # Taux de décroissance des points. Est 
+  # interprété différemment dépendamment de 
+  # `pointage.fonction`.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+# Valeurs acceptées :
+#   visible :
+#     Les participants peuvent voir les défis
+#   cache :
+#     Le défi est caché aux participants.
+etat: "cache"
+# Mettre à true si l'importation dans ctfd 
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

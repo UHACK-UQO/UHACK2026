@@ -1,0 +1,19 @@
+NOTE D'ANALYSE — CELLULE CYBER, 2026-09-24 11h58
+
+Depuis l'épisode précédent, les attaquants sont passés à un
+« chiffrement inviolable » : un masque jetable appliqué sur chaque
+message radio (XOR octet par octet avec une suite secrète).
+
+Deux captures ont été enregistrées sur le canal 7 ce matin :
+  - bulletin_meteo_chiffre.hex  (message du service météo municipal)
+  - consigne_attaquants_chiffre.hex (message des attaquants, inquiétant)
+
+Piste exploitée par un stagiaire enthousiaste : le standardiste du
+service météo a TRANSMIS EN CLAIR le même bulletin météo sur le canal
+d'entraide habituel, quelques secondes avant la version chiffrée
+(voir bulletin_meteo_clair.txt). Il parle d'une erreur de manipulation
+« parce que le poste ne répondait plus ».
+
+Le masque est censé être utilisé une seule fois. Vérifiez si cette
+règle a été respectée, et si le message des attaquants peut être
+reconstitué. Il contiendrait le code de validation du jour.

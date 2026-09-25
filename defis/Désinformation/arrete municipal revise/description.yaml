@@ -1,0 +1,78 @@
+# Type de défi
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource.
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit
+#     exposé, mais ce service est le même pour
+#     tous les utilisateurs. Ex.: Exposer une API REST.
+#   service_personnel :
+#     Le défi nécessite un service pour chaque
+#     utilisateur. Ex.: Exposer un boot2root.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "L'arrêté qui a deux visages"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  Un arrêté municipal signé par le maire circule depuis ce matin : couvre-feu
+  de 21 h à 6 h, eau du secteur nord contaminée. Panique générale dans
+  la ville.
+
+  Le cabinet du maire affirme que **l'arrêté n° 2026-042 authentique ne
+  contenait rien de tout cela**, mais que le fichier diffusé par les
+  attaquants « semble » vraiment émaner de la mairie : le document original,
+  avec ses horodatages officiels.
+
+  Vous disposez du fichier tel qu'il a été relayé. Votre mission :
+  1. démontrer, preuve à l'appui, que le fichier a été **modifié après sa
+     diffusion officielle** ;
+  2. récupérer le contenu **original** du document pour prouver la
+     désinformation.
+
+  Le vrai communiqué emporte un code de vérification posé par le service
+  documentation : c'est le flag, au format `UHACK{...}`.
+
+# Liste de fichiers à téléverser
+fichiers: ['arrete_municipal_2026-042.pdf']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{arrete_042_revision_originale}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi. Le nombre
+# de points diminue à mesure que de plus en plus
+# de solutions sont soumises au défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  # Valeurs acceptées :
+  #   constant / lineaire / logarithmique
+  fonction: "logarithmique"
+  # Nombre de points minimum. La décroissance ne
+  # passera pas en-dessous de ce niveau
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+# Valeurs acceptées :
+#   visible :
+#     Les participants peuvent voir le défi
+#   cache :
+#     Le défi est caché aux participants.
+etat: "cache"
+# Mettre à true si l'importation dans ctfd
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

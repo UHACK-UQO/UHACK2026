@@ -1,0 +1,38 @@
+type: "ctfd"
+
+titre: "Canaux brouillés — épisode 1/3 : La consigne radio"
+
+description: |
+  Les **attaquants** ont plongé la ville dans le chaos : canaux numériques
+  brouillés, messageries municipales coupées, et rançon absurde affichée sur
+  les écrans de la mairie. Les patrouilles ne communiquent plus que par radio
+  analogique, et les consignes y sont désormais chiffrées.
+
+  La cellule cyber de la gendarmerie a intercepté deux choses ce matin :
+  un **courriel interne** envoyé en clair juste avant la coupure des serveurs,
+  et la **première consigne radio chiffrée** diffusée sur le canal 3.
+
+  Les analystes soupçonnent une négligence classique : la clé aurait pu être
+  communiquée en clair dans le même courriel. Retrouvez la consigne en clair
+  et transmettez le code de validation au centre de crise.
+
+  *(Épisode 1 sur 3 de l'enquête « Canaux brouillés » — les épisodes se
+  suivent mais peuvent être attaqués indépendamment.)*
+
+fichiers:
+  - courriel_interne_2026-09-24.eml
+  - consigne_radio_2026-09-24.txt
+  - rapport_interception_2026-09-24.txt
+drapeau: "UHACK{C4N4L_R4D10_D3V3R20UILL3}"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+etat: "cache"
+necessite_un_traitement_special: False

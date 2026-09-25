@@ -1,0 +1,75 @@
+# Type de défi
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource.
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit
+#     exposé, mais ce service est le même pour
+#     tous les utilisateurs. Ex.: Exposer une API REST.
+#   service_personnel :
+#     Le défi nécessite un service pour chaque
+#     utilisateur. Ex.: Exposer un boot2root.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Deux scellés, un seul nonce"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  La mairie signe ses consignes radio en **DSA** avec un
+  module HSM. Cette nuit, la journalisation du prestataire a fuité : on y
+  trouve les paramètres publics de la mairie, sa clef publique de
+  vérification, et les deux premières consignes signées du jour.
+
+  Le prestataire répète que « les signatures émises restent parfaitement
+  valides » et qu'aucune clef n'a fuité. Pourtant, le rapport d'incident
+  mentionne un **défaut d'entropie au démarrage du HSM** cette nuit…
+
+  Vérifiez les signatures (tout y est pour le faire), puis évaluez ce que
+  vaut vraiment la promesse du prestataire.
+
+  Le flag est la clé privée de la mairie au format
+  `UHACK{nonce_reutilise_<x en hexadécimal minuscules, 40 chiffres>}`.
+
+# Liste de fichiers à téléverser
+fichiers: ['journal_signatures_dsa_2026-09-24.txt']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{nonce_reutilise_7c30e4feef4515c7620248c08e38016c742ac6e8}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi. Le nombre
+# de points diminue à mesure que de plus en plus
+# de solutions sont soumises au défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  # Valeurs acceptées :
+  #   constant / lineaire / logarithmique
+  fonction: "logarithmique"
+  # Nombre de points minimum. La décroissance ne
+  # passera pas en-dessous de ce niveau
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+# Valeurs acceptées :
+#   visible :
+#     Les participants peuvent voir le défi
+#   cache :
+#     Le défi est caché aux participants.
+etat: "cache"
+# Mettre à true si l'importation dans ctfd
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

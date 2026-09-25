@@ -1,0 +1,164 @@
+2026-09-22T06:58:12.000000+02:00 dispatch-911 sshd[812]: Accepted password for operatrice.marcoux from 10.20.4.15 port 51122 ssh2
+2026-09-22T06:58:12.000000+02:00 dispatch-911 systemd-logind[431]: New session 115 of user operatrice.marcoux.
+2026-09-22T07:02:44.000000+02:00 dispatch-911 sshd[812]: Accepted password for superviseur.talbot from 10.20.4.3 port 51122 ssh2
+2026-09-22T07:02:44.000000+02:00 dispatch-911 systemd-logind[431]: New session 939 of user superviseur.talbot.
+2026-09-22T07:15:03.000000+02:00 dispatch-911 sshd[812]: Accepted password for operatrice.marcoux from 10.20.4.15 port 51122 ssh2
+2026-09-22T07:15:03.000000+02:00 dispatch-911 systemd-logind[431]: New session 776 of user operatrice.marcoux.
+2026-09-22T08:31:27.000000+02:00 dispatch-911 sshd[812]: Accepted password for stagiaire.lavallee from 10.20.4.22 port 51122 ssh2
+2026-09-22T08:31:27.000000+02:00 dispatch-911 systemd-logind[431]: New session 659 of user stagiaire.lavallee.
+2026-09-22T09:12:55.000000+02:00 dispatch-911 sshd[812]: Accepted password for superviseur.talbot from 10.20.4.3 port 51122 ssh2
+2026-09-22T09:12:55.000000+02:00 dispatch-911 systemd-logind[431]: New session 746 of user superviseur.talbot.
+2026-09-22T12:03:10.000000+02:00 dispatch-911 CRON[1201]: pam_unix(cron:session): session opened for user root by (uid=0)
+2026-09-22T12:03:10.000000+02:00 dispatch-911 CRON[1201]: pam_unix(cron:session): session closed for user root
+2026-09-22T14:37:12.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user operator from 45.155.204.117 port 56615 ssh2
+2026-09-22T14:37:12.000000+02:00 dispatch-911 sshd[933]: reverse mapping checking getaddrinfo failed for host-682.example.org [45.155.204.117] - POSSIBLE BREAK-IN ATTEMPT!
+2026-09-22T14:37:20.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.121 port 23744 ssh2
+2026-09-22T14:37:28.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.118 port 38226 ssh2
+2026-09-22T14:37:36.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.121 port 49030 ssh2
+2026-09-22T14:37:44.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.121 port 41829 ssh2
+2026-09-22T14:37:52.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.118 port 55422 ssh2
+2026-09-22T14:38:00.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.121 port 23821 ssh2
+2026-09-22T14:38:08.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.117 port 37415 ssh2
+2026-09-22T14:38:16.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.117 port 25669 ssh2
+2026-09-22T14:38:24.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.118 port 50821 ssh2
+2026-09-22T14:38:32.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.118 port 24948 ssh2
+2026-09-22T14:38:40.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.118 port 34410 ssh2
+2026-09-22T14:38:48.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.121 port 52364 ssh2
+2026-09-22T14:38:56.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.118 port 49667 ssh2
+2026-09-22T14:39:04.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.118 port 38155 ssh2
+2026-09-22T14:39:12.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.121 port 30930 ssh2
+2026-09-22T14:39:20.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.118 port 59599 ssh2
+2026-09-22T14:39:28.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.117 port 53023 ssh2
+2026-09-22T14:39:36.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.117 port 49882 ssh2
+2026-09-22T14:39:44.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.121 port 57745 ssh2
+2026-09-22T14:39:52.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.121 port 35713 ssh2
+2026-09-22T14:40:00.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.117 port 21473 ssh2
+2026-09-22T14:40:08.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.117 port 58747 ssh2
+2026-09-22T14:40:16.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.118 port 26919 ssh2
+2026-09-22T14:40:24.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.118 port 29054 ssh2
+2026-09-22T14:40:32.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.117 port 40341 ssh2
+2026-09-22T14:40:40.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.117 port 44767 ssh2
+2026-09-22T14:40:48.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.121 port 42921 ssh2
+2026-09-22T14:40:56.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.118 port 34332 ssh2
+2026-09-22T14:41:04.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.118 port 34391 ssh2
+2026-09-22T14:41:12.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.117 port 54768 ssh2
+2026-09-22T14:41:12.000000+02:00 dispatch-911 sshd[933]: reverse mapping checking getaddrinfo failed for host-414.example.org [45.155.204.117] - POSSIBLE BREAK-IN ATTEMPT!
+2026-09-22T14:41:20.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.121 port 21345 ssh2
+2026-09-22T14:41:28.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.121 port 36263 ssh2
+2026-09-22T14:41:36.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.118 port 46185 ssh2
+2026-09-22T14:41:44.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.121 port 20004 ssh2
+2026-09-22T14:41:52.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.118 port 21429 ssh2
+2026-09-22T14:42:00.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.121 port 39083 ssh2
+2026-09-22T14:42:08.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.117 port 27262 ssh2
+2026-09-22T14:42:16.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.121 port 28707 ssh2
+2026-09-22T14:42:24.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.121 port 56085 ssh2
+2026-09-22T14:42:32.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user operator from 45.155.204.117 port 39818 ssh2
+2026-09-22T14:42:40.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user operator from 45.155.204.118 port 24772 ssh2
+2026-09-22T14:42:48.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user operator from 45.155.204.117 port 52864 ssh2
+2026-09-22T14:42:56.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.117 port 58703 ssh2
+2026-09-22T14:43:04.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user operator from 45.155.204.118 port 56787 ssh2
+2026-09-22T14:43:12.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.117 port 25203 ssh2
+2026-09-22T14:43:20.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.121 port 58775 ssh2
+2026-09-22T14:43:28.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.121 port 38944 ssh2
+2026-09-22T14:43:36.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.118 port 52023 ssh2
+2026-09-22T14:43:44.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.117 port 49630 ssh2
+2026-09-22T14:43:52.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user operator from 45.155.204.118 port 48338 ssh2
+2026-09-22T14:44:00.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.118 port 52322 ssh2
+2026-09-22T14:44:08.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.121 port 49521 ssh2
+2026-09-22T14:44:16.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.118 port 41178 ssh2
+2026-09-22T14:44:24.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.118 port 42228 ssh2
+2026-09-22T14:44:32.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.121 port 50081 ssh2
+2026-09-22T14:44:40.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.117 port 30288 ssh2
+2026-09-22T14:44:48.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.121 port 57430 ssh2
+2026-09-22T14:44:56.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.117 port 36676 ssh2
+2026-09-22T14:45:04.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.118 port 57059 ssh2
+2026-09-22T14:45:12.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.118 port 46770 ssh2
+2026-09-22T14:45:12.000000+02:00 dispatch-911 sshd[933]: reverse mapping checking getaddrinfo failed for host-424.example.org [45.155.204.118] - POSSIBLE BREAK-IN ATTEMPT!
+2026-09-22T14:45:20.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.117 port 21159 ssh2
+2026-09-22T14:45:28.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.117 port 29129 ssh2
+2026-09-22T14:45:36.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user operator from 45.155.204.121 port 57521 ssh2
+2026-09-22T14:45:44.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.117 port 58250 ssh2
+2026-09-22T14:45:52.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.118 port 47127 ssh2
+2026-09-22T14:46:00.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.121 port 38404 ssh2
+2026-09-22T14:46:08.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.117 port 30940 ssh2
+2026-09-22T14:46:16.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.117 port 43660 ssh2
+2026-09-22T14:46:24.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.118 port 47344 ssh2
+2026-09-22T14:46:32.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.121 port 34804 ssh2
+2026-09-22T14:46:40.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.118 port 35696 ssh2
+2026-09-22T14:46:48.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.118 port 41703 ssh2
+2026-09-22T14:46:56.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.121 port 26625 ssh2
+2026-09-22T14:47:04.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.118 port 44053 ssh2
+2026-09-22T14:47:12.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.121 port 47405 ssh2
+2026-09-22T14:47:20.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.121 port 50293 ssh2
+2026-09-22T14:47:28.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.117 port 35622 ssh2
+2026-09-22T14:47:36.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.121 port 25145 ssh2
+2026-09-22T14:47:44.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.117 port 46629 ssh2
+2026-09-22T14:47:52.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.121 port 20196 ssh2
+2026-09-22T14:48:00.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.121 port 39647 ssh2
+2026-09-22T14:48:08.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user operator from 45.155.204.118 port 22824 ssh2
+2026-09-22T14:48:16.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.118 port 51891 ssh2
+2026-09-22T14:48:24.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.117 port 40514 ssh2
+2026-09-22T14:48:32.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.117 port 53816 ssh2
+2026-09-22T14:48:40.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user operator from 45.155.204.121 port 25076 ssh2
+2026-09-22T14:48:48.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.121 port 54405 ssh2
+2026-09-22T14:48:56.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user operator from 45.155.204.118 port 20963 ssh2
+2026-09-22T14:49:04.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.121 port 47990 ssh2
+2026-09-22T14:49:12.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.117 port 31145 ssh2
+2026-09-22T14:49:12.000000+02:00 dispatch-911 sshd[933]: reverse mapping checking getaddrinfo failed for host-611.example.org [45.155.204.117] - POSSIBLE BREAK-IN ATTEMPT!
+2026-09-22T14:49:20.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.118 port 55577 ssh2
+2026-09-22T14:49:28.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.118 port 31563 ssh2
+2026-09-22T14:49:36.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user operator from 45.155.204.121 port 20020 ssh2
+2026-09-22T14:49:44.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.121 port 52417 ssh2
+2026-09-22T14:49:52.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.118 port 40361 ssh2
+2026-09-22T14:50:00.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.117 port 34823 ssh2
+2026-09-22T14:50:08.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.117 port 21394 ssh2
+2026-09-22T14:50:16.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.118 port 53434 ssh2
+2026-09-22T14:50:24.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.118 port 23389 ssh2
+2026-09-22T14:50:32.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.118 port 36923 ssh2
+2026-09-22T14:50:40.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.121 port 24770 ssh2
+2026-09-22T14:50:48.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.117 port 35271 ssh2
+2026-09-22T14:50:56.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.118 port 27596 ssh2
+2026-09-22T14:51:04.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.118 port 31540 ssh2
+2026-09-22T14:51:12.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.121 port 22923 ssh2
+2026-09-22T14:51:20.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.118 port 31884 ssh2
+2026-09-22T14:51:28.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.121 port 29748 ssh2
+2026-09-22T14:51:36.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.117 port 48062 ssh2
+2026-09-22T14:51:44.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.121 port 39739 ssh2
+2026-09-22T14:51:52.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.121 port 50866 ssh2
+2026-09-22T14:52:00.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.118 port 24857 ssh2
+2026-09-22T14:52:08.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.121 port 42841 ssh2
+2026-09-22T14:52:16.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user operator from 45.155.204.117 port 44678 ssh2
+2026-09-22T14:52:24.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.117 port 52537 ssh2
+2026-09-22T14:52:32.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.117 port 45273 ssh2
+2026-09-22T14:52:40.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.121 port 33007 ssh2
+2026-09-22T14:52:48.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.121 port 42158 ssh2
+2026-09-22T14:52:56.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.117 port 21971 ssh2
+2026-09-22T14:53:04.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.118 port 40645 ssh2
+2026-09-22T14:53:12.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.118 port 31077 ssh2
+2026-09-22T14:53:12.000000+02:00 dispatch-911 sshd[933]: reverse mapping checking getaddrinfo failed for host-323.example.org [45.155.204.118] - POSSIBLE BREAK-IN ATTEMPT!
+2026-09-22T14:53:20.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.121 port 30775 ssh2
+2026-09-22T14:53:28.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user operator from 45.155.204.118 port 59907 ssh2
+2026-09-22T14:53:36.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.118 port 51481 ssh2
+2026-09-22T14:53:44.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.118 port 36741 ssh2
+2026-09-22T14:53:52.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user support from 45.155.204.121 port 32940 ssh2
+2026-09-22T14:54:00.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.117 port 20194 ssh2
+2026-09-22T14:54:08.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.117 port 38823 ssh2
+2026-09-22T14:54:16.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.117 port 51650 ssh2
+2026-09-22T14:54:24.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.118 port 46338 ssh2
+2026-09-22T14:54:32.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.121 port 43498 ssh2
+2026-09-22T14:54:40.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.118 port 34340 ssh2
+2026-09-22T14:54:48.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.118 port 51218 ssh2
+2026-09-22T14:54:56.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user admin from 45.155.204.118 port 43881 ssh2
+2026-09-22T14:55:04.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.117 port 45356 ssh2
+2026-09-22T14:55:12.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user backup from 45.155.204.121 port 38174 ssh2
+2026-09-22T14:55:20.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user dispatch from 45.155.204.117 port 27576 ssh2
+2026-09-22T14:55:28.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user root from 45.155.204.121 port 25753 ssh2
+2026-09-22T14:55:36.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user ubuntu from 45.155.204.121 port 46190 ssh2
+2026-09-22T14:55:44.000000+02:00 dispatch-911 sshd[933]: Failed password for invalid user operator from 45.155.204.118 port 46044 ssh2
+2026-09-22T15:41:53.000000+02:00 dispatch-911 sshd[933]: Accepted password for dispatch from 45.155.204.121 port 51337 ssh2
+2026-09-22T15:41:53.000000+02:00 dispatch-911 sshd[933]: pam_unix(sshd:session): session opened for user dispatch by (uid=0)
+2026-09-22T15:41:53.000000+02:00 dispatch-911 systemd-logind[431]: New session 447 of user dispatch.
+2026-09-22T15:43:02.000000+02:00 dispatch-911 sudo[2104]: dispatch : TTY=pts/3 ; PWD=/home/dispatch ; USER=root ; COMMAND=/bin/bash
+2026-09-22T15:43:02.000000+02:00 dispatch-911 sudo[2104]: pam_unix(sudo:session): session opened for user root by dispatch(uid=1002)
+2026-09-22T16:05:18.000000+02:00 dispatch-911 sshd[1180]: Accepted password for superviseur.talbot from 10.20.4.3 port 51990 ssh2
+2026-09-22T18:22:40.000000+02:00 dispatch-911 sshd[1311]: Accepted publickey for maintenance.bernier from 10.20.8.7 port 60112 ssh2

@@ -1,0 +1,34 @@
+JOURNAL DE SCELLÉS NUMÉRIQUES — CONSIGNES RADIO MUNICIPALES
+===========================================================
+Service des Systèmes d'Information — Mairie
+Extrait du 24 septembre 2026 (deux premières entrées)
+
+Mécanisme : chaque consigne est signée en DSA (paramètres de la mairie).
+La clef publique de vérification est publiée ci-dessous. Le module HSM
+« AtelierSceau-2 » a connu un incident d'entropie lors de sa mise sous
+tension la nuit dernière ; le prestataire assure que « les signatures
+émises restent parfaitement valides ».
+
+Paramètres publics DSA de la mairie :
+    p = 4061357560784889026260480079459880589066210976741676053140184544296943259585096408385530565668544798941527237350440012186825017391475877909361566528433807
+    q = 811559638945965092338201937887883310232141959889
+    g = 3854652180086649596757952592444725389730701420298881609129078458063243988742560678717426388891037967550627305994395642718965107436794580105808342415402091
+Clef publique de vérification :
+    y = 1898024061627620988132868750805649080858312582418295529259621279140267930617707083223212227456814975793404661605449598755308113296027745887259642060192455
+
+Entrée n°1 (06:30)
+    message : «CONSIGNE RADIO 06:30 — Le service eau confirme : réseau conforme, aucune ébullition requise sur tout le territoire.»
+    signature : r = 311478538398129539791039520814663874367611409467
+                s = 569694511491099236115076806904561187319137595636
+
+Entrée n°2 (09:15)
+    message : «CONSIGNE RADIO 09:15 — Les résultats du laboratoire confirment la conformité de l'eau. Ne pas diffuser les rumeurs de contamination.»
+    signature : r = 311478538398129539791039520814663874367611409467
+                s = 621093675059419988760599362596364190268867683439
+
+Vérifiez par vous-même : toute signature (r, s) doit satisfaire
+    r == ( g^(h(m)*s^-1 mod q) * y^(r*s^-1 mod q) mod p ) mod q
+avec h(m) = SHA-1(m) interprété comme entier, réduit mod q.
+
+L'authenticité de la clef elle-même est garantie par son empreinte,
+déposée auprès de la préfecture.

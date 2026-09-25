@@ -1,0 +1,63 @@
+# Type de défi CTFd.
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource.
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit exposé, partagé pour tous.
+#   service_personnel :
+#     Le défi nécessite une instance par équipe.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Électricité — Le signateur trop concis"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  **Arc Électricité — défi indépendant.**
+
+  Les automates des sous-stations n'obéissent qu'aux ordres **signés**.
+  La passerelle SCADA vérifie un HMAC-SHA256... **tronqué à 24 bits**,
+  parce que le fabricant trouvait ça suffisant en 2019. La clé, elle,
+  est dérivée d'un sel public et d'un **PIN à 6 chiffres** stocké « dans
+  le module sécurisé » — un HSM de pacotille, visiblement.
+
+  Vous avez récupéré trois fichiers : la configuration du signateur, un
+  journal d'ordres signés acceptés (messages + tags valides), et
+  l'ordre que les attaquants rêvent de faire passer :
+  l'ouverture du DJ7, alias « l'hôpital sans courant ».
+
+  **Votre mission :** exploitez la troncature et la dérivation faible
+  pour retrouver le PIN à 6 chiffres, forgez le tag de la commande
+  cible, et prouvez-le : le drapeau s'écrit
+  `UHACK{pin_<le_pin>_hmac_trop_court}`.
+
+fichiers: ['config_signateur.json', 'commandes_signees.log', 'commande_a_forger.txt']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{pin_421337_hmac_trop_court}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  fonction: "logarithmique"
+  # Nombre de points minimum.
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+etat: "cache"
+# Mettre à true si l'importation dans ctfd nécessite un traitement spécial
+necessite_un_traitement_special: False

@@ -1,0 +1,98 @@
+# Type de défiCTFd.
+#     utilisateurs.
+#     exposé.
+#     
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource de 
+#     Ex.: Un fichier à télécharger.
+#   service_unique :
+#     Le défi nécessite qu'un service soit 
+#     exposé, mais ce service est le même pour 
+#     tous les Ex.: Exposer une API REST.
+#   service_personnel :
+#     Le défi nécessite qu'un service pour chaque 
+#     utilisateur soit Ex.: Exposer un boot2root.
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "Le sceau qui connaît son secret"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  La rançon des attaquants vient de changer : désormais, ils exigent que
+  chaque habitant de la ville leur envoie une carte postale personnalisée.
+  En attendant, l'équipe forensic poursuit son inventaire des dégâts sur
+  les dossiers citoyens.
+
+  Un agent de la GED a eu la mauvaise idée de chiffrer lui-même un champ
+  sensible avant que la base entière ne soit sécurisée. Son fichier
+  JSON raconte tout : AES-128-CBC, vecteur d'initialisation fourni… et
+  une note laissant entendre que la clé est « quelque chose que le
+  titulaire ne peut pas oublier ».
+
+  Le titulaire du dossier est né un jour entre 1900 et aujourd'hui. Son
+  « sceau » personnel n'est peut-être pas aussi solide qu'il le croit —
+  120 ans de dates possibles, ça se teste vite.
+
+  Fichier fourni : `dossier_citoyen_chiffre.json`
+
+  Indice de méthode : si la clé fait 16 octets et que la date de
+  naissance en fait 8, l'agent a pu… réutiliser son idée deux fois.
+
+# Liste de fichiers à téléverser
+fichiers: ['dossier_citoyen_chiffre.json']
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{date_de_naissance_mauvais_gardien}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi. Le nombre 
+# de points diminue à mesure que de plus en plus 
+# de solutions sont soumises au défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  # Valeurs acceptées :
+  #   constant :
+  #     Le nombre de points reste constant tout 
+  #     au long de l'événement. Avec cette 
+  #     option, les paramètres `pointage.minimum` 
+  #     et `pointage.decroissance` n'ont aucun 
+  #     effet.
+  #   lineaire :
+  #     Le nombre de points diminue au même 
+  #     rythme en fonction du nombre de solutions 
+  #     soumises.
+  #   logarithmique :
+  #     Le nombre de points chute drastiquement 
+  #     avec les premières soumissions et de plus 
+  #     en plus doucement avec les suivantes.
+  fonction: "logarithmique"
+  # Nombre de points minimum. La décroissance ne 
+  # passera pas en-dessous de ce niveau
+  minimum: 10
+  # Taux de décroissance des points. Est 
+  # interprété différemment dépendamment de 
+  # `pointage.fonction`.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+# Valeurs acceptées :
+#   visible :
+#     Les participants peuvent voir les défis
+#   cache :
+#     Le défi est caché aux participants.
+etat: "cache"
+# Mettre à true si l'importation dans ctfd 
+# nécessite un traitement spécial
+necessite_un_traitement_special: False

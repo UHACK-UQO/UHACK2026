@@ -1,0 +1,76 @@
+# Type de défi
+# [OBLIGATOIRE]
+type: "ctfd"
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "La rumeur diffusée à trois voix"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |
+  **ARC-09 — Réputation.**
+
+  Trois relais de presse partenaires de la ville ont reçu, presque à la
+  même minute, un « communiqué » attribué aux attaquants annonçant
+  une fuite compromettante pour la mairie. Chaque relais vérifie ses
+  communiqués chiffrés avec sa propre clé publique RSA — et, comme toujours
+  chez ce groupe, **e = 3 et aucun schéma de remplissage (padding)**.
+
+  La cellule cyber a intercepté les trois clés publiques et les trois
+  chiffrés aux points de sortie. Aucun des trois chiffrés ne se déchiffre
+  seul par simple racine cubique : le message est trop grand pour un seul
+  module. Mais un vieux rapport d'audit, retrouvé dans les archives de la
+  DSI, rappelle un fait dérangeant : **chiffrer un unique message avec un
+  exposant public court sous plusieurs clés distinctes** permet de le
+  retrouver sans aucune clé privée, par un argument arithmétique, **dès que
+  les modules sont premiers entre eux et que le message reste petit devant
+  leur produit**.
+
+  Les attaquants ont-ils vraiment envoyé le même communiqué aux trois relais
+  pour gagner du temps ? Retrouvez le message en clair et la preuve qu'il
+  contient.
+
+  Fichiers fournis (un couple clé publique / chiffré par relais) :
+
+  - `cle_publique_relais_presse_independante.pem` /
+    `communique_chiffre_presse_independante.bin`
+  - `cle_publique_relais_gazette_regionale.pem` /
+    `communique_chiffre_gazette_regionale.bin`
+  - `cle_publique_relais_flash_actu.pem` / `communique_chiffre_flash_actu.bin`
+  - `note_analyse_diffusion_2026-09-24.txt`
+
+# Liste de fichiers à téléverser
+fichiers:
+  - cle_publique_relais_presse_independante.pem
+  - communique_chiffre_presse_independante.bin
+  - cle_publique_relais_gazette_regionale.pem
+  - communique_chiffre_gazette_regionale.bin
+  - cle_publique_relais_flash_actu.pem
+  - communique_chiffre_flash_actu.bin
+  - note_analyse_diffusion_2026-09-24.txt
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{hastad_e3_meme_message_trois_cles}"
+
+# Liste d'indices LAISSER VIDE POUR LE MOMENT
+indices: []
+
+# Solution du défi. LAISSER VIDE POUR LE MOMENT
+solution: ""
+
+# Paramètres du pointage pour ce défi.
+pointage:
+  # Nombre de points initial
+  initial: 100
+  # Fonction de décroissance des points.
+  fonction: "logarithmique"
+  # Nombre de points minimum.
+  minimum: 10
+  # Taux de décroissance des points.
+  decroissance: 10
+# Le défi est-il visible aux participants?
+etat: "cache"
+# Mettre à true si l'importation dans ctfd
+# nécessite un traitement spécial
+necessite_un_traitement_special: False
