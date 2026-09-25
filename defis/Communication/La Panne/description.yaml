@@ -1,0 +1,114 @@
+# Type de défiCTFd.
+#     utilisateurs.
+#     exposé.
+#     
+# Valeurs acceptées :
+#   ctfd :
+#     Le défi n'utilise aucune autre ressource de 
+#     Ex.: Un fichier à télécharger.
+#   statique :
+#     Le défi nécessite qu'un service soit 
+#     exposé, mais ce service est le même pour 
+#     tous les Ex.: Exposer une API REST.
+#   dynamique :
+#     Le défi nécessite qu'un service pour chaque 
+#     utilisateur soit Ex.: Exposer un boot2root.
+#     NON SUPPORTÉ
+# [OBLIGATOIRE]
+type: statique
+
+# Titre du défi
+# [OBLIGATOIRE]
+titre: "La Panne"
+
+# Description du défi. Supporte le markdown
+# [OBLIGATOIRE]
+description: |-
+  Les pirates ont touchés les services internets de la ville, plus aucune communication ne se fait! La mairesse doit envoyer un texto
+  d'urgence aux villes avoisinantes, mais que faire? C'est l'heure de sortir le système internet d'urgence : les 
+  [drapeaux sémaphores](https://fr.wikipedia.org/wiki/Alphabet_s%C3%A9maphore). Vous êtes en charge d'établir la communication avec
+  le reste du réseau, qui a encore la chance d'avoir l'internet, avec [manuel d'opérateur](https://datatracker.ietf.org/doc/html/rfc4824).
+  Bonne chance!\n
+  \n
+  The hacker destroyed the city's internet services, there is no communications left! The mayor needs to send an emergency text message
+  to the neighbouring cities, but how? It is time for the emergency internet system : the 
+  [semaphore flag system](https://datatracker.ietf.org/doc/html/rfc4824#ref-Wikipedia). You are in charge of connecting the city with the
+  rest of the network, which is lucky to still have internet, with the [operator's manual](https://datatracker.ietf.org/doc/html/rfc4824).
+  Good luck!
+
+# Liste de fichiers à téléverser
+#fichiers:
+
+# flag du défi
+# [OBLIGATOIRE]
+drapeau: "UHACK{77711deeecde9ee1afde13c66751c66c}"
+
+# Liste d'indices, en ordre d'apparence. Supporte 
+# le markdown.
+#indices:   
+
+# Solution du défi. Supporte le markdown. Cet 
+# attribut est obligatoire.
+# [OBLIGATOIRE]
+solution: ""
+
+# Paramètres du pointage pour ce défi. Le nombre 
+# de points diminue à mesure que de plus en plus 
+# de solutions sont soumises au défi.
+pointage:
+  # Nombre de points initial
+  initial: 500
+  
+  # Fonction de décroissance des points.
+  # Valeurs acceptées :
+  #   constant :
+  #     Le nombre de points reste constant tout 
+  #     au long de l'événement. Avec cette 
+  #     option, les paramètres `pointage.minimum` 
+  #     et `pointage.decroissance` n'ont aucun 
+  #     effet.
+  #   lineaire :
+  #     Le nombre de points diminue au même 
+  #     rythme en fonction du nombre de solutions 
+  #     soumises.
+  #   logarithmique :
+  #     Le nombre de points chute drastiquement 
+  #     avec les premières soumissions et de plus 
+  #     en plus doucement avec les suivantes.
+  fonction: "logarithmique"
+  
+  # Nombre de points minimum. La décroissance ne 
+  # passera pas en-dessous de ce niveau
+  minimum: 100
+  
+  # Taux de décroissance des points. Est 
+  # interprété différemment dépendamment de 
+  # `pointage.fonction`.
+  decroissance: 8
+
+# Le défi est-il visible aux participants?
+# Valeurs acceptées :
+#   visible :
+#     Les participants peuvent voir le défis
+#   cache :
+#     Le défi est caché aux participants.
+etat: "cache"
+
+# Liste des défis devant avoir été complété avant 
+# de pouvoir accéder à celui-ci. Faites référence 
+# aux défis par leur titre.
+#prerequis:
+
+
+# Si 'type' est 'statique' ou 'dynamique', le 
+# script spécifié ici sera appelé pour installer 
+# et démarrer le service à exposer.
+script_installation: "installation.sh"
+
+# Si 'type' est 'statique', l'ip spécifiée ici 
+# sera utilisé pour rediriger les requêtes http.
+port: "11080"
+
+# Indiquez les instructions supplémentaires 
+# nécessaires au déploiement de ce défi.
+#necessite_un_traitement_special:
