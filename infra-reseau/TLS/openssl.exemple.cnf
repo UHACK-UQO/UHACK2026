@@ -55,15 +55,15 @@ localityName                    = Nom de Localité
 0.organizationName              = Nom de l'Organisation
 organizationalUnitName          = Unité Organisationelle
 commonName                      = Nom Commun
-emailAddress                    = Adresse Courriel
+#emailAddress                    = Adresse Courriel
 
 countryName_default             = CA
 stateOrProvinceName_default     = QC
 localityName_default            = Gatineau
 0.organizationName_default      = <EVENEMENT>
 organizationalUnitName_default  = CTF
-commonName_default              = <EVENEMENT>-CTF
-emailAddress_default            = admin@%DOMAINE_GLOBAL
+commonName_default              = *.%DOMAINE_GLOBAL
+#emailAddress_default            = admin@%DOMAINE_GLOBAL
 
 [ v3_ca ]
 # Extensions for a typical CA (`man x509v3_config`).

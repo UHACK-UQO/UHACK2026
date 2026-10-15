@@ -49,36 +49,85 @@ main() {
         echo "  -r --desinstaller   Désinstalle le ctf."
         echo "  -d --demarrer       Démarre le ctf s'il est déjà installé."
         echo "  -a --arreter        Arrête le ctf s'il est déjà installé."
+        echo "  -h --help           Affiche ce message d'aide."
     else 
-        if [ -z "./installation_etat.txt" ]; then
-            printf "desinstalle" > ./installation_etat.txt
-        fi
-# 
-        etat=$(cat ./installation_etat.txt)
-        if [ "$etat" = "desinstalle" ]; then
-            installer
-            printf "actif" > ./installation_etat.txt
-        elif [ "$etat" = "actif" ]; then
-            arreter
-            printf "inactif" > ./installation_etat.txt
-        elif [ "$etat" = "inactif" ]; then
-            demarrer
-            printf "actif" > ./installation_etat.txt
-        else
-            installer
-            printf "actif" > ./installation_etat.txt
-        fi
+        echo   "#########################################################################################"
+        echo   "#***************************************************************************************#"
+        echo   "#*                                                                                     *#"
+        echo   "#*  ▉▉╮  ▉▉╮ ▉▉╮  ▉▉╮  ▉▉▉▉▉╮  ▉▉▉▉▉▉▉╮ ▉▉╮  ▉▉╮  ▉▉▉▉▉▉▉╮ ▉▉▉▉▉▉▉╮ ▉▉▉▉▉▉▉╮ ▉▉▉▉▉▉▉╮  *#"
+        echo   "#*  ▉▉│  ▉▉│ ▉▉│  ▉▉│ ▉▉╭──▉▉╮ ▉▉╭────╯ ▉▉│ ▉▉╭╯  ╰────▉▉│ ▉▉╭──▉▉│ ╰────▉▉│ ▉▉╭────╯  *#"
+        echo   "#*  ▉▉│  ▉▉│ ▉▉▉▉▉▉▉│ ▉▉▉▉▉▉▉│ ▉▉│      ▉▉▉▉╭─╯   ▉▉▉▉▉▉▉│ ▉▉│  ▉▉│ ▉▉▉▉▉▉▉│ ▉▉▉▉▉▉▉╮  *#"
+        echo   "#*  ▉▉│  ▉▉│ ▉▉╭──▉▉│ ▉▉╭──▉▉│ ▉▉│      ▉▉╭─▉▉╮   ▉▉╭────╯ ▉▉│  ▉▉│ ▉▉╭────╯ ▉▉╭──▉▉│  *#"
+        echo   "#*  ▉▉▉▉▉▉▉│ ▉▉│  ▉▉│ ▉▉│  ▉▉│ ▉▉▉▉▉▉▉╮ ▉▉│ ╰▉▉╮  ▉▉▉▉▉▉▉╮ ▉▉▉▉▉▉▉│ ▉▉▉▉▉▉▉╮ ▉▉▉▉▉▉▉│  *#"
+        echo   "#*  ╰──────╯ ╰─╯  ╰─╯ ╰─╯  ╰─╯ ╰──────╯ ╰─╯  ╰─╯  ╰──────╯ ╰──────╯ ╰──────╯ ╰──────╯  *#"
+        echo   "#*                                                                                     *#"
+        echo   "#***************************************************************************************#"
+        echo   "#########################################################################################"
+        while true; do
+            echo   ""
+            echo   "Veuillez choisir une option :"
+            echo   " 1. Installer le CTF"
+            echo   " 2. Désinstaller le CTF"
+            echo   " 3. Démarrer le CTF"
+            echo   " 4. Mettre le CTF sur pause"
+            echo   " 5. Aide"
+            echo   ""
+            while true; do
+                printf "> "
+                read rep
+
+                if [ "$(echo "$rep" | sed "s/*/a/g" | sed -E "s/[1-5]/*/g")" == "*" ]; then
+                    break
+                fi
+                echo "Veuillez entrer un nombre entre 1 et 4"
+            done
+
+            case "$rep" in
+                "1")
+                    installer
+                    printf "actif" > ./installation_etat.txt
+                    break
+                ;;
+                "2")
+                    desinstaller
+                    printf "desinstalle" > ./installation_etat.txt
+                    break
+                ;;
+                "3")
+                    demarrer
+                    printf "actif" > ./installation_etat.txt
+                    break
+                ;;
+                "4")
+                    arreter
+                    printf "inactif" > ./installation_etat.txt
+                    break
+                ;;
+                "5")
+                    echo "USAGE ctf <OPTION>"
+                    echo "  -i --installer      Installe et démarre le ctf. Si le ctf est déjà installe, le désinstalle, puis l'installe."
+                    echo "  -r --desinstaller   Désinstalle le ctf."
+                    echo "  -d --demarrer       Démarre le ctf s'il est déjà installé."
+                    echo "  -a --arreter        Arrête le ctf s'il est déjà installé."
+                    echo "  -h --help           Affiche ce message d'aide."
+
+                    if [ -z "./installation_etat.txt" ]; then
+                        printf "desinstalle" > ./installation_etat.txt
+                    fi
+                ;;
+            esac
+        done
     fi
 }
 
 demarrer() {
-    docker compose -f ctfd/docker-compose.yaml up -d
-    docker compose -f infra-reseau/docker-compose.yaml up -d
+    docker compose -f ctfd/docker-compose.yaml up -d > /dev/null
+    docker compose -f infra-reseau/docker-compose.yaml up -d > /dev/null
 }
 
 arreter() {
-    docker compose -f ctfd/docker-compose.yaml down
-    docker compose -f infra-reseau/docker-compose.yaml down
+    docker compose -f ctfd/docker-compose.yaml down > /dev/null
+    docker compose -f infra-reseau/docker-compose.yaml down > /dev/null
 }
 
 desinstaller() {
@@ -88,20 +137,19 @@ desinstaller() {
     if [ $(systemctl status systemd-resolved > /dev/null ; echo $?) = 0 ]; then
         sed -i -E "s/^DNS=\$infra_ip$/#DNS=/gm" /etc/systemd/resolved.conf
         systemctl restart systemd-resolved
-    else
-        sed '0,/^nameserver=\$infra_ip$/{s///}' /etc/resolv.conf
     fi
+    sed -i -E '0,/^nameserver=\$infra_ip$/{s///}' /etc/resolv.conf
 
     if [ "$ctfd_local" = "true" ]; then
-        docker compose -f ctfd/docker-compose.yaml down
+        docker compose -f ctfd/docker-compose.yaml down &> /dev/null
     else
-        ssh -o StrictHostKeyChecking=no "$ctfd_usr@$ctfd_ip" docker compose -f ctfd/docker-compose.yaml down
+        ssh -o StrictHostKeyChecking=no "$ctfd_usr@$ctfd_ip" docker compose -f ctfd/docker-compose.yaml down &> /dev/null
     fi
 
     if [ "$infra_local" = "true" ]; then
-        docker compose -f infra-reseau/docker-compose.yaml down
+        docker compose -f infra-reseau/docker-compose.yaml down &> /dev/null
     else
-        ssh -o StrictHostKeyChecking=no "$infra_usr@$infra_ip" docker compose -f infra-reseau/docker-compose.yaml down
+        ssh -o StrictHostKeyChecking=no "$infra_usr@$infra_ip" docker compose -f infra-reseau/docker-compose.yaml down &> /dev/null
     fi
 
     rm -rf ctfd/.venv \
@@ -110,7 +158,8 @@ desinstaller() {
             infra-reseau/dnsmasq.conf \
             infra-reseau/nginx.conf \
             infra-reseau/defis.nginx.conf \
-            infra-reseau/TLS/*.pem
+            infra-reseau/TLS/*.pem \
+            infra-reseau/TLS/openssl.cnf
 }
 
 installer() {
@@ -123,15 +172,16 @@ installer() {
         ssh-keygen -f ~/.ssh/id_ed25519 -t ed25519 -N "" &> /dev/null
     fi
 
-    printf "Veuillez indiquer le nom de domaine du CTF : "
-    read DOMAINE
+    DOMAINE=$(cat coordination/nom_domaine.env | grep "DOMAINE_GLOBAL=" | sed "s/DOMAINE_GLOBAL=//g")
 
     printf "\nModification du nom de domaine.\n"
     sed -i -E "s/DOMAINE_GLOBAL=.*/DOMAINE_GLOBAL=${DOMAINE}/gm" coordination/nom_domaine.env
     sed -E "s/url: ?\"?((https?:\/\/)?[a-xA-Z0-9_-]+).*$/url: \"\1.${DOMAINE}\"/gm" ctfd/config.yaml > ctfd/config_prod.yaml
     sed -E "s/%DOMAINE_GLOBAL/${DOMAINE}/gm" infra-reseau/dnsmasq.exemple.conf > infra-reseau/dnsmasq.conf
     sed "s/%DOMAINE_GLOBAL/${DOMAINE}/gm" infra-reseau/nginx.exemple.conf > infra-reseau/nginx.conf
+    sed "s/%DOMAINE_GLOBAL/${DOMAINE}/gm" infra-reseau/TLS/openssl.exemple.cnf > infra-reseau/TLS/openssl.cnf
 
+    printf "\nInstallation de l'infrastructure réseau.\n"
     if [ "$infra_local" = "true" ]; then
         installer_reseau_local "$infra_ip"
     else
@@ -178,34 +228,35 @@ installer() {
         echo "        CTFd : ${nom} (${id}@${DOMAINE})"
         echo "         mdp : ${mdp}"
     done
+
+    printf "\nLe CTF est installé. Vous pouvez y accéder sur https://ctfd.${DOMAINE}\n"
+    printf "Votre navigateur vous avertira à propos d'un risque de sécurité. Vous pouvez l'ignorer.\n"
+    printf "Vos identifiants sont indiqués ci-dessus.\n"
 }
 
 installer_reseau_local() {
     echo ""
     echo "Lancement de l'infra réseau."
-    openssl req -config infra-reseau/TLS/openssl.cnf \
+    openssl req -quiet -config infra-reseau/TLS/openssl.cnf \
             -nodes -new -x509 \
             -keyout "infra-reseau/TLS/${DOMAINE}.key.pem" \
+            -subj /C=CA/ST=QC/L=Gatineau/O=UHACK/OU=UHACK-CTF/CN=*.${DOMAINE} \
             -days 7300 -sha256 -extensions v3_ca \
-            -out "infra-reseau/TLS/${DOMAINE}.cert.pem"
+            -out "infra-reseau/TLS/${DOMAINE}.cert.pem" &> /dev/null
 
     cd infra-reseau
     DOMAINE_GLOBAL=${DOMAINE} python3 nginx-setup.py ../defis
-    printf '\n===== Docker =====\n'
-    docker compose up -d
-    printf '===== Docker =====\n\n'
+    docker compose up -d &> /dev/null
     cd ..
 }
 
 installer_ctfd_local() {
     echo ""
     echo "Installation de CTFd"
-    printf '\n===== Docker =====\n'
-    docker compose -f ctfd/docker-compose.yaml up -d
-    printf '===== Docker =====\n\n'
+    docker compose -f ctfd/docker-compose.yaml up -d &> /dev/null
     cd ctfd
     python3 -m venv .venv > /dev/null
-    .venv/bin/python3 -m pip install -r requirements.txt > /dev/null
+    .venv/bin/python3 -m pip install -r requirements.txt &> /dev/null
     chown -R 1001:1001 donnees/ctfd
     printf "En attente du lancement de CTFd"
     while [ $(curl -fk https://ctfd.${DOMAINE} &> /dev/null ; echo $?) != 0 ]; do

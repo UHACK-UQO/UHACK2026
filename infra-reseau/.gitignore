@@ -1,3 +1,4 @@
 dnsmasq.conf
 *nginx.conf
 TLS/*.pem
+TLS/openssl.cnf
