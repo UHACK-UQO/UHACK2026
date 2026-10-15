@@ -23,8 +23,9 @@ def valider_config(config : dict, structure : dict, nom : str = "") -> list[str]
     for k,v in config.items():
         if k not in structure.keys():
             erreurs.append(f"Le paramètre {nom}.{k} est invalide")
+            continue
         if not isinstance(v, type(structure[k]["defaut"])):
-            erreurs.append(f"Le paramètre {nom}.{k} doit être du type {type(structure[k]["defaut"])}, pas {type(k)}")
+            erreurs.append(f"Le paramètre {nom}.{k} doit être du type {type(structure[k]["defaut"])}, pas {type(v)}")
         if "regex" in structure[k].keys() and not re.search(structure[k]["regex"], v):
             erreurs.append(f"Le paramètre {nom}.{k} ne remplis pas le format '{structure[k]["regex"]}'")
 

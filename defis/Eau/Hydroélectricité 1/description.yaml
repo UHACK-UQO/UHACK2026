@@ -1,0 +1,25 @@
+type: ctfd
+
+titre: "Hydroélectricité 1"
+
+description: |-
+  Qui est élu le 17 août?
+  Who's elected on August 17th?
+  https://www.youtube.com/watch?v=axWId0PugPc
+  Format: FLAG_XXXX
+
+fichiers: []
+
+drapeau: "FLAG_MAURICE_DUPLESSIS"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 50
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+
+etat: "cache"

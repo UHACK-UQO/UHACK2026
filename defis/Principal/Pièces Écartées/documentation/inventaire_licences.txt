@@ -1,0 +1,10 @@
+Outils de supervision: 24 licences. Éditeur de texte: 80 licences. Agent de sauvegarde: 14 licences.
+
+REF-9901 | état=archivé
+REF-7333 | état=terminé
+REF-2062 | état=fermé
+REF-7876 | état=archivé
+REF-9901 | état=terminé
+REF-6083 | état=archivé
+REF-7827 | état=archivé
+REF-9279 | état=fermé

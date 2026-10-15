@@ -1,0 +1,10 @@
+Copie de travail. Les priorités étaient le stockage, la messagerie et la téléphonie de laboratoire.
+
+REF-9127 | état=fermé
+REF-4324 | état=fermé
+REF-4490 | état=terminé
+REF-6111 | état=archivé
+REF-6209 | état=terminé
+REF-6235 | état=archivé
+REF-7957 | état=terminé
+REF-3585 | état=fermé

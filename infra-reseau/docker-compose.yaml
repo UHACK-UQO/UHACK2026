@@ -6,11 +6,11 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./TLS/:/etc/ssl/
     networks:
-      uhack_partage:
-        ipv4_address: 172.16.10.50
-    dns: 172.16.10.2
-    # depends_on:
-    #   - dnsmasq
+      externe:
+        ipv4_address: 173.10.10.20
+    ports:
+      - 80:80
+      - 443:443
 
   dnsmasq:
     image: dockurr/dnsmasq
@@ -19,9 +19,11 @@ services:
       - ./dnsmasq.conf:/etc/dnsmasq.conf
       - ./dnsmasq.sh:/usr/bin/dnsmasq.sh
     networks:
-      uhack_partage:
-        ipv4_address: 172.16.10.2
+      externe:
+        ipv4_address: 173.10.10.2
 
 networks:
-  uhack_partage:
-    external: true
+  externe:
+    ipam:
+      config:
+        - subnet: 173.10.10.0/24

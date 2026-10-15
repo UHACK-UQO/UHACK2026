@@ -1,0 +1,21 @@
+type: ctfd
+
+titre: "J'ai peur"
+
+description: "https://drive.google.com/file/d/1IL3TpSi76lVlmc1D5mX_pCj62WoqV3AR/view?usp=sharing"
+
+fichiers: []
+
+drapeau: "FLAG_TH4TSWH4WES4ID"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 50
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+
+etat: "cache"

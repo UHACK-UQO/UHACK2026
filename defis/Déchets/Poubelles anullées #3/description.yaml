@@ -1,0 +1,24 @@
+type: ctfd
+
+titre: "Poubelles anullées ?! #3"
+
+description: |-
+  Je peux pas croire qu'ils font ça !
+  I can't believe they're doing that!
+  Format: FLAG_XXXXXXXXX
+
+fichiers: []
+
+drapeau: "FLAG_OHMERDE"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

@@ -1,0 +1,30 @@
+FORMAT ET CONTEXTE / FORMAT AND CONTEXT
+
+- Encodage / Encoding: UTF-8
+- Separateur des journaux / Log delimiter: |
+- Fuseau horaire / Time zone: America/Toronto, UTC-04:00 pour cette collecte
+- Periode couverte / Covered period: 2026-09-25, 07:30:00 a 11:00:00
+- Les lignes sont triees par horodatage / Lines are sorted by timestamp
+
+CONTEXTE TECHNIQUE / TECHNICAL CONTEXT
+
+- Les adresses 10.24.0.0/16 sont internes.
+  Addresses in 10.24.0.0/16 are internal.
+- 198.51.100.10, 198.51.100.11 et 198.51.100.12 sont les sorties approuvees du VPN municipal.
+  198.51.100.10, 198.51.100.11, and 198.51.100.12 are approved municipal VPN egress addresses.
+- Les identifiants d'appareil geres commencent par VDG-.
+  Managed device identifiers start with VDG-.
+- Un tiret (-) signifie qu'aucune valeur n'a ete fournie par le systeme source.
+  A dash (-) means the source system supplied no value.
+- Une adresse externe, un appareil inconnu ou un message suspect ne suffit pas, seul, a prouver une compromission.
+  An external address, unknown device, or suspicious message is not enough on its own to prove compromise.
+
+SOURCES
+
+annuaire_employes.log     Comptes et identites / Accounts and identities
+inventaire_appareils.json Appareils geres / Managed devices
+passerelle_courriel.log   Courriels et filtrage / Email and filtering
+proxy_web.log             Navigation Web / Web browsing
+authentification.log      Connexions / Sign-ins
+evenements_mfa.log        Defis MFA / MFA challenges
+acces_ressources.log      Utilisation des sessions / Session activity

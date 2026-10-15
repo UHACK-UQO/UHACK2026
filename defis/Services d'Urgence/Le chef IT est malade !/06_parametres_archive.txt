@@ -1,0 +1,10 @@
+PARAMÈTRES D'ARCHIVE
+====================
+
+Lot technique : 442
+Température de conservation : -18 °C
+Rotor : 3200 rpm
+Contrôle qualité global : 97 %
+Station : LAB-04
+Version du format : 3.8
+Checksum export : 71-19-04-88

@@ -144,3 +144,23 @@ visibilite:
   #   admins :
   #     Les comptes ne sont visibles qu'aux admins
   comptes: "publiques"
+
+# Paramètres d'installation des défis statiques 
+# et dynamiques
+defis_installation:
+  # Les défis sont installés sur la machine sur 
+  # laquelle ce script est exécuté ou pas.
+  est_local: True
+  
+  # Adresse IP de la machine sur laquelle 
+  # installer les défis
+  #ip: "0.0.0.0"
+  
+  # Utilisateur auquel ce script se connectera 
+  # sur la machine d'installation pour installer 
+  # les défis
+  #utilisateur: "root"
+  
+  # Mot de passe de l'utilisateur auquel ce 
+  # script se connectera pour installer les défis
+  #mdp: "mot_de_passe"

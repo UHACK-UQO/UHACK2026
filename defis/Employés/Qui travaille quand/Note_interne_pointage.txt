@@ -1,0 +1,35 @@
+IMPORTANT - INTERPRÉTATION DU JOURNAL DE PRÉSENCES
+
+Les heures de badge ne doivent pas être arrondies automatiquement aux minutes exactes inscrites dans le fichier CSV.
+
+Lorsqu’un quart ou une modification a été approuvé avec une heure officielle, utiliser l’heure officielle approuvée.
+
+Exemples :
+- une entrée à 07:56 pour un quart commençant à 08:00 ne crée pas quatre minutes supplémentaires;
+- une sortie à 16:02 pour une fin autorisée à 16:00 ne crée pas deux minutes supplémentaires;
+- une entrée tardive documentée réduit le quart à l’heure rémunérée indiquée dans la note de l’événement;
+- une différence de quelques minutes causée uniquement par le passage au lecteur de carte doit être ignorée.
+
+Lorsqu’un retard ou un départ anticipé est confirmé, l’heure rémunérée applicable est indiquée directement dans la note de l’événement ou dans une correction officielle.
+
+Les heures doivent être calculées par tranches de 15 minutes.
+
+============================================================
+INTERNAL NOTE ON TIMEKEEPING
+============================================================
+
+IMPORTANT - INTERPRETATION OF THE ATTENDANCE LOG
+
+Badge times must not automatically be rounded to the exact minutes recorded in the CSV file.
+
+When a shift or change has been approved with an official time, use the approved official time.
+
+Examples:
+- an entry at 07:56 for a shift beginning at 08:00 does not create four additional minutes;
+- an exit at 16:02 for an authorized end time of 16:00 does not create two additional minutes;
+- a documented late arrival reduces the shift to the paid start time indicated in the event note;
+- a difference of a few minutes caused only by passing through the card reader must be ignored.
+
+When a late arrival or early departure is confirmed, the applicable paid time is indicated directly in the event note or in an official correction.
+
+Hours must be calculated in 15-minute increments.

@@ -1,0 +1,10 @@
+Les noms de fichiers doivent inclure le service, la date et la version. Éviter les espaces dans les scripts automatisés.
+
+REF-2741 | état=archivé
+REF-4104 | état=fermé
+REF-2586 | état=terminé
+REF-8489 | état=archivé
+REF-6874 | état=terminé
+REF-4328 | état=archivé
+REF-1526 | état=fermé
+REF-9347 | état=fermé

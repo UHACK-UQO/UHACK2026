@@ -1,0 +1,10 @@
+Réunion du 14 octobre 2020. Sujets: capacité de stockage, licences, remplacement du pare-feu de laboratoire.
+
+REF-1993 | état=terminé
+REF-2853 | état=terminé
+REF-9212 | état=archivé
+REF-5457 | état=archivé
+REF-9601 | état=fermé
+REF-8336 | état=fermé
+REF-3423 | état=terminé
+REF-4860 | état=archivé

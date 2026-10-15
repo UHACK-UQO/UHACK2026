@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Les cadenas 6"
+
+description: |-
+  Très difficile
+  Very hard
+
+fichiers: []
+
+drapeau: "FLAG_KK98SH234G"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

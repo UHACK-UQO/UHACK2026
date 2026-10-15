@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Le temps dira"
+
+description: |-
+  Format: FLAG_XXXX
+
+fichiers:
+  - "./Le temps dira.pdf"
+
+drapeau: "FLAG_PRECISIONMATTERS"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

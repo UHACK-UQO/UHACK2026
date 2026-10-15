@@ -1,0 +1,25 @@
+type: ctfd
+
+titre: "Le courriel"
+
+description: |-
+  Nous avons reçu un courriel...
+  We received an email...
+  Format: FLAG_XXXX
+
+fichiers:
+  - "Le courriel.pdf"
+
+drapeau: "FLAG_BLACKOUT"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"

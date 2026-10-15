@@ -1,0 +1,23 @@
+type: ctfd
+
+titre: "Les cadenas 2"
+
+description: |-
+  Facile
+  Easy
+
+fichiers: []
+
+drapeau: "FLAG_PPLOIS89"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 50
+  fonction: "logarithmique"
+  minimum: 10
+  decroissance: 10
+
+etat: "cache"

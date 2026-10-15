@@ -1,0 +1,24 @@
+type: ctfd
+
+titre: "Chuchotement"
+
+description: |-
+  Les murs chuchotent...
+  The walls are whispering...
+  Format: FLAG_XXXXXXX
+
+fichiers: []
+
+drapeau: "FLAG_Hope_You_Are_Not_Tired"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

@@ -1,0 +1,24 @@
+type: ctfd
+
+titre: "Dans mon vieux temps"
+
+description: |-
+  Le flag contient uniquement des lettres.
+  The flag only contains letters
+  Format: FLAG_XXXXXXXX
+
+fichiers: []
+
+drapeau: "FLAG_AIDEZMOI"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

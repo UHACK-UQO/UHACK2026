@@ -1,0 +1,12 @@
+PROFIL STRUCTUREL — V-17
+=========================
+
+Type de matériel génétique : ARN
+Organisation : simple brin
+Polarité : positive
+Enveloppe : présente
+Nucléocapside : hélicoïdale
+Structures externes : glycoprotéines saillantes nombreuses
+
+Ce profil provient d'une fiche de classification incomplète.
+Il peut être utilisé uniquement comme vérification du mot obtenu par décodage.

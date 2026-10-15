@@ -1,0 +1,26 @@
+type: ctfd
+
+titre: "Les cadenas 7 (bleu)"
+
+description: |-
+  Mon premier ouvre une rivière.
+  Mon deuxième se trouve au cœur de la pluie.
+  Mon troisième est à la source d’un nuage.
+  Mon quatrième se trouve à l’embouchure de l’océan.
+  Mon tout est le secret emporté par le courant.
+
+fichiers: []
+
+drapeau: "FLAG_JSUIS_3MU3"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 75
+  fonction: "logarithmique"
+  minimum: 15
+  decroissance: 10
+
+etat: "cache"

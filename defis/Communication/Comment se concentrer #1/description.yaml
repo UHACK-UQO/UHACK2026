@@ -1,0 +1,25 @@
+type: ctfd
+
+titre: "Comment se concentrer #1"
+
+description: |-
+  Le patron IT a besoin de retrouver ses 3 chansons préférées. Attention aux oreilles.
+  The IT boss needs to find his 3 favorite songs. Watch out for your ears.
+  Format: FLAG_NOM_CHANSON
+
+fichiers:
+  - "./Comment se concentrer1.mp3"
+
+drapeau: "FLAG_SMOOTH_CRIMINAL"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

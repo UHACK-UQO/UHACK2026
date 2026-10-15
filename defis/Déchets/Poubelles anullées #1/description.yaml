@@ -1,0 +1,25 @@
+type: ctfd
+
+titre: "Poubelles anullées ?! #1"
+
+description: |-
+  Mon secteur est-il annulé ?
+  Is my sector cancelled?
+  Format: FLAG_XXXXXXXXXX
+
+fichiers:
+  - "./AVIS_AUX_CITOYENS_DECHETS.pdf"
+
+drapeau: "FLAG_CASENTBONICI"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

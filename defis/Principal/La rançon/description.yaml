@@ -1,0 +1,25 @@
+type: ctfd
+
+titre: "La rançon"
+
+description: |-
+  Nous avons reçu un message étrange.
+  We received a strange message.
+  Fomat: FLAG_XXX
+
+fichiers:
+  - "AVIS IMPORTANT.pdf"
+
+drapeau: "FLAG_YOU_MAYBE_HAVE_IT"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"

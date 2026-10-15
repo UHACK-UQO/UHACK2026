@@ -1,0 +1,25 @@
+type: ctfd
+
+titre: "Ils vont passer quand ? #1"
+
+description: |-
+  J'ai 7 raisons de me fâcher en anglais
+  I have 7 reasons to get angry in english
+  Format: FLAG_XXXXX
+
+fichiers:
+  - "./Horaire de collecte.png"
+
+drapeau: "FLAG_FRIDAY-THURSDAY-MONDAY"
+
+indices: []
+
+solution: ""
+
+pointage:
+  initial: 100
+  fonction: "logarithmique"
+  minimum: 20
+  decroissance: 10
+
+etat: "cache"
