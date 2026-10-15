@@ -20,11 +20,6 @@ infra_usr="$(jq -r '."infra-reseau".usr' infra-reseau/machines_services.json)"
 infra_mdp="$(jq -r '."infra-reseau".mdp' infra-reseau/machines_services.json)"
 infra_local="$(jq -r '."infra-reseau".local' infra-reseau/machines_services.json)"
 
-courriels_ip="$(jq -r '.courriels.ip' infra-reseau/machines_services.json)"
-courriels_usr="$(jq -r '.courriels.usr' infra-reseau/machines_services.json)"
-courriels_mdp="$(jq -r '.courriels.mdp' infra-reseau/machines_services.json)"
-courriels_local="$(jq -r '.courriels.local' infra-reseau/machines_services.json)"
-
 ctfd_ip="$(jq -r '.ctfd.ip' infra-reseau/machines_services.json)"
 ctfd_usr="$(jq -r '.ctfd.usr' infra-reseau/machines_services.json)"
 ctfd_mdp="$(jq -r '.ctfd.mdp' infra-reseau/machines_services.json)"
@@ -34,11 +29,6 @@ defis_ip="$(jq -r '.defis.ip' infra-reseau/machines_services.json)"
 defis_usr="$(jq -r '.defis.usr' infra-reseau/machines_services.json)"
 defis_mdp="$(jq -r '.defis.mdp' infra-reseau/machines_services.json)"
 defis_local="$(jq -r '.defis.local' infra-reseau/machines_services.json)"
-
-mastodon_ip="$(jq -r '.mastodon.ip' infra-reseau/machines_services.json)"
-mastodon_usr="$(jq -r '.mastodon.usr' infra-reseau/machines_services.json)"
-mastodon_mdp="$(jq -r '.mastodon.mdp' infra-reseau/machines_services.json)"
-mastodon_local="$(jq -r '.mastodon.local' infra-reseau/machines_services.json)"
 
 main() {
     if [ "$1" = "-i" ] || [ "$1" = "--installer" ]; then
@@ -82,17 +72,13 @@ main() {
 }
 
 demarrer() {
-    docker compose -f courriels/docker-compose.yaml up -d
     docker compose -f ctfd/docker-compose.yaml up -d
     docker compose -f infra-reseau/docker-compose.yaml up -d
-    docker compose -f mastodon/docker-compose.yaml up -d
 }
 
 arreter() {
-    docker compose -f courriels/docker-compose.yaml down
     docker compose -f ctfd/docker-compose.yaml down
     docker compose -f infra-reseau/docker-compose.yaml down
-    docker compose -f mastodon/docker-compose.yaml down
 }
 
 desinstaller() {
@@ -104,13 +90,6 @@ desinstaller() {
         systemctl restart systemd-resolved
     else
         sed '0,/^nameserver=\$infra_ip$/{s///}' /etc/resolv.conf
-    fi
-
-
-    if [ "$courriels_local" = "true" ]; then
-        docker compose -f courriels/docker-compose.yaml down
-    else
-        ssh -o StrictHostKeyChecking=no "$courriels_usr@$courriels_ip" docker compose -f courriels/docker-compose.yaml down
     fi
 
     if [ "$ctfd_local" = "true" ]; then
@@ -125,27 +104,13 @@ desinstaller() {
         ssh -o StrictHostKeyChecking=no "$infra_usr@$infra_ip" docker compose -f infra-reseau/docker-compose.yaml down
     fi
 
-    if [ "$mastodon_local" = "true" ]; then
-        docker compose -f mastodon/docker-compose.yaml down
-    else
-        ssh -o StrictHostKeyChecking=no "$mastodon_usr@$mastodon_ip" docker compose -f mastodon/docker-compose.yaml down
-    fi
-
-    rm -rf courriels/data \
-            courriels/dms \
-            courriels/installation/est_installe.bool \
-            ctfd/.venv \
+    rm -rf ctfd/.venv \
             ctfd/donnees \
             ctfd/config_prod.yaml \
             infra-reseau/dnsmasq.conf \
             infra-reseau/nginx.conf \
             infra-reseau/defis.nginx.conf \
-            infra-reseau/TLS/*.pem \
-            mastodon/installation/*.bool \
-            mastodon/installation/*.mdp \
-            mastodon/postgres*/ \
-            mastodon/public/ \
-            mastodon/redis/ 
+            infra-reseau/TLS/*.pem
 }
 
 installer() {
@@ -163,10 +128,8 @@ installer() {
 
     printf "\nModification du nom de domaine.\n"
     sed -i -E "s/DOMAINE_GLOBAL=.*/DOMAINE_GLOBAL=${DOMAINE}/gm" coordination/nom_domaine.env
-    sed -i -E "s/DOMAINE_GLOBAL=.*/DOMAINE_GLOBAL=${DOMAINE}/gm" courriels/.env
     sed -E "s/url: ?\"?((https?:\/\/)?[a-xA-Z0-9_-]+).*$/url: \"\1.${DOMAINE}\"/gm" ctfd/config.yaml > ctfd/config_prod.yaml
     sed -E "s/%DOMAINE_GLOBAL/${DOMAINE}/gm" infra-reseau/dnsmasq.exemple.conf > infra-reseau/dnsmasq.conf
-    sed -i -E "s/DOMAINE_GLOBAL=.*/DOMAINE_GLOBAL=${DOMAINE}/gm" mastodon/.env.production
     sed "s/%DOMAINE_GLOBAL/${DOMAINE}/gm" infra-reseau/nginx.exemple.conf > infra-reseau/nginx.conf
 
     if [ "$infra_local" = "true" ]; then
@@ -192,29 +155,17 @@ installer() {
         sed -i -E '0,/^nameserver=(.*)$/{s//namserver=$infra_ip\nameserver=\1/}' /etc/resolv.conf
     fi
 
-    if [ "$courriels_local" = "true" ]; then
-        installer_courriels_local
-    else
-        installer_courriels_distant "$courriels_ip" "$courriels_usr" "$courriels_mdp"
-    fi
-
     if [ "$ctfd_local" = "true" ]; then
         installer_ctfd_local
     else
         installer_ctfd_distant "$ctfd_ip" "$ctfd_usr" "$ctfd_mdp"
     fi
 
-    if [ "$defis_local" = "true" ]; then
-        installer_defis_local
-    else
-        installer_defis_distant "$defis_ip" "$defis_usr" "$defis_mdp"
-    fi
-
-    if [ "$mastodon_local" = "true" ]; then
-        installer_mastodon_local
-    else
-        installer_mastodon_distant "$mastodon_ip" "$mastodon_usr" "$mastodon_mdp"
-    fi
+    # if [ "$defis_local" = "true" ]; then
+    #     installer_defis_local
+    # else
+    #     installer_defis_distant "$defis_ip" "$defis_usr" "$defis_mdp"
+    # fi
 
     echo ""
     echo "Comptes utilisateurs : "
@@ -222,23 +173,8 @@ installer() {
         nom="$(echo $compte | jq -r ".nom")"
         id="$(echo $compte | jq -r ".id")"
         mdp="$(echo $compte | jq -r ".mdp")"
-        if [ "$id" = "admin" ] && [ "$mastodon_local" = "true" ]; then
-            mdp_mstdn="$(echo "$(cat mastodon/installation/admin.mdp)" | grep -E 'New password: ' | sed -E 's/.+: (.+)/\1/gm')"
-        elif [ "$id" != "admin" ] && [ "$mastodon_local" = "true" ]; then
-            mdp_mstdn="$(echo "$(cat mastodon/installation/utilisateurs.mdp)" | grep -E "${id}: " | sed -E 's/.+: (.+)/\1/gm')"
-        elif [ "$id" = "admin" ] && [ "$mastodon_local" != "true" ]; then
-            ssh -o StrictHostKeyChecking=no "$mastodon_usr@$mastodon_ip" \ 
-                mdp_mstdn="$(echo "$(cat mastodon/installation/admin.mdp)" | grep -E 'New password: ' | sed -E 's/.+: (.+)/\1/gm')"
-        elif [ "$id" != "admin" ] && [ "$mastodon_local" != "true" ]; then
-            ssh -o StrictHostKeyChecking=no "$mastodon_usr@$mastodon_ip" \ 
-                mdp_mstdn="$(echo "$(cat mastodon/installation/utilisateurs.mdp)" | grep -E "${id}: " | sed -E 's/.+: (.+)/\1/gm')"
-        fi
 
         echo "${nom} :"
-        echo "    Courriel : ${id}@${DOMAINE}"
-        echo "         mdp : ${mdp}"
-        echo "    Mastodon : @${id}@${DOMAINE}"
-        echo "         mdp : ${mdp_mstdn}"
         echo "        CTFd : ${nom} (${id}@${DOMAINE})"
         echo "         mdp : ${mdp}"
     done
@@ -259,34 +195,6 @@ installer_reseau_local() {
     docker compose up -d
     printf '===== Docker =====\n\n'
     cd ..
-}
-
-installer_courriels_local() {
-    echo ""
-    echo "Installation du serveur SMTP."
-    printf '\n===== Docker =====\n'
-    docker compose -f courriels/docker-compose.yaml up -d
-    printf '===== Docker =====\n\n'
-}
-
-installer_mastodon_local() {
-    echo ""
-    echo "Installation du serveur Mastodon."
-    chown -R 991:911 mastodon/installation
-    jq -c ".utilisateurs[]" coordination/comptes_utilisateurs.json | while read compte; do
-        if [ "$(echo $compte | jq -r ".id")" = "admin" ]; then
-            MDP_ADMIN_SMTP="$(echo $compte | jq -r ".mdp")"
-        fi
-    done
-    sed -i -E "s/SMTP_PASSWORD=.*/$MDP_ADMIN_SMTP/gm" mastodon/.env.production
-    printf '\n===== Docker =====\n'
-    docker compose -f mastodon/docker-compose.yaml up -d
-    printf '===== Docker =====\n\n'
-    printf "En attente de l'installation de Mastodon"
-    while [ "$(cat mastodon/installation/est_installe.bool 2> /dev/null || echo 'false')"  != "true" ]; do
-        printf '.'
-        sleep 1
-    done
 }
 
 installer_ctfd_local() {
@@ -334,56 +242,6 @@ installer_reseau_distant() {
     printf '\n===== Docker =====\n'
     ssh -o StrictHostKeyChecking=no "$usr@$ip" docker compose up -d
     printf '===== Docker =====\n\n'
-}
-
-installer_courriels_distant() {
-    echo ""
-    echo "Installation du serveur SMTP."
-
-    ip="$1"
-    usr="$2"
-    mdp="$3"
-
-    sshpass -p "$mdp"  ssh-copy-id -o StrictHostKeyChecking=no "$usr@$ip"
-    scp -r -o StrictHostKeyChecking=no "./courriels/" "$usr@$ip"
-    scp -r -o StrictHostKeyChecking=no "./coordination/" "$usr@$ip"
-    scp -o StrictHostKeyChecking=no "./installer_dependances.sh" "$usr@$ip:installer_dependances.sh"
-    ssh -o StrictHostKeyChecking=no "$usr@$ip" ./installer_dependances.sh "$mdp"
-
-    printf '\n===== Docker =====\n'
-    ssh -o StrictHostKeyChecking=no "$usr@$ip" docker compose -f courriels/docker-compose.yaml up -d
-    printf '===== Docker =====\n\n'
-}
-
-installer_mastodon_distant() {
-    echo ""
-    echo "Installation du serveur Mastodon."
-    chown -R 991:911 mastodon/installation
-    jq -c ".utilisateurs[]" coordination/comptes_utilisateurs.json | while read compte; do
-        if [ "$(echo $compte | jq -r ".id")" = "admin" ]; then
-            MDP_ADMIN_SMTP="$(echo $compte | jq -r ".mdp")"
-        fi
-    done
-    sed -i -E "s/SMTP_PASSWORD=.*/$MDP_ADMIN_SMTP/gm" mastodon/.env.production
-
-    ip="$1"
-    usr="$2"
-    mdp="$3"
-
-    sshpass -p "$mdp"  ssh-copy-id -o StrictHostKeyChecking=no "$usr@$ip"
-    scp -r -o StrictHostKeyChecking=no "./mastodon/" "$usr@$ip"
-    scp -r -o StrictHostKeyChecking=no "./coordination/" "$usr@$ip"
-    scp -o StrictHostKeyChecking=no "./installer_dependances.sh" "$usr@$ip:installer_dependances.sh"
-    ssh -o StrictHostKeyChecking=no "$usr@$ip" ./installer_dependances.sh "$mdp"
-
-    printf '\n===== Docker =====\n'
-    ssh -o StrictHostKeyChecking=no docker compose -f mastodon/docker-compose.yaml up -d
-    printf '===== Docker =====\n\n'
-    printf "En attente de l'installation de Mastodon"
-    while [ "$(ssh -o StrictHostKeyChecking=no "$usr@$ip" cat mastodon/installation/est_installe.bool 2> /dev/null || echo 'false')"  != "true" ]; do
-        printf '.'
-        sleep 1
-    done
 }
 
 installer_ctfd_distant() {

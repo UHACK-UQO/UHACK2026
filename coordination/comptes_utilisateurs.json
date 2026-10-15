@@ -6,169 +6,18 @@
             "mdp":"9504b4d5470b049f8fecf7eb82a2ee20"
         },
         {
-            "nom":"Luka Labrèche-Cadieux",
-            "id":"LukLab1",
-            "mdp":"a72b5b08e2061b2a0ab7ef3f903f82c3"
-        },
-        {
-            "nom":"Luka Labrèche-Cadieux",
-            "id":"LukLab2",
-            "mdp":"0b81b7c44a0be4969e20cb3b4bd4f905"
-        },
-        {
-            "nom":"Luka Labrèche-Cadieux",
-            "id":"LukLab3",
-            "mdp":"2adac7b1e7deb2f37e1aba15bb48a6b8"
-        },
-        {
-            "nom":"Luka Labrèche-Cadieux",
-            "id":"LukLab4",
-            "mdp":"5af98c3aba9feceb74df62222cb758e0"
-        },
-        {
-            "nom":"Colin Belanger",
-            "id":"ColBel1",
-            "mdp":"26e14b19b7bbbcd2699d3132f042d333"
-        },
-        {
-            "nom":"Magaly Boivin",
-            "id":"MagBoi1",
-            "mdp":"baa50c98f51cbc7e512cf2d655d4a208"
-        },
-        {
-            "nom":"Amina Ikhlef",
-            "id":"AmiIkh1",
-            "mdp":"e612ac2d898f2686ff4e872c3ec7e5bf"
-        },
-        {
-            "nom":"Amina Ikhlef",
-            "id":"AmiIkh2",
-            "mdp":"7763220e17cab24bf77af373ecad97e5"
-        },
-        {
-            "nom":"Olivier Rossignol",
-            "id":"OliRos1",
-            "mdp":"56b1d8b29ae2f7754375ad5c6b0dee65"
-        },
-        {
-            "nom":"Nicolas Audette",
-            "id":"NicAud1",
-            "mdp":"3300f1dc9f204e28bb79110b6394a42d"
-        },
-        {
-            "nom":"Zackary Ritchie",
-            "id":"ZacRit1",
-            "mdp":"0e327856f3e24278dd74b517ce5e7e0b"
-        },
-        {
-            "nom":"Sébastien Roussel",
-            "id":"SebRou1",
-            "mdp":"5fb6de199ea86e9ec93601b1c78255ed"
-        },
-        {
-            "nom":"Micael racine Leblanc",
-            "id":"Micrac1",
-            "mdp":"e001c7d034391b8efa002998f696b86c"
-        },
-        {
-            "nom":"Ahmed Boussayri",
-            "id":"AhmBou1",
-            "mdp":"8b76ff9d322498924e271eafdc6e636a"
-        },
-        {
-            "nom":"Edison Puvaneswaran",
-            "id":"EdiPuv1",
-            "mdp":"2ba4a9b00f9afd60b9712dcffead998d"
-        },
-        {
-            "nom":"Hocine REHRAH",
-            "id":"HocREH1",
-            "mdp":"bce4cd6f286c4220382fcc18110f4769"
-        },
-        {
-            "nom":"Matis Chambard",
-            "id":"MatCha1",
-            "mdp":"026ccdf28904887f8ed9e72063ab2b9a"
-        },
-        {
-            "nom":"Bharath VENKADASAMY",
-            "id":"BhaVEN1",
-            "mdp":"3c8a61ba2a6803356f9888bf54dca951"
-        },
-        {
-            "nom":"William Madgin",
-            "id":"WilMad1",
-            "mdp":"582fd8e1c0a1a172a33e16e2d36693de"
-        },
-        {
-            "nom":"Tristan Canuel-Le Jossec",
-            "id":"TriCan1",
-            "mdp":"05f42b65f05e047dd0459dcbaa29c46e"
-        },
-        {
-            "nom":"Zachary McSween Manickchand",
-            "id":"ZacMcS1",
-            "mdp":"0bbd2f80d1b188b95f3bd8fcadbf84ad"
-        },
-        {
-            "nom":"Ayrton Adam",
-            "id":"AyrAda1",
-            "mdp":"cb9d9902dd46ee8e883553a9eedf84af"
-        },
-        {
-            "nom":"Jérémie Le Bel",
-            "id":"JeerLeB1",
-            "mdp":"333d899def26929ab4d8cc4cff38013e"
-        },
-        {
-            "nom":"Abdramane Doumbia",
-            "id":"AbdDou1",
-            "mdp":"0466caa51b21c9d62f962cf740bc7a45"
-        },
-        {
-            "nom":"Julien Turcotte",
-            "id":"JulTur1",
-            "mdp":"f75ae29734afa5d07410f802aa540887"
-        },
-        {
-            "nom":"Francesco Andres",
-            "id":"FraAnd1",
-            "mdp":"fa98da52a8910d722dd1ebc18fa43a47"
-        },
-        {
-            "nom":"Noham gnanvo",
-            "id":"Nohgna1",
-            "mdp":"9a3aa25d25616aa1232bdc415933bc44"
-        },
-        {
-            "nom":"Felix Lachapelle",
-            "id":"FelLac1",
-            "mdp":"502ec87dd266edbe9322dce1cb40372a"
-        },
-        {
-            "nom":"Léonardo Alonso Zepeda-Bonilla",
-            "id":"LeoAlo1",
-            "mdp":"a2f5e9dfbf91107f263375b86114851b"
-        },
-        {
-            "nom":"Yannick Turpin",
-            "id":"YanTur1",
-            "mdp":"a3ac743c641ea353126a57a02fb26ce0"
-        },
-        {
-            "nom":"tiffany atitsogbé",
-            "id":"tifati1",
-            "mdp":"e277de3aeb630e10cf0aa604c7ee15db"
+            "nom":"Pirate",
+            "id":"pirate",
+            "mdp":"Harrr!"
         }
     ],
     "equipes_ctfd":[
         {
-            "nom": "test",
-            "mdp": "mdp3",
-            "chef": "test",
+            "nom": "Pirate",
+            "mdp": "Harrr!",
+            "chef": "pirate",
             "membres": [
-                "test",
-                "test1"
+                "pirate"
             ]
         }
     ]

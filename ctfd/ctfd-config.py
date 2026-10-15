@@ -753,7 +753,7 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
         # Trouver le chef d'équipe pour prendre son courriel
         u_chef : dict = None
         for u in utilisateurs["utilisateurs"]:
-            if u["nom"] == e["chef"]:
+            if u["id"] == e["chef"]:
                 u_chef = u
                 break
         if u_chef == None:
@@ -790,9 +790,9 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
         for m in e["membres"]:
 
             u_membre : dict = None
-            if m != "chef":
+            if m != e["chef"]:
                 for u in utilisateurs["utilisateurs"]:
-                    if u["nom"] == m:
+                    if u["id"] == m:
                         u_membre = u
                         break
             else:

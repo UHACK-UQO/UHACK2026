@@ -5,12 +5,6 @@
         "mdp":"",
         "local":true
     },
-    "courriels":{
-        "ip":"0.0.0.0",
-        "usr":"",
-        "mdp":"",
-        "local":true
-    },
     "ctfd":{
         "ip":"0.0.0.0",
         "usr":"",
@@ -18,12 +12,6 @@
         "local":true
     },
     "defis":{
-        "ip":"0.0.0.0",
-        "usr":"",
-        "mdp":"",
-        "local":true
-    },
-    "mastodon":{
         "ip":"0.0.0.0",
         "usr":"",
         "mdp":"",
