@@ -74,9 +74,6 @@ Choisissez un mode de jeu :
    - Nom d'utilisateur : **pirate**
    - Mot de passe : **Harrr!**
 
-> [!NOTE]
-> L'application créée un serveur DNS qui filtre votre traffic internet. Vous n'aurez pas accès à des sites d'intelligence artificielle durant l'opération de l'application. Veuillez exécuter `./installer.sh --desinstaller` pour retirer l'application de votre ordinateur.
-
 ## Structure du dépot
 
 Ce répo comprend toutes les ressources nécessaires au déploiement de l'infrastucture informatique du UHACK 2026.
