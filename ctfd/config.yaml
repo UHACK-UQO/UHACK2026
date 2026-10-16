@@ -7,10 +7,10 @@ url: "https://ctfd.uhack.ctf"
 general:
   # Nom de l'événement
   # [OBLIGATOIRE]
-  nom: "Super CTF"
+  nom: "UHACK 2026"
   
   # Description de l'événement
-  description: "Un super Capture The Flag, où les participants auront à résoudre des défis de cybersécurité pour gagner des points."
+  description: "CTF du UHACK 2026"
   
   # Mode de jeu. Est-ce que les participants 
   # jouent en équipe ou seuls?
@@ -19,11 +19,11 @@ general:
   #     Les participants jouent en équipe
   #   seuls :
   #     Les participants jouent seuls
-  mode: "equipes"
+  mode: "seuls"
   
   # Taille des équipes. Ne doit être indiqué que 
   # si general.mode = 'equipes'
-  taille_equipes: 5
+  #taille_equipes: 5
   
   # Permettre la création de compte?
   # Valeurs acceptées :
@@ -72,15 +72,15 @@ general:
 apparence:
   # Logo de l'événement. Doit être le répertoire 
   # de l'image
-  logo: "./ctfd-fichiers/tmp.png"
+  logo: "./ctfd-fichiers/Logo2.webp"
   
   # Bannière de l'événement. Doit être le 
   # répertoire de l'image
-  banniere: "./ctfd-fichiers/tmp.png"
+  banniere: "./ctfd-fichiers/banniere.webp"
   
   # Icone de l'onglet du navigateur. Doit être le 
   # répertoire de l'image
-  icone: "./ctfd-fichiers/tmp.png"
+  icone: "./ctfd-fichiers/Logo2.webp"
   
   # Thème utilisé lors de l'événement. Doit être 
   # le nom du thème
@@ -88,7 +88,7 @@ apparence:
   
   # Couleur du thème de l'événement. Doit être un 
   # code hexadécimal RVB dans le format : #FFFFFF
-  couleur: "#FF6615"
+  couleur: "#E174AD"
 
 # Paramètres de visibilité
 visibilite:

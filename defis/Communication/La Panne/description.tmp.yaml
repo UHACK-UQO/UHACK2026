@@ -107,7 +107,7 @@ script_installation: "installation.sh"
 
 # Si 'type' est 'statique', l'ip spécifiée ici 
 # sera utilisé pour rediriger les requêtes http.
-port: "11080"
+port: 11080
 
 # Indiquez les instructions supplémentaires 
 # nécessaires au déploiement de ce défi.

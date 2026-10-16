@@ -1,0 +1,21 @@
+vagues:
+  - categorie: "Employés"
+    delais: 14400
+  - categorie: "Communication"
+    delais: 28800
+  - categorie: "Données Citoyennes"
+    delais: 43200
+  - categorie: "Déchets"
+    delais: 57600
+  - categorie: "Eau"
+    delais: 72000
+  - categorie: "Électricité"
+    delais: 86400
+  - categorie: "Réseaux Sociaux"
+    delais: 100800
+  - categorie: "Services d'Urgence"
+    delais: 115200
+  - categorie: "Désinformation"
+    delais: 129600
+  - categorie: "Réputation"
+    delais: 144000

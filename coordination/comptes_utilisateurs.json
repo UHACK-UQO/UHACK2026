@@ -10,15 +10,5 @@
             "id":"pirate",
             "mdp":"Harrr!"
         }
-    ],
-    "equipes_ctfd":[
-        {
-            "nom": "Pirate",
-            "mdp": "Harrr!",
-            "chef": "pirate",
-            "membres": [
-                "pirate"
-            ]
-        }
     ]
 }

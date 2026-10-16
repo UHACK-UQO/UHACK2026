@@ -1,4 +1,5 @@
 #!/bin/python3
+import datetime
 import json
 import mimetypes
 import os
@@ -129,7 +130,8 @@ def lire_configuration(rep_config : str) -> dict:
         comptes = json.loads(f.read())
 
     config["utilisateurs"] = comptes["utilisateurs"]
-    config["equipes"] = comptes["equipes_ctfd"]
+    if config["general"]["mode"] == "equipes":
+        config["equipes"] = comptes["equipes_ctfd"]
 
     return config
 
@@ -389,29 +391,30 @@ def lire_defis(rep : str) -> list[dict]:
                 desc["fichiers"][i] = os.path.abspath(rep + '/' + c + '/' + d + '/' + desc["fichiers"][i])
             
             desc["repertoire"] = os.path.abspath(rep + '/' + c + '/' + d)
-            nom_domaine = (desc["categorie"] + '-' + desc["titre"]).lower()
-            desc["nom_domaine"] = ""
-            for l in nom_domaine:
-                if l in "abcdefghijklmnopqrstuvwxyz0123456789_-":
-                    desc["nom_domaine"] += l
-                elif l == ' ':
-                    desc["nom_domaine"] += ' '
-                elif l in "àâä":
-                    desc["nom_domaine"] += "a"
-                elif l in "èéêë":
-                    desc["nom_domaine"] += "e"
-                elif l == 'ç':
-                    desc["nom_domaine"] += 'c'
-                elif l in "ùûü":
-                    desc["nom_domaine"] += 'u'
-                elif l in "ôòö":
-                    desc["nom_domaine"] += 'o'
-                elif l in "îïì":
-                    desc["nom_domaine"] += 'i'
-                elif l in "ŷÿỳ":
-                    desc["nom_domaine"] += 'y'
+            if desc["type"] != "ctfd":
+                nom_domaine = (desc["categorie"] + '-' + desc["titre"]).lower()
+                desc["nom_domaine"] = ""
+                for l in nom_domaine:
+                    if l in "abcdefghijklmnopqrstuvwxyz0123456789_-":
+                        desc["nom_domaine"] += l
+                    elif l == ' ':
+                        desc["nom_domaine"] += ' '
+                    elif l in "àâä":
+                        desc["nom_domaine"] += "a"
+                    elif l in "èéêë":
+                        desc["nom_domaine"] += "e"
+                    elif l == 'ç':
+                        desc["nom_domaine"] += 'c'
+                    elif l in "ùûü":
+                        desc["nom_domaine"] += 'u'
+                    elif l in "ôòö":
+                        desc["nom_domaine"] += 'o'
+                    elif l in "îïì":
+                        desc["nom_domaine"] += 'i'
+                    elif l in "ŷÿỳ":
+                        desc["nom_domaine"] += 'y'
 
-            desc["description"] = f"\n\nLe service est exposé sur/The service is exposed at : {desc["nom_domaine"]}.defis.{os.getenv("DOMAINE_GLOBAL","aucun_domaine.lan")}"
+                desc["description"] = f"\n\nLe service est exposé sur/The service is exposed at : {desc["nom_domaine"]}.defis.{os.getenv("DOMAINE_GLOBAL","aucun_domaine.lan")}"
 
             defis.append(desc)
     
@@ -443,7 +446,8 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
         defis_json = {
             "name": d["titre"],
             "category": d["categorie"],
-            "description": d["description"]
+            "description": d["description"],
+            "state" : "hidden" if d["etat"] == "cache" else "visible"
         }
 
         if d["pointage"]["fonction"] == "constant":
@@ -652,6 +656,17 @@ def configurer_defis(config : dict, defis : list[dict], capi : str) -> None:
                 subprocess.call([f"scp -o StrictHostKeyChecking=no ./{d["repertoire"]} \"{usr}@{ip}:{d["titre"]}\""], check=False)
                 subprocess.call([f"ssh -o StrictHostKeyChecking=no {usr}@{ip} \"{d["titre"]}/{d["script_installation"]}\""], check=False)
 
+    print("Configuration des vagues")
+    for v in config["vagues"]:
+        #print(v)
+        defis_vague = []
+        for d in defis:
+            #print(d)
+            if d["categorie"] == v["categorie"]:
+                defis_vague.append(d["id"])
+        #print(defis_vague)
+        subprocess.run(["/bin/bash","-c",f"./vague_chrono.sh {v["delais"]} {config["url"]} {capi} \"{json.dumps(defis_vague).replace('"','\\"')}\" &"], check=False, start_new_session=True)
+
     for d in defis:
         if d["necessite_un_traitement_special"]:
             avis.append(f"{CYAN}[INFO]{NEUTRE} {d["categorie"]}/{d["titre"]} indique qu'il nécessite un traitement spécial :\n\t{d["necessite_un_traitement_special"]}")
@@ -678,13 +693,13 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
     if "utilisateurs" not in utilisateurs:
         print(f"{ROUGE}[ERREUR]{NEUTRE} : Le fichier des utilisateurs doit contenir la clé 'utilisateurs'")
         return
-    if "equipes_ctfd" not in utilisateurs:
-        print(f"{ROUGE}[ERREUR]{NEUTRE} : Le fichier des utilisateurs doit contenir la clé 'equipes_ctfd'")
+    if "equipes_ctfd" not in utilisateurs and config["general"]["mode"] == "equipes":
+        print(f"{ROUGE}[ERREUR]{NEUTRE} : Le ctf est configuré en mode 'equipes', donc le fichier des utilisateurs doit contenir la clé 'equipes_ctfd'")
         return
     if not isinstance(utilisateurs["utilisateurs"], list):
         print(f"{ROUGE}[ERREUR]{NEUTRE} : La clé 'utilisateurs' doit être une liste d'objets")
         return
-    if not isinstance(utilisateurs["equipes_ctfd"], list):
+    if config["general"]["mode"] == "equipes" and not isinstance(utilisateurs["equipes_ctfd"], list):
         print(f"{ROUGE}[ERREUR]{NEUTRE} : La clé 'equipes_ctfd' doit être une liste d'objets")
         return
     
@@ -729,6 +744,9 @@ def configurer_utilisateurs(config : dict, capi : str) -> None:
         
         u["ctfd_id"] = rep.json()["data"]["id"]
         print(f" id = {u["ctfd_id"]}")
+
+    if config["general"]["mode"] != "equipes":
+        return
 
     print("Configuration des équipes")
     for e in utilisateurs["equipes_ctfd"]:
@@ -898,11 +916,11 @@ structure_config = {
             },
             "debut":{
                 "description": "Date d'ouverture de l'événement. Les participants n'auront pas accès à la plateforme avant cette date.\nFormat : Unix Epoch\n\tex. : 1781751060 = mer 17 jun 2026 22:51:00 EDT",
-                "defaut": 1781751060
+                "defaut": int(datetime.datetime.now().timestamp())
             },
             "fin":{
                 "description": "Date de fermeture de l'événement. Les participants n'auront pas accès à la plateforme après cette date.\nFormat : Unix Epoch\n\tex. : 1781751060 = mer 17 jun 2026 22:51:00 EDT",
-                "defaut": 1781751060
+                "defaut": int((datetime.datetime.now() + datetime.timedelta(hours=24)).timestamp())
             },
             "partage_sociaux":{
                 "description": "Les participants peuvent-ils partager les défis sur les réseaux sociaux?",
@@ -1036,6 +1054,22 @@ structure_config = {
                 "defaut_est_exemple": True
             }
         }
+    },
+    "vagues":{
+        "description": "Liste de catégories dont les défis seront dévoilés un certain temps après le début du CTF",
+        "defaut":[
+            {
+                "categorie":{
+                    "description": "Nom de la catégorie à dévoiler",
+                    "defaut": "Catégorie1"
+                },
+                "delais":{
+                    "description": "Délais, en secondes, après le début du CTF, après lequel il faut dévoiler la catégorie",
+                    "defaut": 3600
+                }
+            }
+        ],
+        "defaut_est_exemple": True
     }
 }
 

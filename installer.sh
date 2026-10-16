@@ -160,10 +160,46 @@ desinstaller() {
             infra-reseau/defis.nginx.conf \
             infra-reseau/TLS/*.pem \
             infra-reseau/TLS/openssl.cnf
+    
+    # Tuer les processus du système de vagues
+    pkill vague_chrono.sh
 }
 
 installer() {
     printf '\nInstallation du CTF\n\n'
+
+    cp ctfd/config.yaml ctfd/config_prod.yaml
+
+    echo "Choisissez un mode de jeu :"
+    echo "  1. Illimité - Vous aurez autant de temps que vous le souhaitez pour finir le CTF"
+    echo "  2. 24h - Vous aurez 24h pour faire le CTF (NE FERMEZ PAS L'ORDINATEUR ENTRE-TEMPS!!)"
+    echo "  3. 48h - Vous aurez 48h pour faire le CTF (NE FERMEZ PAS L'ORDINATEUR ENTRE-TEMPS!!)"
+
+    while true; do
+        printf "> "
+        read rep
+
+        case "$rep" in
+            "1")
+                sed -i -E "s/debut: [0-9]+$/debut: 0/gm" ctfd/config_prod.yaml
+                sed -i -E "s/fin: [0-9]+$/fin: 9999999999/gm" ctfd/config_prod.yaml
+                break
+            ;;
+            "2")
+                sed -i -E "s/debut: [0-9]+$/debut: $(date +%s)/gm" ctfd/config_prod.yaml
+                sed -i -E "s/fin: [0-9]+$/fin: $(( $(date +%s) + 86400 ))/gm" ctfd/config_prod.yaml
+                printf "\n$(cat ctfd/vagues_config_24h.yaml)" >> ctfd/config_prod.yaml
+                break
+            ;;
+            "3")
+                sed -i -E "s/debut: [0-9]+$/debut: $(date +%s)/gm" ctfd/config_prod.yaml
+                sed -i -E "s/fin: [0-9]+$/fin: $(( $(date +%s) + 172800 ))/gm" ctfd/config_prod.yaml
+                printf "\n$(cat ctfd/vagues_config_24h.yaml)" >> ctfd/config_prod.yaml
+                break
+            ;;
+        esac
+        echo "Veuillez choisir une option entre 1, 2 et 3"
+    done
 
     printf '\nInstallation des dépendances\n\n'
     ./installer_dependances.sh
@@ -176,7 +212,7 @@ installer() {
 
     printf "\nModification du nom de domaine.\n"
     sed -i -E "s/DOMAINE_GLOBAL=.*/DOMAINE_GLOBAL=${DOMAINE}/gm" coordination/nom_domaine.env
-    sed -E "s/url: ?\"?((https?:\/\/)?[a-xA-Z0-9_-]+).*$/url: \"\1.${DOMAINE}\"/gm" ctfd/config.yaml > ctfd/config_prod.yaml
+    sed -i -E "s/url: ?\"?((https?:\/\/)?[a-xA-Z0-9_-]+).*$/url: \"\1.${DOMAINE}\"/gm" ctfd/config_prod.yaml
     sed -E "s/%DOMAINE_GLOBAL/${DOMAINE}/gm" infra-reseau/dnsmasq.exemple.conf > infra-reseau/dnsmasq.conf
     sed "s/%DOMAINE_GLOBAL/${DOMAINE}/gm" infra-reseau/nginx.exemple.conf > infra-reseau/nginx.conf
     sed "s/%DOMAINE_GLOBAL/${DOMAINE}/gm" infra-reseau/TLS/openssl.exemple.cnf > infra-reseau/TLS/openssl.cnf
@@ -217,21 +253,21 @@ installer() {
     #     installer_defis_distant "$defis_ip" "$defis_usr" "$defis_mdp"
     # fi
 
-    echo ""
-    echo "Comptes utilisateurs : "
+    rm comptes.txt
     jq -c ".utilisateurs[]" coordination/comptes_utilisateurs.json | while read compte; do
         nom="$(echo $compte | jq -r ".nom")"
         id="$(echo $compte | jq -r ".id")"
         mdp="$(echo $compte | jq -r ".mdp")"
 
-        echo "${nom} :"
-        echo "        CTFd : ${nom} (${id}@${DOMAINE})"
-        echo "         mdp : ${mdp}"
+        echo "${nom} :" >> comptes.txt
+        echo "        CTFd : ${nom} (${id}@${DOMAINE})" >> comptes.txt
+        echo "         mdp : ${mdp}" >> comptes.txt
     done
+    cat comptes.txt
 
     printf "\nLe CTF est installé. Vous pouvez y accéder sur https://ctfd.${DOMAINE}\n"
     printf "Votre navigateur vous avertira à propos d'un risque de sécurité. Vous pouvez l'ignorer.\n"
-    printf "Vos identifiants sont indiqués ci-dessus.\n"
+    printf "Vos identifiants sont indiqués ci-dessus et une copie se trouves dans 'comptes.txt'\n"
 }
 
 installer_reseau_local() {
