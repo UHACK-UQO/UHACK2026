@@ -1,0 +1,6 @@
+admin :
+        CTFd : admin (admin@uhack.ctf)
+         mdp : 9504b4d5470b049f8fecf7eb82a2ee20
+Pirate :
+        CTFd : Pirate (pirate@uhack.ctf)
+         mdp : Harrr!
